@@ -274,7 +274,7 @@ padding:25px
 
 }
 
-/* STICKY CART BUTTON */
+/* STICKY CART */
 
 .sticky-cart{
 
@@ -314,7 +314,9 @@ justify-content:space-between;
 
 align-items:center;
 
-cursor:pointer
+cursor:pointer;
+
+transition:opacity .2s ease
 
 }
 
@@ -329,6 +331,12 @@ border-radius:20px;
 padding:3px 9px;
 
 font-size:13px
+
+}
+
+.sticky-cart.hide-cart{
+
+display:none
 
 }
 
@@ -420,7 +428,11 @@ padding:0
 
 <p>Coco Cafeina • Fresh Food & Drinks</p>
 
-<span class="badge">🚚 Delivery Only</span>
+<span class="badge">
+
+🚚 Delivery Only
+
+</span>
 
 </div>
 
@@ -446,7 +458,11 @@ padding:0
 
 <div id="cart">
 
-<p class="empty">Your cart is empty.</p>
+<p class="empty">
+
+Your cart is empty.
+
+</p>
 
 </div>
 
@@ -454,13 +470,39 @@ padding:0
 
 <h3>Delivery Details</h3>
 
-<input id="name" placeholder="Your name">
+<input
 
-<input id="phone" placeholder="Mobile number">
+id="name"
 
-<textarea id="address" rows="3" placeholder="Full delivery address"></textarea>
+placeholder="Your name"
 
-<button class="order" onclick="sendOrder()">
+>
+
+<input
+
+id="phone"
+
+placeholder="Mobile number"
+
+>
+
+<textarea
+
+id="address"
+
+rows="3"
+
+placeholder="Full delivery address"
+
+></textarea>
+
+<button
+
+class="order"
+
+onclick="sendOrder()"
+
+>
 
 Order on WhatsApp
 
@@ -476,11 +518,17 @@ Order on WhatsApp
 
 </footer>
 
-<!-- STICKY VIEW CART BUTTON -->
+<!-- STICKY VIEW CART -->
 
-<button class="sticky-cart"
+<button
 
-onclick="document.querySelector('.cart').scrollIntoView({behavior:'smooth'})">
+class="sticky-cart"
+
+id="stickyCart"
+
+onclick="document.querySelector('.cart').scrollIntoView({behavior:'smooth'})"
+
+>
 
 <span style="background:none;color:white;padding:0">
 
@@ -488,23 +536,45 @@ onclick="document.querySelector('.cart').scrollIntoView({behavior:'smooth'})">
 
 </span>
 
-<span id="cartCount">0</span>
+<span id="cartCount">
+
+0
+
+</span>
 
 </button>
 
 <!-- FULL SCREEN PHOTO -->
 
-<div class="photo-modal" id="photoModal">
+<div
 
-<button class="close-photo"
+class="photo-modal"
 
-onclick="closePhoto()">
+id="photoModal"
+
+>
+
+<button
+
+class="close-photo"
+
+onclick="closePhoto()"
+
+>
 
 ×
 
 </button>
 
-<img id="fullPhoto" src="" alt="Food">
+<img
+
+id="fullPhoto"
+
+src=""
+
+alt="Food"
+
+>
 
 </div>
 
@@ -630,7 +700,7 @@ img:"loaded-sandwich.jpeg"
 
 let cart={};
 
-/* MENU */
+/* RENDER MENU */
 
 function renderMenu(){
 
@@ -638,11 +708,11 @@ function renderMenu(){
 
 document.getElementById(cat).innerHTML=
 
-products.map((p,i)=>
+products.map((p,i)=>{
 
-p.cat===cat?
+if(p.cat!==cat) return "";
 
-`
+return `
 
 <div class="card">
 
@@ -662,7 +732,11 @@ onclick="openPhoto('${p.img}')"
 
 <div>
 
-<h3>${p.icon} ${p.name}</h3>
+<h3>
+
+${p.icon} ${p.name}
+
+</h3>
 
 <div class="price">
 
@@ -676,7 +750,9 @@ onclick="openPhoto('${p.img}')"
 
 class="add"
 
-onclick="add(${i})">
+onclick="add(${i})"
+
+>
 
 Add
 
@@ -686,17 +762,15 @@ Add
 
 </div>
 
-`
+`;
 
-:""
-
-).join("");
+}).join("");
 
 });
 
 }
 
-/* ADD */
+/* ADD ITEM */
 
 function add(i){
 
@@ -706,21 +780,23 @@ renderCart();
 
 }
 
-/* REMOVE */
+/* REMOVE ITEM */
 
 function remove(i){
 
 cart[i]--;
 
-if(cart[i]<=0)
+if(cart[i]<=0){
 
 delete cart[i];
+
+}
 
 renderCart();
 
 }
 
-/* CART */
+/* RENDER CART */
 
 function renderCart(){
 
@@ -731,6 +807,8 @@ let box=document.getElementById("cart");
 let count=Object.values(cart)
 
 .reduce((a,b)=>a+b,0);
+
+/* UPDATE CART COUNT */
 
 document.getElementById("cartCount").textContent=count;
 
@@ -774,13 +852,21 @@ ${p.name} × ${q}
 
 <span class="qty">
 
-<button onclick="remove(${i})">
+<button
+
+onclick="remove(${i})"
+
+>
 
 −
 
 </button>
 
-<button onclick="add(${i})">
+<button
+
+onclick="add(${i})"
+
+>
 
 +
 
@@ -921,6 +1007,50 @@ closePhoto();
 }
 
 });
+
+/* HIDE VIEW CART WHEN ORDER SECTION IS VISIBLE */
+
+const stickyCart=
+
+document.getElementById("stickyCart");
+
+const orderSection=
+
+document.querySelector(".cart");
+
+const cartObserver=
+
+new IntersectionObserver(
+
+(entries)=>{
+
+entries.forEach(entry=>{
+
+if(entry.isIntersecting){
+
+stickyCart.classList.add("hide-cart");
+
+}else{
+
+stickyCart.classList.remove("hide-cart");
+
+}
+
+});
+
+},
+
+{
+
+threshold:0.15
+
+}
+
+);
+
+cartObserver.observe(orderSection);
+
+/* START */
 
 renderMenu();
 
