@@ -1,25 +1,735 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#7b2d26"><title>Miracle Drinks and Food</title>
+<!doctype html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<meta name="theme-color" content="#7b2d26">
+
+<title>Miracle Drinks and Food</title>
+
 <style>
-*{box-sizing:border-box}body{margin:0;background:#fffaf6;color:#2b211e;font-family:Arial,sans-serif}header{background:linear-gradient(135deg,#6f241f,#b85b42);color:#fff;padding:28px 18px;border-radius:0 0 28px 28px}.wrap{max-width:720px;margin:auto;padding:18px}h1{margin:0;font-size:29px}header p{margin:7px 0 0;opacity:.9}.badge{display:inline-block;margin-top:12px;padding:7px 12px;border-radius:20px;background:#fff1eb;color:#7b2d26;font-size:13px}h2{font-size:21px;margin:20px 0 12px}.grid{display:grid;gap:12px}.card{background:#fff;padding:0;border-radius:17px;overflow:hidden;box-shadow:0 4px 18px #00000010}.photo{width:100%;height:190px;object-fit:cover;display:block}.info{padding:15px;display:flex;align-items:center;justify-content:space-between;gap:12px}.card h3{margin:0 0 5px;font-size:17px}.price{font-weight:bold;color:#7b2d26}button{border:0;border-radius:11px;padding:10px 14px;font-weight:bold}.add{background:#7b2d26;color:#fff}.cart{margin-top:25px;background:#fff;padding:18px;border-radius:18px;box-shadow:0 4px 18px #00000010}.item{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #eee;padding:9px 0}.qty button{padding:5px 9px;margin-left:4px}.total{font-size:19px;font-weight:bold;margin:14px 0}input,textarea{width:100%;padding:12px;margin:5px 0 9px;border:1px solid #ddd;border-radius:11px;font-size:15px}.order{width:100%;background:#25d366;color:white;font-size:16px;margin-top:8px}.empty{color:#777}footer{text-align:center;color:#888;font-size:12px;padding:25px}
-</style></head><body>
-<header><div class="wrap"><h1>Miracle Drinks and Food</h1><p>Coco Cafeina • Fresh Food & Drinks</p><span class="badge">🚚 Delivery Only</span></div></header>
-<main class="wrap"><h2>🥤 Milkshake</h2><div class="grid" id="milkshake"></div><h2>🍔 Burger</h2><div class="grid" id="burger"></div><h2>🌯 Roll & Sandwich</h2><div class="grid" id="roll"></div>
-<section class="cart"><h2>🛒 Your Order</h2><div id="cart"><p class="empty">Your cart is empty.</p></div><div class="total" id="total"></div><h3>Delivery Details</h3><input id="name" placeholder="Your name"><input id="phone" placeholder="Mobile number"><textarea id="address" rows="3" placeholder="Full delivery address"></textarea><button class="order" onclick="sendOrder()">Order on WhatsApp</button></section></main><footer>© Miracle Drinks and Food • Coco Cafeina</footer>
+
+*{box-sizing:border-box}
+
+body{
+
+margin:0;
+
+background:#fffaf6;
+
+color:#2b211e;
+
+font-family:Arial,sans-serif
+
+}
+
+header{
+
+background:linear-gradient(135deg,#6f241f,#b85b42);
+
+color:#fff;
+
+padding:28px 18px;
+
+border-radius:0 0 28px 28px
+
+}
+
+.wrap{
+
+max-width:720px;
+
+margin:auto;
+
+padding:18px
+
+}
+
+h1{
+
+margin:0;
+
+font-size:29px
+
+}
+
+header p{
+
+margin:7px 0 0;
+
+opacity:.9
+
+}
+
+.badge{
+
+display:inline-block;
+
+margin-top:12px;
+
+padding:7px 12px;
+
+border-radius:20px;
+
+background:#fff1eb;
+
+color:#7b2d26;
+
+font-size:13px
+
+}
+
+h2{
+
+font-size:21px;
+
+margin:20px 0 12px
+
+}
+
+.grid{
+
+display:grid;
+
+gap:12px
+
+}
+
+.card{
+
+background:#fff;
+
+padding:0;
+
+border-radius:17px;
+
+overflow:hidden;
+
+box-shadow:0 4px 18px #00000010
+
+}
+
+/* PRODUCT PHOTO */
+
+.photo{
+
+width:100%;
+
+height:190px;
+
+object-fit:cover;
+
+display:block;
+
+cursor:pointer;
+
+-webkit-touch-callout:none;
+
+-webkit-user-select:none;
+
+user-select:none;
+
+-webkit-user-drag:none;
+
+touch-action:manipulation
+
+}
+
+.info{
+
+padding:15px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:space-between;
+
+gap:12px
+
+}
+
+.card h3{
+
+margin:0 0 5px;
+
+font-size:17px
+
+}
+
+.price{
+
+font-weight:bold;
+
+color:#7b2d26
+
+}
+
+button{
+
+border:0;
+
+border-radius:11px;
+
+padding:10px 14px;
+
+font-weight:bold
+
+}
+
+.add{
+
+background:#7b2d26;
+
+color:#fff
+
+}
+
+.cart{
+
+margin-top:25px;
+
+background:#fff;
+
+padding:18px;
+
+border-radius:18px;
+
+box-shadow:0 4px 18px #00000010
+
+}
+
+.item{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+border-bottom:1px solid #eee;
+
+padding:9px 0
+
+}
+
+.qty button{
+
+padding:5px 9px;
+
+margin-left:4px
+
+}
+
+.total{
+
+font-size:19px;
+
+font-weight:bold;
+
+margin:14px 0
+
+}
+
+input,textarea{
+
+width:100%;
+
+padding:12px;
+
+margin:5px 0 9px;
+
+border:1px solid #ddd;
+
+border-radius:11px;
+
+font-size:15px
+
+}
+
+.order{
+
+width:100%;
+
+background:#25d366;
+
+color:white;
+
+font-size:16px;
+
+margin-top:8px
+
+}
+
+.empty{
+
+color:#777
+
+}
+
+footer{
+
+text-align:center;
+
+color:#888;
+
+font-size:12px;
+
+padding:25px
+
+}
+
+/* FULL SCREEN PHOTO VIEWER */
+
+.image-viewer{
+
+display:none;
+
+position:fixed;
+
+z-index:99999;
+
+left:0;
+
+top:0;
+
+width:100%;
+
+height:100%;
+
+background:rgba(0,0,0,.92);
+
+align-items:center;
+
+justify-content:center;
+
+padding:15px;
+
+touch-action:none
+
+}
+
+.image-viewer img{
+
+max-width:100%;
+
+max-height:92vh;
+
+width:auto;
+
+height:auto;
+
+object-fit:contain;
+
+border-radius:10px;
+
+-webkit-user-select:none;
+
+user-select:none;
+
+-webkit-user-drag:none
+
+}
+
+.close-image{
+
+position:absolute;
+
+top:18px;
+
+right:18px;
+
+width:45px;
+
+height:45px;
+
+border-radius:50%;
+
+background:#fff;
+
+color:#333;
+
+font-size:30px;
+
+line-height:45px;
+
+padding:0;
+
+text-align:center;
+
+z-index:100000;
+
+cursor:pointer
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="wrap">
+
+<h1>Miracle Drinks and Food</h1>
+
+<p>Coco Cafeina • Fresh Food & Drinks</p>
+
+<span class="badge">🚚 Delivery Only</span>
+
+</div>
+
+</header>
+
+<main class="wrap">
+
+<h2>🥤 Milkshake</h2>
+
+<div class="grid" id="milkshake"></div>
+
+<h2>🍔 Burger</h2>
+
+<div class="grid" id="burger"></div>
+
+<h2>🌯 Roll & Sandwich</h2>
+
+<div class="grid" id="roll"></div>
+
+<section class="cart">
+
+<h2>🛒 Your Order</h2>
+
+<div id="cart">
+
+<p class="empty">Your cart is empty.</p>
+
+</div>
+
+<div class="total" id="total"></div>
+
+<h3>Delivery Details</h3>
+
+<input id="name" placeholder="Your name">
+
+<input id="phone" placeholder="Mobile number">
+
+<textarea id="address" rows="3" placeholder="Full delivery address"></textarea>
+
+<button class="order" onclick="sendOrder()">
+
+Order on WhatsApp
+
+</button>
+
+</section>
+
+</main>
+
+<footer>
+
+© Miracle Drinks and Food • Coco Cafeina
+
+</footer>
+
+<!-- FULL SCREEN IMAGE -->
+
+<div
+
+class="image-viewer"
+
+id="imageViewer"
+
+onclick="closeImage()"
+
+ontouchend="closeImage()"
+
+>
+
+<button
+
+class="close-image"
+
+onclick="event.stopPropagation();closeImage()"
+
+ontouchend="event.stopPropagation();closeImage()"
+
+>
+
+×
+
+</button>
+
+<img
+
+id="bigImage"
+
+src=""
+
+alt="Product"
+
+onclick="event.stopPropagation()"
+
+ontouchend="event.stopPropagation()"
+
+>
+
+</div>
+
 <script>
+
 const WA="919945093204";
+
 const products=[
+
 {name:"Tender Miracle",price:90,icon:"🥤",cat:"milkshake",img:"tender-miracle.jpeg"},
+
 {name:"Milo Magic",price:90,icon:"🥤",cat:"milkshake",img:"milo-magic.jpeg"},
+
 {name:"Tender Mango",price:80,icon:"🥭",cat:"milkshake",img:"tender-mango.jpeg"},
+
 {name:"Tender-Dates",price:90,icon:"🥤",cat:"milkshake",img:"tender-dates.jpeg"},
+
 {name:"Zinger Burger",price:90,icon:"🍔",cat:"burger",img:"zinger-burger.jpeg"},
+
 {name:"Barbecue Honey Burger",price:120,icon:"🍔",cat:"burger",img:"barbecue-honey-burger.jpeg"},
+
 {name:"Cafeina Jumbo Roll",price:90,icon:"🌯",cat:"roll",img:"cafeina-jumbo-roll.jpeg"},
-{name:"Loaded Sandwich",price:90,icon:"🥪",cat:"roll",img:"loaded-sandwich.jpeg"}];
+
+{name:"Loaded Sandwich",price:90,icon:"🥪",cat:"roll",img:"loaded-sandwich.jpeg"}
+
+];
+
 let cart={};
-function renderMenu(){["milkshake","burger","roll"].forEach(cat=>{document.getElementById(cat).innerHTML=products.map((p,i)=>p.cat===cat?`<div class="card"><img class="photo" src="${p.img}" alt="${p.name}"><div class="info"><div><h3>${p.icon} ${p.name}</h3><div class="price">₹${p.price}</div></div><button class="add" onclick="add(${i})">Add</button></div></div>`:"").join("")})}
-function add(i){cart[i]=(cart[i]||0)+1;renderCart()}function remove(i){cart[i]--;if(cart[i]<=0)delete cart[i];renderCart()}
-function renderCart(){let keys=Object.keys(cart),box=document.getElementById("cart");if(!keys.length){box.innerHTML='<p class="empty">Your cart is empty.</p>';document.getElementById("total").textContent="";return}let total=0;box.innerHTML=keys.map(i=>{let p=products[i],q=cart[i];total+=p.price*q;return `<div class="item"><span>${p.name} × ${q}</span><span>₹${p.price*q} <span class="qty"><button onclick="remove(${i})">−</button><button onclick="add(${i})">+</button></span></span></div>`}).join("");document.getElementById("total").textContent="Total: ₹"+total}
-function sendOrder(){let keys=Object.keys(cart);if(!keys.length)return alert("Please add an item.");let name=document.getElementById("name").value.trim(),phone=document.getElementById("phone").value.trim(),address=document.getElementById("address").value.trim();if(!name||!phone||!address)return alert("Please enter your name, mobile number and delivery address.");let total=0,msg="*New Order - Miracle Drinks and Food*%0A%0A";keys.forEach(i=>{let p=products[i];total+=p.price*cart[i];msg+=`• ${p.name} × ${cart[i]} = ₹${p.price*cart[i]}%0A`});msg+=`%0A*Total: ₹${total}*%0A%0A*Customer:* ${name}%0A*Phone:* ${phone}%0A*Delivery Address:* ${address}%0A%0A🚚 Delivery Only`;window.open("https://wa.me/"+WA+"?text="+msg,"_blank")}
-renderMenu();renderCart();
-</script></body></html>
+
+/* OPEN PHOTO WITH SINGLE TAP */
+
+function openImage(src){
+
+document.getElementById("bigImage").src=src;
+
+document.getElementById("imageViewer").style.display="flex";
+
+document.body.style.overflow="hidden";
+
+}
+
+/* CLOSE PHOTO */
+
+function closeImage(){
+
+document.getElementById("imageViewer").style.display="none";
+
+document.getElementById("bigImage").src="";
+
+document.body.style.overflow="";
+
+}
+
+/* STOP LONG PRESS / CONTEXT MENU */
+
+document.addEventListener("contextmenu",function(e){
+
+if(e.target.classList.contains("photo")){
+
+e.preventDefault();
+
+return false;
+
+}
+
+});
+
+/* MENU */
+
+function renderMenu(){
+
+["milkshake","burger","roll"].forEach(cat=>{
+
+document.getElementById(cat).innerHTML=
+
+products.map((p,i)=>
+
+p.cat===cat?
+
+`<div class="card">
+
+<img
+
+class="photo"
+
+src="${p.img}"
+
+alt="${p.name}"
+
+onclick="openImage('${p.img}')"
+
+ontouchend="event.preventDefault();openImage('${p.img}')"
+
+oncontextmenu="return false;"
+
+draggable="false">
+
+<div class="info">
+
+<div>
+
+<h3>${p.icon} ${p.name}</h3>
+
+<div class="price">₹${p.price}</div>
+
+</div>
+
+<button
+
+class="add"
+
+onclick="add(${i})"
+
+>
+
+Add
+
+</button>
+
+</div>
+
+</div>`
+
+:"").join("")
+
+})
+
+}
+
+/* ADD */
+
+function add(i){
+
+cart[i]=(cart[i]||0)+1;
+
+renderCart();
+
+}
+
+/* REMOVE */
+
+function remove(i){
+
+cart[i]--;
+
+if(cart[i]<=0)
+
+delete cart[i];
+
+renderCart();
+
+}
+
+/* CART */
+
+function renderCart(){
+
+let keys=Object.keys(cart);
+
+let box=document.getElementById("cart");
+
+if(!keys.length){
+
+box.innerHTML='<p class="empty">Your cart is empty.</p>';
+
+document.getElementById("total").textContent="";
+
+return;
+
+}
+
+let total=0;
+
+box.innerHTML=keys.map(i=>{
+
+let p=products[i];
+
+let q=cart[i];
+
+total+=p.price*q;
+
+return `<div class="item">
+
+<span>${p.name} × ${q}</span>
+
+<span>₹${p.price*q}
+
+<span class="qty">
+
+<button onclick="remove(${i})">−</button>
+
+<button onclick="add(${i})">+</button>
+
+</span>
+
+</span>
+
+</div>`
+
+}).join("");
+
+document.getElementById("total").textContent="Total: ₹"+total;
+
+}
+
+/* WHATSAPP ORDER */
+
+function sendOrder(){
+
+let keys=Object.keys(cart);
+
+if(!keys.length)
+
+return alert("Please add an item.");
+
+let name=document.getElementById("name").value.trim();
+
+let phone=document.getElementById("phone").value.trim();
+
+let address=document.getElementById("address").value.trim();
+
+if(!name||!phone||!address)
+
+return alert("Please enter your name, mobile number and delivery address.");
+
+let total=0;
+
+let msg="*New Order - Miracle Drinks and Food*%0A%0A";
+
+keys.forEach(i=>{
+
+let p=products[i];
+
+total+=p.price*cart[i];
+
+msg+=`• ${p.name} × ${cart[i]} = ₹${p.price*cart[i]}%0A`;
+
+});
+
+msg+=`%0A*Total: ₹${total}*%0A%0A*Customer:* ${name}%0A*Phone:* ${phone}%0A*Delivery Address:* ${address}%0A%0A🚚 Delivery Only`;
+
+window.open("https://wa.me/"+WA+"?text="+msg,"_blank");
+
+}
+
+renderMenu();
+
+renderCart();
+
+</script>
+
+</body>
+
+</html>
