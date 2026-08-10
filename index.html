@@ -24,7 +24,9 @@ background:#fffaf6;
 
 color:#2b211e;
 
-font-family:Arial,sans-serif
+font-family:Arial,sans-serif;
+
+padding-bottom:85px
 
 }
 
@@ -114,8 +116,6 @@ box-shadow:0 4px 18px #00000010
 
 }
 
-/* PRODUCT PHOTO */
-
 .photo{
 
 width:100%;
@@ -126,17 +126,7 @@ object-fit:cover;
 
 display:block;
 
-cursor:pointer;
-
--webkit-touch-callout:none;
-
--webkit-user-select:none;
-
-user-select:none;
-
--webkit-user-drag:none;
-
-touch-action:manipulation
+cursor:pointer
 
 }
 
@@ -284,15 +274,73 @@ padding:25px
 
 }
 
-/* FULL SCREEN PHOTO VIEWER */
+/* STICKY CART BUTTON */
 
-.image-viewer{
+.sticky-cart{
+
+position:fixed;
+
+bottom:15px;
+
+left:50%;
+
+transform:translateX(-50%);
+
+width:calc(100% - 30px);
+
+max-width:690px;
+
+background:#7b2d26;
+
+color:#fff;
+
+border:0;
+
+border-radius:15px;
+
+padding:14px 18px;
+
+font-size:16px;
+
+font-weight:bold;
+
+box-shadow:0 6px 20px #00000035;
+
+z-index:9999;
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+cursor:pointer
+
+}
+
+.sticky-cart span{
+
+background:#fff;
+
+color:#7b2d26;
+
+border-radius:20px;
+
+padding:3px 9px;
+
+font-size:13px
+
+}
+
+/* FULL SCREEN PHOTO */
+
+.photo-modal{
 
 display:none;
 
 position:fixed;
 
-z-index:99999;
+z-index:10000;
 
 left:0;
 
@@ -302,51 +350,39 @@ width:100%;
 
 height:100%;
 
-background:rgba(0,0,0,.92);
+background:rgba(0,0,0,.88);
 
 align-items:center;
 
 justify-content:center;
 
-padding:15px;
-
-touch-action:none
+padding:20px
 
 }
 
-.image-viewer img{
+.photo-modal img{
 
 max-width:100%;
 
-max-height:92vh;
-
-width:auto;
-
-height:auto;
+max-height:90vh;
 
 object-fit:contain;
 
-border-radius:10px;
-
--webkit-user-select:none;
-
-user-select:none;
-
--webkit-user-drag:none
+border-radius:15px
 
 }
 
-.close-image{
+.close-photo{
 
 position:absolute;
 
-top:18px;
+top:25px;
 
-right:18px;
+right:20px;
 
-width:45px;
+width:50px;
 
-height:45px;
+height:50px;
 
 border-radius:50%;
 
@@ -356,15 +392,17 @@ color:#333;
 
 font-size:30px;
 
-line-height:45px;
+font-weight:bold;
 
-padding:0;
+display:flex;
 
-text-align:center;
+align-items:center;
 
-z-index:100000;
+justify-content:center;
 
-cursor:pointer
+cursor:pointer;
+
+padding:0
 
 }
 
@@ -438,47 +476,35 @@ Order on WhatsApp
 
 </footer>
 
-<!-- FULL SCREEN IMAGE -->
+<!-- STICKY VIEW CART BUTTON -->
 
-<div
+<button class="sticky-cart"
 
-class="image-viewer"
+onclick="document.querySelector('.cart').scrollIntoView({behavior:'smooth'})">
 
-id="imageViewer"
+<span style="background:none;color:white;padding:0">
 
-onclick="closeImage()"
+🛒 View Cart
 
-ontouchend="closeImage()"
+</span>
 
->
+<span id="cartCount">0</span>
 
-<button
+</button>
 
-class="close-image"
+<!-- FULL SCREEN PHOTO -->
 
-onclick="event.stopPropagation();closeImage()"
+<div class="photo-modal" id="photoModal">
 
-ontouchend="event.stopPropagation();closeImage()"
+<button class="close-photo"
 
->
+onclick="closePhoto()">
 
 ×
 
 </button>
 
-<img
-
-id="bigImage"
-
-src=""
-
-alt="Product"
-
-onclick="event.stopPropagation()"
-
-ontouchend="event.stopPropagation()"
-
->
+<img id="fullPhoto" src="" alt="Food">
 
 </div>
 
@@ -488,63 +514,121 @@ const WA="919945093204";
 
 const products=[
 
-{name:"Tender Miracle",price:90,icon:"🥤",cat:"milkshake",img:"tender-miracle.jpeg"},
+{
 
-{name:"Milo Magic",price:90,icon:"🥤",cat:"milkshake",img:"milo-magic.jpeg"},
+name:"Tender Miracle",
 
-{name:"Tender Mango",price:80,icon:"🥭",cat:"milkshake",img:"tender-mango.jpeg"},
+price:90,
 
-{name:"Tender-Dates",price:90,icon:"🥤",cat:"milkshake",img:"tender-dates.jpeg"},
+icon:"🥤",
 
-{name:"Zinger Burger",price:90,icon:"🍔",cat:"burger",img:"zinger-burger.jpeg"},
+cat:"milkshake",
 
-{name:"Barbecue Honey Burger",price:120,icon:"🍔",cat:"burger",img:"barbecue-honey-burger.jpeg"},
+img:"tender-miracle.jpeg"
 
-{name:"Cafeina Jumbo Roll",price:90,icon:"🌯",cat:"roll",img:"cafeina-jumbo-roll.jpeg"},
+},
 
-{name:"Loaded Sandwich",price:90,icon:"🥪",cat:"roll",img:"loaded-sandwich.jpeg"}
+{
+
+name:"Milo Magic",
+
+price:90,
+
+icon:"🥤",
+
+cat:"milkshake",
+
+img:"milo-magic.jpeg"
+
+},
+
+{
+
+name:"Tender Mango",
+
+price:80,
+
+icon:"🥭",
+
+cat:"milkshake",
+
+img:"tender-mango.jpeg"
+
+},
+
+{
+
+name:"Tender-Dates",
+
+price:90,
+
+icon:"🥤",
+
+cat:"milkshake",
+
+img:"tender-dates.jpeg"
+
+},
+
+{
+
+name:"Zinger Burger",
+
+price:90,
+
+icon:"🍔",
+
+cat:"burger",
+
+img:"zinger-burger.jpeg"
+
+},
+
+{
+
+name:"Barbecue Honey Burger",
+
+price:120,
+
+icon:"🍔",
+
+cat:"burger",
+
+img:"barbecue-honey-burger.jpeg"
+
+},
+
+{
+
+name:"Cafeina Jumbo Roll",
+
+price:90,
+
+icon:"🌯",
+
+cat:"roll",
+
+img:"cafeina-jumbo-roll.jpeg"
+
+},
+
+{
+
+name:"Loaded Sandwich",
+
+price:90,
+
+icon:"🥪",
+
+cat:"roll",
+
+img:"loaded-sandwich.jpeg"
+
+}
 
 ];
 
 let cart={};
-
-/* OPEN PHOTO WITH SINGLE TAP */
-
-function openImage(src){
-
-document.getElementById("bigImage").src=src;
-
-document.getElementById("imageViewer").style.display="flex";
-
-document.body.style.overflow="hidden";
-
-}
-
-/* CLOSE PHOTO */
-
-function closeImage(){
-
-document.getElementById("imageViewer").style.display="none";
-
-document.getElementById("bigImage").src="";
-
-document.body.style.overflow="";
-
-}
-
-/* STOP LONG PRESS / CONTEXT MENU */
-
-document.addEventListener("contextmenu",function(e){
-
-if(e.target.classList.contains("photo")){
-
-e.preventDefault();
-
-return false;
-
-}
-
-});
 
 /* MENU */
 
@@ -558,7 +642,9 @@ products.map((p,i)=>
 
 p.cat===cat?
 
-`<div class="card">
+`
+
+<div class="card">
 
 <img
 
@@ -568,13 +654,9 @@ src="${p.img}"
 
 alt="${p.name}"
 
-onclick="openImage('${p.img}')"
+onclick="openPhoto('${p.img}')"
 
-ontouchend="event.preventDefault();openImage('${p.img}')"
-
-oncontextmenu="return false;"
-
-draggable="false">
+>
 
 <div class="info">
 
@@ -582,7 +664,11 @@ draggable="false">
 
 <h3>${p.icon} ${p.name}</h3>
 
-<div class="price">₹${p.price}</div>
+<div class="price">
+
+₹${p.price}
+
+</div>
 
 </div>
 
@@ -590,9 +676,7 @@ draggable="false">
 
 class="add"
 
-onclick="add(${i})"
-
->
+onclick="add(${i})">
 
 Add
 
@@ -600,11 +684,15 @@ Add
 
 </div>
 
-</div>`
+</div>
 
-:"").join("")
+`
 
-})
+:""
+
+).join("");
+
+});
 
 }
 
@@ -640,9 +728,17 @@ let keys=Object.keys(cart);
 
 let box=document.getElementById("cart");
 
+let count=Object.values(cart)
+
+.reduce((a,b)=>a+b,0);
+
+document.getElementById("cartCount").textContent=count;
+
 if(!keys.length){
 
-box.innerHTML='<p class="empty">Your cart is empty.</p>';
+box.innerHTML=
+
+'<p class="empty">Your cart is empty.</p>';
 
 document.getElementById("total").textContent="";
 
@@ -652,7 +748,9 @@ return;
 
 let total=0;
 
-box.innerHTML=keys.map(i=>{
+box.innerHTML=
+
+keys.map(i=>{
 
 let p=products[i];
 
@@ -660,27 +758,47 @@ let q=cart[i];
 
 total+=p.price*q;
 
-return `<div class="item">
+return `
 
-<span>${p.name} × ${q}</span>
+<div class="item">
 
-<span>₹${p.price*q}
+<span>
+
+${p.name} × ${q}
+
+</span>
+
+<span>
+
+₹${p.price*q}
 
 <span class="qty">
 
-<button onclick="remove(${i})">−</button>
+<button onclick="remove(${i})">
 
-<button onclick="add(${i})">+</button>
+−
+
+</button>
+
+<button onclick="add(${i})">
+
++
+
+</button>
 
 </span>
 
 </span>
 
-</div>`
+</div>
+
+`;
 
 }).join("");
 
-document.getElementById("total").textContent="Total: ₹"+total;
+document.getElementById("total").textContent=
+
+"Total: ₹"+total;
 
 }
 
@@ -690,23 +808,49 @@ function sendOrder(){
 
 let keys=Object.keys(cart);
 
-if(!keys.length)
+if(!keys.length){
 
-return alert("Please add an item.");
+alert("Please add an item.");
 
-let name=document.getElementById("name").value.trim();
+return;
 
-let phone=document.getElementById("phone").value.trim();
+}
 
-let address=document.getElementById("address").value.trim();
+let name=
 
-if(!name||!phone||!address)
+document.getElementById("name")
 
-return alert("Please enter your name, mobile number and delivery address.");
+.value.trim();
+
+let phone=
+
+document.getElementById("phone")
+
+.value.trim();
+
+let address=
+
+document.getElementById("address")
+
+.value.trim();
+
+if(!name||!phone||!address){
+
+alert(
+
+"Please enter your name, mobile number and delivery address."
+
+);
+
+return;
+
+}
 
 let total=0;
 
-let msg="*New Order - Miracle Drinks and Food*%0A%0A";
+let msg=
+
+"*New Order - Miracle Drinks and Food*%0A%0A";
 
 keys.forEach(i=>{
 
@@ -714,15 +858,69 @@ let p=products[i];
 
 total+=p.price*cart[i];
 
-msg+=`• ${p.name} × ${cart[i]} = ₹${p.price*cart[i]}%0A`;
+msg+=
+
+`• ${p.name} × ${cart[i]} = ₹${p.price*cart[i]}%0A`;
 
 });
 
-msg+=`%0A*Total: ₹${total}*%0A%0A*Customer:* ${name}%0A*Phone:* ${phone}%0A*Delivery Address:* ${address}%0A%0A🚚 Delivery Only`;
+msg+=
 
-window.open("https://wa.me/"+WA+"?text="+msg,"_blank");
+`%0A*Total: ₹${total}*%0A%0A`+
+
+`*Customer:* ${name}%0A`+
+
+`*Phone:* ${phone}%0A`+
+
+`*Delivery Address:* ${address}%0A%0A`+
+
+`🚚 Delivery Only`;
+
+window.open(
+
+"https://wa.me/"+WA+"?text="+msg,
+
+"_blank"
+
+);
 
 }
+
+/* FULL SCREEN PHOTO */
+
+function openPhoto(src){
+
+document.getElementById("fullPhoto").src=src;
+
+document.getElementById("photoModal").style.display="flex";
+
+document.body.style.overflow="hidden";
+
+}
+
+function closePhoto(){
+
+document.getElementById("photoModal").style.display="none";
+
+document.getElementById("fullPhoto").src="";
+
+document.body.style.overflow="";
+
+}
+
+/* TAP OUTSIDE PHOTO TO CLOSE */
+
+document.getElementById("photoModal")
+
+.addEventListener("click",function(e){
+
+if(e.target===this){
+
+closePhoto();
+
+}
+
+});
 
 renderMenu();
 
