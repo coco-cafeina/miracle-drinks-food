@@ -8,14 +8,14 @@
 <script>
 const WA="919945093204";
 const products=[
-{name:"Tender Miracle",price:90,icon:"🥤",cat:"milkshake",img:"images/tender-miracle.jpeg"},
-{name:"Milo Magic",price:90,icon:"🥤",cat:"milkshake",img:"images/milo-magic.jpeg"},
-{name:"Tender Mango",price:80,icon:"🥭",cat:"milkshake",img:"images/tender-mango.jpeg"},
-{name:"Tender-Dates",price:90,icon:"🥤",cat:"milkshake",img:"images/tender-dates.jpeg"},
-{name:"Zinger Burger",price:90,icon:"🍔",cat:"burger",img:"images/zinger-burger.jpeg"},
-{name:"Barbecue Honey Burger",price:120,icon:"🍔",cat:"burger",img:"images/barbecue-honey-burger.jpeg"},
-{name:"Cafeina Jumbo Roll",price:90,icon:"🌯",cat:"roll",img:"images/cafeina-jumbo-roll.jpeg"},
-{name:"Loaded Sandwich",price:90,icon:"🥪",cat:"roll",img:"images/loaded-sandwich.jpeg"}];
+{name:"Tender Miracle",price:90,icon:"🥤",cat:"milkshake",img:"tender-miracle.jpeg"},
+{name:"Milo Magic",price:90,icon:"🥤",cat:"milkshake",img:"milo-magic.jpeg"},
+{name:"Tender Mango",price:80,icon:"🥭",cat:"milkshake",img:"tender-mango.jpeg"},
+{name:"Tender-Dates",price:90,icon:"🥤",cat:"milkshake",img:"tender-dates.jpeg"},
+{name:"Zinger Burger",price:90,icon:"🍔",cat:"burger",img:"zinger-burger.jpeg"},
+{name:"Barbecue Honey Burger",price:120,icon:"🍔",cat:"burger",img:"barbecue-honey-burger.jpeg"},
+{name:"Cafeina Jumbo Roll",price:90,icon:"🌯",cat:"roll",img:"cafeina-jumbo-roll.jpeg"},
+{name:"Loaded Sandwich",price:90,icon:"🥪",cat:"roll",img:"loaded-sandwich.jpeg"}];
 let cart={};
 function renderMenu(){["milkshake","burger","roll"].forEach(cat=>{document.getElementById(cat).innerHTML=products.map((p,i)=>p.cat===cat?`<div class="card"><img class="photo" src="${p.img}" alt="${p.name}"><div class="info"><div><h3>${p.icon} ${p.name}</h3><div class="price">₹${p.price}</div></div><button class="add" onclick="add(${i})">Add</button></div></div>`:"").join("")})}
 function add(i){cart[i]=(cart[i]||0)+1;renderCart()}function remove(i){cart[i]--;if(cart[i]<=0)delete cart[i];renderCart()}
