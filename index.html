@@ -82,7 +82,21 @@ background:#fff1eb;
 
 color:#7b2d26;
 
-font-size:13px
+font-size:13px;
+
+font-weight:bold
+
+}
+
+.delivery-area{
+
+margin:8px 0 0;
+
+font-size:14px;
+
+font-weight:bold;
+
+color:#fff
 
 }
 
@@ -596,7 +610,17 @@ border:0
 
 <p>Coco Cafeina • Fresh Food & Drinks</p>
 
-<span class="badge">🚚 Delivery Only</span>
+<span class="badge">
+
+🚚 FREE DELIVERY
+
+</span>
+
+<p class="delivery-area">
+
+📍 Deralakatte → Thokkottu
+
+</p>
 
 </div>
 
@@ -740,7 +764,7 @@ onclick="document.querySelector('.cart').scrollIntoView({behavior:'smooth'})">
 
 <div class="photo-modal" id="photoModal">
 
-<button class="close-photo" onclick="closePhoto()">
+<button class="close-photo" onclick="closePhoto">
 
 ×
 
@@ -1182,15 +1206,17 @@ msg+=
 
 msg+=
 
-`%0A*Total: ₹${total}*%0A%0A`+
+`%0A*Total: ₹${total}*%0A`+
+
+`*Delivery:* FREE%0A`+
+
+`*Area:* Deralakatte to Thokkottu%0A%0A`+
 
 `*Customer:* ${name}%0A`+
 
 `*Phone:* ${phone}%0A`+
 
-`*Delivery Address:* ${address}%0A%0A`+
-
-`🚚 Delivery Only`;
+`*Delivery Address:* ${address}`;
 
 window.open(
 
