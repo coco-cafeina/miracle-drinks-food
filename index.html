@@ -26,7 +26,7 @@ color:#2b211e;
 
 font-family:Arial,sans-serif;
 
-padding-bottom:85px
+padding-bottom:78px
 
 }
 
@@ -194,7 +194,9 @@ border-radius:17px;
 
 overflow:hidden;
 
-box-shadow:0 4px 18px #00000010
+box-shadow:0 4px 18px #00000010;
+
+position:relative
 
 }
 
@@ -222,7 +224,7 @@ user-select:none;
 
 .info{
 
-padding:15px;
+padding:14px 15px 16px;
 
 display:flex;
 
@@ -236,9 +238,21 @@ gap:12px
 
 .card h3{
 
-margin:0 0 5px;
+margin:0 0 4px;
 
 font-size:17px
+
+}
+
+.description{
+
+font-size:13px;
+
+color:#777;
+
+line-height:1.4;
+
+margin:0 0 6px
 
 }
 
@@ -246,11 +260,13 @@ font-size:17px
 
 font-weight:bold;
 
-color:#7b2d26
+color:#7b2d26;
+
+font-size:17px
 
 }
 
-button{
+.add{
 
 border:0;
 
@@ -258,15 +274,41 @@ border-radius:11px;
 
 padding:10px 14px;
 
-font-weight:bold
-
-}
-
-.add{
+font-weight:bold;
 
 background:#7b2d26;
 
-color:#fff
+color:#fff;
+
+flex-shrink:0
+
+}
+
+/* POPULAR BADGE */
+
+.popular{
+
+position:absolute;
+
+top:12px;
+
+left:12px;
+
+background:#fff;
+
+color:#7b2d26;
+
+padding:6px 10px;
+
+border-radius:18px;
+
+font-size:12px;
+
+font-weight:bold;
+
+box-shadow:0 3px 10px #00000025;
+
+z-index:2
 
 }
 
@@ -360,7 +402,13 @@ color:white;
 
 font-size:16px;
 
-margin-top:8px
+margin-top:8px;
+
+border:0;
+
+border-radius:11px;
+
+padding:12px
 
 }
 
@@ -382,21 +430,21 @@ padding:25px
 
 }
 
-/* STICKY CART */
+/* SLIM STICKY CART */
 
 .sticky-cart{
 
 position:fixed;
 
-bottom:15px;
+bottom:12px;
 
 left:50%;
 
 transform:translateX(-50%);
 
-width:calc(100% - 30px);
+width:calc(100% - 32px);
 
-max-width:690px;
+max-width:680px;
 
 background:#7b2d26;
 
@@ -404,15 +452,15 @@ color:#fff;
 
 border:0;
 
-border-radius:15px;
+border-radius:14px;
 
-padding:14px 18px;
+padding:11px 16px;
 
-font-size:16px;
+font-size:15px;
 
 font-weight:bold;
 
-box-shadow:0 6px 20px #00000035;
+box-shadow:0 5px 16px #00000030;
 
 z-index:9999;
 
@@ -426,13 +474,25 @@ cursor:pointer
 
 }
 
-.sticky-cart span{
+.sticky-cart .cart-label{
+
+background:none;
+
+color:#fff;
+
+padding:0;
+
+font-size:15px
+
+}
+
+.sticky-cart .count{
 
 background:#fff;
 
 color:#7b2d26;
 
-border-radius:20px;
+border-radius:18px;
 
 padding:3px 9px;
 
@@ -516,7 +576,9 @@ justify-content:center;
 
 cursor:pointer;
 
-padding:0
+padding:0;
+
+border:0
 
 }
 
@@ -534,19 +596,13 @@ padding:0
 
 <p>Coco Cafeina • Fresh Food & Drinks</p>
 
-<span class="badge">
-
-🚚 Delivery Only
-
-</span>
+<span class="badge">🚚 Delivery Only</span>
 
 </div>
 
 </header>
 
 <main class="wrap">
-
-<!-- SEARCH -->
 
 <input
 
@@ -562,69 +618,49 @@ oninput="filterProducts()"
 
 >
 
-<!-- FILTER BUTTONS -->
-
 <div class="filters">
 
-<button
-
-class="filter-btn active"
+<button class="filter-btn active"
 
 data-category="all"
 
-onclick="setCategory('all',this)"
-
->
+onclick="setCategory('all',this)">
 
 All
 
 </button>
 
-<button
-
-class="filter-btn"
+<button class="filter-btn"
 
 data-category="milkshake"
 
-onclick="setCategory('milkshake',this)"
-
->
+onclick="setCategory('milkshake',this)">
 
 🥤 Milkshake
 
 </button>
 
-<button
-
-class="filter-btn"
+<button class="filter-btn"
 
 data-category="burger"
 
-onclick="setCategory('burger',this)"
-
->
+onclick="setCategory('burger',this)">
 
 🍔 Burger
 
 </button>
 
-<button
-
-class="filter-btn"
+<button class="filter-btn"
 
 data-category="roll"
 
-onclick="setCategory('roll',this)"
-
->
+onclick="setCategory('roll',this)">
 
 🌯 Roll & Sandwich
 
 </button>
 
 </div>
-
-<!-- PRODUCTS -->
 
 <h2 id="milkshakeTitle">🥤 Milkshake</h2>
 
@@ -638,21 +674,11 @@ onclick="setCategory('roll',this)"
 
 <div class="grid" id="roll"></div>
 
-<div
-
-class="no-results"
-
-id="noResults"
-
-style="display:none"
-
->
+<div class="no-results" id="noResults" style="display:none">
 
 😔 No food or drink found.
 
 </div>
-
-<!-- CART -->
 
 <section class="cart">
 
@@ -660,11 +686,7 @@ style="display:none"
 
 <div id="cart">
 
-<p class="empty">
-
-Your cart is empty.
-
-</p>
+<p class="empty">Your cart is empty.</p>
 
 </div>
 
@@ -672,21 +694,9 @@ Your cart is empty.
 
 <h3>Delivery Details</h3>
 
-<input
+<input id="name" placeholder="Your name">
 
-id="name"
-
-placeholder="Your name"
-
->
-
-<input
-
-id="phone"
-
-placeholder="Mobile number"
-
->
+<input id="phone" placeholder="Mobile number">
 
 <textarea
 
@@ -694,17 +704,11 @@ id="address"
 
 rows="3"
 
-placeholder="Full delivery address"
+placeholder="Full delivery address">
 
-></textarea>
+</textarea>
 
-<button
-
-class="order"
-
-onclick="sendOrder()"
-
->
+<button class="order" onclick="sendOrder()">
 
 Order on WhatsApp
 
@@ -720,63 +724,29 @@ Order on WhatsApp
 
 </footer>
 
-<!-- STICKY CART -->
-
 <button
 
 class="sticky-cart"
 
 id="stickyCart"
 
-onclick="document.querySelector('.cart').scrollIntoView({behavior:'smooth'})"
+onclick="document.querySelector('.cart').scrollIntoView({behavior:'smooth'})">
 
->
+<span class="cart-label">🛒 View Cart</span>
 
-<span style="background:none;color:white;padding:0">
-
-🛒 View Cart
-
-</span>
-
-<span id="cartCount">
-
-0
-
-</span>
+<span class="count" id="cartCount">0</span>
 
 </button>
 
-<!-- FULL SCREEN PHOTO -->
+<div class="photo-modal" id="photoModal">
 
-<div
-
-class="photo-modal"
-
-id="photoModal"
-
->
-
-<button
-
-class="close-photo"
-
-onclick="closePhoto()"
-
->
+<button class="close-photo" onclick="closePhoto()">
 
 ×
 
 </button>
 
-<img
-
-id="fullPhoto"
-
-src=""
-
-alt="Food"
-
->
+<img id="fullPhoto" src="" alt="Food">
 
 </div>
 
@@ -796,7 +766,11 @@ icon:"🥤",
 
 cat:"milkshake",
 
-img:"tender-miracle.jpeg"
+img:"tender-miracle.jpeg",
+
+desc:"Fresh tender coconut special drink.",
+
+popular:true
 
 },
 
@@ -810,7 +784,11 @@ icon:"🥤",
 
 cat:"milkshake",
 
-img:"milo-magic.jpeg"
+img:"milo-magic.jpeg",
+
+desc:"Creamy and delicious Milo special.",
+
+popular:false
 
 },
 
@@ -824,7 +802,11 @@ icon:"🥭",
 
 cat:"milkshake",
 
-img:"tender-mango.jpeg"
+img:"tender-mango.jpeg",
+
+desc:"Refreshing tender coconut & mango blend.",
+
+popular:true
 
 },
 
@@ -838,7 +820,11 @@ icon:"🥤",
 
 cat:"milkshake",
 
-img:"tender-dates.jpeg"
+img:"tender-dates.jpeg",
+
+desc:"Rich tender coconut and dates combination.",
+
+popular:false
 
 },
 
@@ -852,7 +838,11 @@ icon:"🍔",
 
 cat:"burger",
 
-img:"zinger-burger.jpeg"
+img:"zinger-burger.jpeg",
+
+desc:"Crispy, tasty and freshly prepared burger.",
+
+popular:true
 
 },
 
@@ -866,7 +856,11 @@ icon:"🍔",
 
 cat:"burger",
 
-img:"barbecue-honey-burger.jpeg"
+img:"barbecue-honey-burger.jpeg",
+
+desc:"Juicy burger with barbecue honey flavour.",
+
+popular:true
 
 },
 
@@ -880,7 +874,11 @@ icon:"🌯",
 
 cat:"roll",
 
-img:"cafeina-jumbo-roll.jpeg"
+img:"cafeina-jumbo-roll.jpeg",
+
+desc:"Loaded jumbo roll prepared fresh.",
+
+popular:false
 
 },
 
@@ -894,7 +892,11 @@ icon:"🥪",
 
 cat:"roll",
 
-img:"loaded-sandwich.jpeg"
+img:"loaded-sandwich.jpeg",
+
+desc:"Fresh and delicious loaded sandwich.",
+
+popular:false
 
 }
 
@@ -904,19 +906,13 @@ let cart={};
 
 let selectedCategory="all";
 
-/* SET CATEGORY */
-
 function setCategory(category,button){
 
 selectedCategory=category;
 
 document.querySelectorAll(".filter-btn")
 
-.forEach(btn=>{
-
-btn.classList.remove("active");
-
-});
+.forEach(btn=>btn.classList.remove("active"));
 
 button.classList.add("active");
 
@@ -924,47 +920,29 @@ filterProducts();
 
 }
 
-/* SEARCH + CATEGORY FILTER */
-
 function filterProducts(){
 
-let search=
+let search=document.getElementById("searchBox")
 
-document.getElementById("searchBox")
-
-.value
-
-.toLowerCase()
-
-.trim();
+.value.toLowerCase().trim();
 
 let found=false;
 
 ["milkshake","burger","roll"].forEach(cat=>{
 
-let container=
+let container=document.getElementById(cat);
 
-document.getElementById(cat);
+let title=document.getElementById(cat+"Title");
 
-let title=
-
-document.getElementById(cat+"Title");
-
-let visibleProducts=
-
-products.filter((p,i)=>{
+let visibleProducts=products.filter(p=>{
 
 let categoryMatch=
 
-selectedCategory==="all" ||
-
-p.cat===selectedCategory;
+selectedCategory==="all" || p.cat===selectedCategory;
 
 let searchMatch=
 
-p.name.toLowerCase()
-
-.includes(search);
+p.name.toLowerCase().includes(search);
 
 return categoryMatch && searchMatch;
 
@@ -976,9 +954,7 @@ title.style.display="block";
 
 container.style.display="grid";
 
-container.innerHTML=
-
-visibleProducts.map(p=>{
+container.innerHTML=visibleProducts.map(p=>{
 
 let i=products.indexOf(p);
 
@@ -987,6 +963,8 @@ found=true;
 return `
 
 <div class="card">
+
+${p.popular ? '<div class="popular">⭐ Popular</div>' : ''}
 
 <img
 
@@ -1004,11 +982,13 @@ onclick="openPhoto('${p.img}')"
 
 <div>
 
-<h3>
+<h3>${p.icon} ${p.name}</h3>
 
-${p.icon} ${p.name}
+<p class="description">
 
-</h3>
+${p.desc}
+
+</p>
 
 <div class="price">
 
@@ -1022,9 +1002,7 @@ ${p.icon} ${p.name}
 
 class="add"
 
-onclick="add(${i})"
-
->
+onclick="add(${i})">
 
 Add
 
@@ -1054,8 +1032,6 @@ document.getElementById("noResults")
 
 }
 
-/* ADD */
-
 function add(i){
 
 cart[i]=(cart[i]||0)+1;
@@ -1063,8 +1039,6 @@ cart[i]=(cart[i]||0)+1;
 renderCart();
 
 }
-
-/* REMOVE */
 
 function remove(i){
 
@@ -1078,19 +1052,13 @@ renderCart();
 
 }
 
-/* CART */
-
 function renderCart(){
 
 let keys=Object.keys(cart);
 
-let box=
+let box=document.getElementById("cart");
 
-document.getElementById("cart");
-
-let count=
-
-Object.values(cart)
+let count=Object.values(cart)
 
 .reduce((a,b)=>a+b,0);
 
@@ -1114,9 +1082,7 @@ return;
 
 let total=0;
 
-box.innerHTML=
-
-keys.map(i=>{
+box.innerHTML=keys.map(i=>{
 
 let p=products[i];
 
@@ -1140,25 +1106,9 @@ ${p.name} × ${q}
 
 <span class="qty">
 
-<button
+<button onclick="remove(${i})">−</button>
 
-onclick="remove(${i})"
-
->
-
-−
-
-</button>
-
-<button
-
-onclick="add(${i})"
-
->
-
-+
-
-</button>
+<button onclick="add(${i})">+</button>
 
 </span>
 
@@ -1176,8 +1126,6 @@ document.getElementById("total")
 
 }
 
-/* WHATSAPP */
-
 function sendOrder(){
 
 let keys=Object.keys(cart);
@@ -1190,21 +1138,15 @@ return;
 
 }
 
-let name=
-
-document.getElementById("name")
+let name=document.getElementById("name")
 
 .value.trim();
 
-let phone=
-
-document.getElementById("phone")
+let phone=document.getElementById("phone")
 
 .value.trim();
 
-let address=
-
-document.getElementById("address")
+let address=document.getElementById("address")
 
 .value.trim();
 
@@ -1260,13 +1202,9 @@ window.open(
 
 }
 
-/* FULL SCREEN PHOTO */
-
 function openPhoto(src){
 
-document.getElementById("fullPhoto")
-
-.src=src;
+document.getElementById("fullPhoto").src=src;
 
 document.getElementById("photoModal")
 
@@ -1282,9 +1220,7 @@ document.getElementById("photoModal")
 
 .style.display="none";
 
-document.getElementById("fullPhoto")
-
-.src="";
+document.getElementById("fullPhoto").src="";
 
 document.body.style.overflow="";
 
@@ -1302,8 +1238,6 @@ closePhoto();
 
 });
 
-/* HIDE CART WHEN ORDER IS VISIBLE */
-
 const stickyCart=
 
 document.getElementById("stickyCart");
@@ -1314,9 +1248,7 @@ document.querySelector(".cart");
 
 const cartObserver=
 
-new IntersectionObserver(
-
-(entries)=>{
+new IntersectionObserver(entries=>{
 
 entries.forEach(entry=>{
 
@@ -1332,19 +1264,13 @@ stickyCart.classList.remove("hide-cart");
 
 });
 
-},
-
-{
+},{
 
 threshold:0.15
 
-}
-
-);
+});
 
 cartObserver.observe(orderSection);
-
-/* START */
 
 filterProducts();
 
