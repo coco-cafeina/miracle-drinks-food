@@ -94,6 +94,88 @@ margin:20px 0 12px
 
 }
 
+/* SEARCH */
+
+.search-box{
+
+width:100%;
+
+padding:14px 16px;
+
+border:1px solid #ddd;
+
+border-radius:14px;
+
+font-size:16px;
+
+outline:none;
+
+background:#fff;
+
+margin-top:8px;
+
+box-shadow:0 3px 12px #00000008
+
+}
+
+.search-box:focus{
+
+border-color:#7b2d26
+
+}
+
+/* FILTER */
+
+.filters{
+
+display:flex;
+
+gap:8px;
+
+overflow-x:auto;
+
+padding:12px 0 4px;
+
+scrollbar-width:none
+
+}
+
+.filters::-webkit-scrollbar{
+
+display:none
+
+}
+
+.filter-btn{
+
+white-space:nowrap;
+
+border:1px solid #7b2d26;
+
+background:#fff;
+
+color:#7b2d26;
+
+padding:9px 13px;
+
+border-radius:20px;
+
+font-size:13px;
+
+font-weight:bold
+
+}
+
+.filter-btn.active{
+
+background:#7b2d26;
+
+color:#fff
+
+}
+
+/* PRODUCTS */
+
 .grid{
 
 display:grid;
@@ -126,7 +208,15 @@ object-fit:cover;
 
 display:block;
 
-cursor:pointer
+cursor:pointer;
+
+-webkit-touch-callout:none;
+
+-webkit-user-select:none;
+
+user-select:none;
+
+-webkit-user-drag:none
 
 }
 
@@ -180,6 +270,22 @@ color:#fff
 
 }
 
+.no-results{
+
+text-align:center;
+
+padding:25px 10px;
+
+color:#777;
+
+background:#fff;
+
+border-radius:15px
+
+}
+
+/* CART */
+
 .cart{
 
 margin-top:25px;
@@ -204,7 +310,9 @@ align-items:center;
 
 border-bottom:1px solid #eee;
 
-padding:9px 0
+padding:9px 0;
+
+gap:10px
 
 }
 
@@ -314,9 +422,7 @@ justify-content:space-between;
 
 align-items:center;
 
-cursor:pointer;
-
-transition:opacity .2s ease
+cursor:pointer
 
 }
 
@@ -358,7 +464,7 @@ width:100%;
 
 height:100%;
 
-background:rgba(0,0,0,.88);
+background:rgba(0,0,0,.92);
 
 align-items:center;
 
@@ -440,17 +546,113 @@ padding:0
 
 <main class="wrap">
 
-<h2>🥤 Milkshake</h2>
+<!-- SEARCH -->
+
+<input
+
+class="search-box"
+
+id="searchBox"
+
+type="search"
+
+placeholder="🔍 Search food & drinks..."
+
+oninput="filterProducts()"
+
+>
+
+<!-- FILTER BUTTONS -->
+
+<div class="filters">
+
+<button
+
+class="filter-btn active"
+
+data-category="all"
+
+onclick="setCategory('all',this)"
+
+>
+
+All
+
+</button>
+
+<button
+
+class="filter-btn"
+
+data-category="milkshake"
+
+onclick="setCategory('milkshake',this)"
+
+>
+
+🥤 Milkshake
+
+</button>
+
+<button
+
+class="filter-btn"
+
+data-category="burger"
+
+onclick="setCategory('burger',this)"
+
+>
+
+🍔 Burger
+
+</button>
+
+<button
+
+class="filter-btn"
+
+data-category="roll"
+
+onclick="setCategory('roll',this)"
+
+>
+
+🌯 Roll & Sandwich
+
+</button>
+
+</div>
+
+<!-- PRODUCTS -->
+
+<h2 id="milkshakeTitle">🥤 Milkshake</h2>
 
 <div class="grid" id="milkshake"></div>
 
-<h2>🍔 Burger</h2>
+<h2 id="burgerTitle">🍔 Burger</h2>
 
 <div class="grid" id="burger"></div>
 
-<h2>🌯 Roll & Sandwich</h2>
+<h2 id="rollTitle">🌯 Roll & Sandwich</h2>
 
 <div class="grid" id="roll"></div>
+
+<div
+
+class="no-results"
+
+id="noResults"
+
+style="display:none"
+
+>
+
+😔 No food or drink found.
+
+</div>
+
+<!-- CART -->
 
 <section class="cart">
 
@@ -518,7 +720,7 @@ Order on WhatsApp
 
 </footer>
 
-<!-- STICKY VIEW CART -->
+<!-- STICKY CART -->
 
 <button
 
@@ -700,17 +902,87 @@ img:"loaded-sandwich.jpeg"
 
 let cart={};
 
-/* RENDER MENU */
+let selectedCategory="all";
 
-function renderMenu(){
+/* SET CATEGORY */
+
+function setCategory(category,button){
+
+selectedCategory=category;
+
+document.querySelectorAll(".filter-btn")
+
+.forEach(btn=>{
+
+btn.classList.remove("active");
+
+});
+
+button.classList.add("active");
+
+filterProducts();
+
+}
+
+/* SEARCH + CATEGORY FILTER */
+
+function filterProducts(){
+
+let search=
+
+document.getElementById("searchBox")
+
+.value
+
+.toLowerCase()
+
+.trim();
+
+let found=false;
 
 ["milkshake","burger","roll"].forEach(cat=>{
 
-document.getElementById(cat).innerHTML=
+let container=
 
-products.map((p,i)=>{
+document.getElementById(cat);
 
-if(p.cat!==cat) return "";
+let title=
+
+document.getElementById(cat+"Title");
+
+let visibleProducts=
+
+products.filter((p,i)=>{
+
+let categoryMatch=
+
+selectedCategory==="all" ||
+
+p.cat===selectedCategory;
+
+let searchMatch=
+
+p.name.toLowerCase()
+
+.includes(search);
+
+return categoryMatch && searchMatch;
+
+});
+
+if(visibleProducts.length){
+
+title.style.display="block";
+
+container.style.display="grid";
+
+container.innerHTML=
+
+visibleProducts.map(p=>{
+
+let i=products.indexOf(p);
+
+found=true;
 
 return `
 
@@ -766,11 +1038,23 @@ Add
 
 }).join("");
 
-});
+}else{
+
+title.style.display="none";
+
+container.style.display="none";
 
 }
 
-/* ADD ITEM */
+});
+
+document.getElementById("noResults")
+
+.style.display=found?"none":"block";
+
+}
+
+/* ADD */
 
 function add(i){
 
@@ -780,37 +1064,39 @@ renderCart();
 
 }
 
-/* REMOVE ITEM */
+/* REMOVE */
 
 function remove(i){
 
 cart[i]--;
 
-if(cart[i]<=0){
+if(cart[i]<=0)
 
 delete cart[i];
-
-}
 
 renderCart();
 
 }
 
-/* RENDER CART */
+/* CART */
 
 function renderCart(){
 
 let keys=Object.keys(cart);
 
-let box=document.getElementById("cart");
+let box=
 
-let count=Object.values(cart)
+document.getElementById("cart");
+
+let count=
+
+Object.values(cart)
 
 .reduce((a,b)=>a+b,0);
 
-/* UPDATE CART COUNT */
+document.getElementById("cartCount")
 
-document.getElementById("cartCount").textContent=count;
+.textContent=count;
 
 if(!keys.length){
 
@@ -818,7 +1104,9 @@ box.innerHTML=
 
 '<p class="empty">Your cart is empty.</p>';
 
-document.getElementById("total").textContent="";
+document.getElementById("total")
+
+.textContent="";
 
 return;
 
@@ -882,13 +1170,13 @@ onclick="add(${i})"
 
 }).join("");
 
-document.getElementById("total").textContent=
+document.getElementById("total")
 
-"Total: ₹"+total;
+.textContent="Total: ₹"+total;
 
 }
 
-/* WHATSAPP ORDER */
+/* WHATSAPP */
 
 function sendOrder(){
 
@@ -976,9 +1264,13 @@ window.open(
 
 function openPhoto(src){
 
-document.getElementById("fullPhoto").src=src;
+document.getElementById("fullPhoto")
 
-document.getElementById("photoModal").style.display="flex";
+.src=src;
+
+document.getElementById("photoModal")
+
+.style.display="flex";
 
 document.body.style.overflow="hidden";
 
@@ -986,15 +1278,17 @@ document.body.style.overflow="hidden";
 
 function closePhoto(){
 
-document.getElementById("photoModal").style.display="none";
+document.getElementById("photoModal")
 
-document.getElementById("fullPhoto").src="";
+.style.display="none";
+
+document.getElementById("fullPhoto")
+
+.src="";
 
 document.body.style.overflow="";
 
 }
-
-/* TAP OUTSIDE PHOTO TO CLOSE */
 
 document.getElementById("photoModal")
 
@@ -1008,7 +1302,7 @@ closePhoto();
 
 });
 
-/* HIDE VIEW CART WHEN ORDER SECTION IS VISIBLE */
+/* HIDE CART WHEN ORDER IS VISIBLE */
 
 const stickyCart=
 
@@ -1052,7 +1346,7 @@ cartObserver.observe(orderSection);
 
 /* START */
 
-renderMenu();
+filterProducts();
 
 renderCart();
 
