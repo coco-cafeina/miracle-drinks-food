@@ -14,7 +14,11 @@
 
 <style>
 
-*{box-sizing:border-box}
+*{
+
+box-sizing:border-box
+
+}
 
 body{
 
@@ -108,7 +112,11 @@ margin:20px 0 12px
 
 }
 
-/* SPECIAL OFFER */
+/* =========================
+
+   SPECIAL OFFER
+
+========================= */
 
 .offer-banner{
 
@@ -116,47 +124,47 @@ background:linear-gradient(135deg,#fff1eb,#ffffff);
 
 border:2px solid #b85b42;
 
-border-radius:20px;
+border-radius:18px;
 
-padding:18px 15px;
+padding:13px 11px;
 
-margin:8px 0 20px;
+margin:8px 0 16px;
 
 text-align:center;
 
-box-shadow:0 5px 18px #00000012
+box-shadow:0 4px 14px #00000010
 
 }
 
 .offer-title{
 
-font-size:23px;
+font-size:21px;
 
-font-weight:bold;
+font-weight:800;
 
 color:#7b2d26;
 
-margin-bottom:12px
+margin-bottom:9px
 
 }
 
 .offer-item{
 
-font-size:16px;
+font-size:14px;
 
-line-height:1.6;
+line-height:1.45;
 
 color:#2b211e;
 
 background:#fff;
 
-border-radius:13px;
+border-radius:12px;
 
-padding:11px 8px;
+padding:9px 7px;
 
-margin:8px 0;
+margin:6px 0;
 
-box-shadow:0 2px 8px #00000008
+box-shadow:0 2px 7px #00000008
 
 }
 
@@ -168,31 +176,35 @@ color:#7b2d26
 
 .offer-or{
 
-font-size:13px;
+font-size:12px;
 
 font-weight:bold;
 
 color:#888;
 
-margin:5px 0
+margin:4px 0
 
 }
 
 .offer-delivery{
 
-margin-top:12px;
+margin-top:8px;
 
-font-size:13px;
+font-size:12px;
 
 font-weight:bold;
 
 color:#7b2d26;
 
-line-height:1.6
+line-height:1.5
 
 }
 
-/* SEARCH */
+/* =========================
+
+   SEARCH
+
+========================= */
 
 .search-box{
 
@@ -222,7 +234,11 @@ border-color:#7b2d26
 
 }
 
-/* FILTER */
+/* =========================
+
+   FILTER
+
+========================= */
 
 .filters{
 
@@ -272,7 +288,11 @@ color:#fff
 
 }
 
-/* PRODUCTS */
+/* =========================
+
+   PRODUCTS
+
+========================= */
 
 .grid{
 
@@ -382,7 +402,11 @@ flex-shrink:0
 
 }
 
-/* POPULAR */
+/* =========================
+
+   POPULAR
+
+========================= */
 
 .popular{
 
@@ -424,7 +448,11 @@ border-radius:15px
 
 }
 
-/* CART */
+/* =========================
+
+   CART
+
+========================= */
 
 .cart{
 
@@ -528,7 +556,11 @@ padding:25px
 
 }
 
-/* STICKY CART */
+/* =========================
+
+   STICKY CART
+
+========================= */
 
 .sticky-cart{
 
@@ -604,7 +636,11 @@ display:none
 
 }
 
-/* FULL SCREEN PHOTO */
+/* =========================
+
+   FULL SCREEN PHOTO
+
+========================= */
 
 .photo-modal{
 
@@ -712,7 +748,11 @@ border:0
 
 <main class="wrap">
 
-<!-- SPECIAL OFFER -->
+<!-- =========================
+
+     SPECIAL OFFER
+
+========================= -->
 
 <div class="offer-banner">
 
@@ -724,7 +764,9 @@ border:0
 
 <div class="offer-item">
 
-🥤 <b>BUY 3 TENDER MIRACLE</b><br>
+🥤 <b>BUY 3 TENDER MIRACLE</b>
+
+<br>
 
 🍔 <b>GET 1 ZINGER BURGER FREE</b>
 
@@ -738,7 +780,9 @@ OR
 
 <div class="offer-item">
 
-🍔 <b>BUY 3 ZINGER BURGER</b><br>
+🍔 <b>BUY 3 ZINGER BURGER</b>
+
+<br>
 
 🥤 <b>GET 1 TENDER MIRACLE FREE</b>
 
@@ -746,7 +790,9 @@ OR
 
 <div class="offer-delivery">
 
-🚚 FREE DELIVERY<br>
+🚚 FREE DELIVERY
+
+<br>
 
 📍 Deralakatte → Thokkottu
 
@@ -1168,6 +1214,12 @@ let cart={};
 
 let selectedCategory="all";
 
+/* =========================
+
+   CATEGORY
+
+========================= */
+
 function setCategory(category,button){
 
 selectedCategory=category;
@@ -1187,6 +1239,12 @@ button.classList.add("active");
 filterProducts();
 
 }
+
+/* =========================
+
+   FILTER PRODUCTS
+
+========================= */
 
 function filterProducts(){
 
@@ -1214,12 +1272,6 @@ let title=
 
 document.getElementById(cat+"Title");
 
-/* IMPORTANT FIX:
-
-   Each section shows ONLY its own products.
-
-*/
-
 let visibleProducts=
 
 products.filter(p=>{
@@ -1230,7 +1282,9 @@ let categoryMatch=
 
 p.cat===selectedCategory)
 
-&& p.cat===cat;
+&&
+
+p.cat===cat;
 
 let searchMatch=
 
@@ -1338,7 +1392,9 @@ Add
 
 .join("");
 
-}else{
+}
+
+else{
 
 title.style.display="none";
 
@@ -1366,6 +1422,12 @@ found
 
 }
 
+/* =========================
+
+   ADD TO CART
+
+========================= */
+
 function add(i){
 
 cart[i]=
@@ -1376,17 +1438,31 @@ renderCart();
 
 }
 
+/* =========================
+
+   REMOVE
+
+========================= */
+
 function remove(i){
 
 cart[i]--;
 
-if(cart[i]<=0)
+if(cart[i]<=0){
 
 delete cart[i];
+
+}
 
 renderCart();
 
 }
+
+/* =========================
+
+   CART
+
+========================= */
 
 function renderCart(){
 
@@ -1430,7 +1506,9 @@ let total=0;
 
 box.innerHTML=
 
-keys.map(i=>{
+keys
+
+.map(i=>{
 
 let p=products[i];
 
@@ -1494,6 +1572,12 @@ document
 
 }
 
+/* =========================
+
+   WHATSAPP ORDER
+
+========================= */
+
 function sendOrder(){
 
 let keys=
@@ -1542,11 +1626,15 @@ document
 
 .trim();
 
-if(!name ||
+if(
+
+!name ||
 
 !phone ||
 
-!address){
+!address
+
+){
 
 alert(
 
@@ -1564,6 +1652,8 @@ let msg=
 
 "*New Order - Miracle Drinks and Food*%0A%0A";
 
+/* PRODUCTS */
+
 keys.forEach(i=>{
 
 let p=products[i];
@@ -1578,37 +1668,73 @@ msg+=
 
 });
 
-/* OFFER INFORMATION IN WHATSAPP ORDER */
+/* =========================
+
+   SPECIAL OFFER CHECK
+
+========================= */
 
 let tenderQty=
 
-cart[0]||0;
+cart[0] || 0;
 
 let zingerQty=
 
-cart[4]||0;
+cart[4] || 0;
 
-let offer="";
+let offerMessages=[];
+
+/* 3 TENDER = 1 ZINGER FREE */
 
 if(tenderQty>=3){
 
-offer=
+let freeZinger=
 
-`%0A🔥 *SPECIAL OFFER APPLIED*%0A`+
+Math.floor(tenderQty/3);
 
-`🥤 Buy 3 Tender Miracle → 🍔 1 Zinger Burger FREE%0A`;
+offerMessages.push(
+
+`🥤 Buy ${freeZinger*3} Tender Miracle → 🍔 ${freeZinger} Zinger Burger FREE`
+
+);
 
 }
+
+/* 3 ZINGER = 1 TENDER FREE */
 
 if(zingerQty>=3){
 
+let freeTender=
+
+Math.floor(zingerQty/3);
+
+offerMessages.push(
+
+`🍔 Buy ${freeTender*3} Zinger Burger → 🥤 ${freeTender} Tender Miracle FREE`
+
+);
+
+}
+
+/* OFFER IN WHATSAPP */
+
+let offer="";
+
+if(offerMessages.length){
+
 offer=
 
 `%0A🔥 *SPECIAL OFFER APPLIED*%0A`+
 
-`🍔 Buy 3 Zinger Burger → 🥤 1 Tender Miracle FREE%0A`;
+offerMessages
+
+.map(x=>x+"%0A")
+
+.join("");
 
 }
+
+/* FINAL MESSAGE */
 
 msg+=
 
@@ -1637,6 +1763,12 @@ window.open(
 );
 
 }
+
+/* =========================
+
+   PHOTO
+
+========================= */
 
 function openPhoto(src){
 
@@ -1690,7 +1822,15 @@ closePhoto();
 
 }
 
-});
+}
+
+);
+
+/* =========================
+
+   STICKY CART
+
+========================= */
 
 const stickyCart=
 
@@ -1724,7 +1864,9 @@ stickyCart
 
 .add("hide-cart");
 
-}else{
+}
+
+else{
 
 stickyCart
 
@@ -1751,6 +1893,12 @@ cartObserver.observe(
 orderSection
 
 );
+
+/* =========================
+
+   START
+
+========================= */
 
 filterProducts();
 
