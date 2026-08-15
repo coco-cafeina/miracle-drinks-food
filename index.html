@@ -298,7 +298,7 @@ flex-shrink:0
 
 }
 
-/* POPULAR BADGE */
+/* POPULAR */
 
 .popular{
 
@@ -444,7 +444,7 @@ padding:25px
 
 }
 
-/* SLIM STICKY CART */
+/* STICKY CART */
 
 .sticky-cart{
 
@@ -644,7 +644,9 @@ oninput="filterProducts()"
 
 <div class="filters">
 
-<button class="filter-btn active"
+<button
+
+class="filter-btn active"
 
 data-category="all"
 
@@ -654,7 +656,9 @@ All
 
 </button>
 
-<button class="filter-btn"
+<button
+
+class="filter-btn"
 
 data-category="milkshake"
 
@@ -664,7 +668,9 @@ onclick="setCategory('milkshake',this)">
 
 </button>
 
-<button class="filter-btn"
+<button
+
+class="filter-btn"
 
 data-category="burger"
 
@@ -674,7 +680,9 @@ onclick="setCategory('burger',this)">
 
 </button>
 
-<button class="filter-btn"
+<button
+
+class="filter-btn"
 
 data-category="roll"
 
@@ -698,7 +706,13 @@ onclick="setCategory('roll',this)">
 
 <div class="grid" id="roll"></div>
 
-<div class="no-results" id="noResults" style="display:none">
+<div
+
+class="no-results"
+
+id="noResults"
+
+style="display:none">
 
 😔 No food or drink found.
 
@@ -718,9 +732,17 @@ onclick="setCategory('roll',this)">
 
 <h3>Delivery Details</h3>
 
-<input id="name" placeholder="Your name">
+<input
 
-<input id="phone" placeholder="Mobile number">
+id="name"
+
+placeholder="Your name">
+
+<input
+
+id="phone"
+
+placeholder="Mobile number">
 
 <textarea
 
@@ -728,11 +750,13 @@ id="address"
 
 rows="3"
 
-placeholder="Full delivery address">
+placeholder="Full delivery address"></textarea>
 
-</textarea>
+<button
 
-<button class="order" onclick="sendOrder()">
+class="order"
+
+onclick="sendOrder()">
 
 Order on WhatsApp
 
@@ -756,21 +780,47 @@ id="stickyCart"
 
 onclick="document.querySelector('.cart').scrollIntoView({behavior:'smooth'})">
 
-<span class="cart-label">🛒 View Cart</span>
+<span class="cart-label">
 
-<span class="count" id="cartCount">0</span>
+🛒 View Cart
+
+</span>
+
+<span
+
+class="count"
+
+id="cartCount">
+
+0
+
+</span>
 
 </button>
 
-<div class="photo-modal" id="photoModal">
+<div
 
-<button class="close-photo" onclick="closePhoto">
+class="photo-modal"
+
+id="photoModal">
+
+<button
+
+class="close-photo"
+
+onclick="closePhoto()">
 
 ×
 
 </button>
 
-<img id="fullPhoto" src="" alt="Food">
+<img
+
+id="fullPhoto"
+
+src=""
+
+alt="Food">
 
 </div>
 
@@ -946,9 +996,15 @@ filterProducts();
 
 function filterProducts(){
 
-let search=document.getElementById("searchBox")
+let search=document
 
-.value.toLowerCase().trim();
+.getElementById("searchBox")
+
+.value
+
+.toLowerCase()
+
+.trim();
 
 let found=false;
 
@@ -958,11 +1014,21 @@ let container=document.getElementById(cat);
 
 let title=document.getElementById(cat+"Title");
 
+/* FIXED:
+
+   Each category container now receives
+
+   ONLY its own products.
+
+*/
+
 let visibleProducts=products.filter(p=>{
 
 let categoryMatch=
 
-selectedCategory==="all" || p.cat===selectedCategory;
+(selectedCategory==="all" || p.cat===selectedCategory)
+
+&& p.cat===cat;
 
 let searchMatch=
 
@@ -978,7 +1044,9 @@ title.style.display="block";
 
 container.style.display="grid";
 
-container.innerHTML=visibleProducts.map(p=>{
+container.innerHTML=
+
+visibleProducts.map(p=>{
 
 let i=products.indexOf(p);
 
@@ -988,7 +1056,11 @@ return `
 
 <div class="card">
 
-${p.popular ? '<div class="popular">⭐ Popular</div>' : ''}
+${p.popular
+
+? '<div class="popular">⭐ Popular</div>'
+
+: ''}
 
 <img
 
@@ -1006,7 +1078,11 @@ onclick="openPhoto('${p.img}')"
 
 <div>
 
-<h3>${p.icon} ${p.name}</h3>
+<h3>
+
+${p.icon} ${p.name}
+
+</h3>
 
 <p class="description">
 
@@ -1082,7 +1158,9 @@ let keys=Object.keys(cart);
 
 let box=document.getElementById("cart");
 
-let count=Object.values(cart)
+let count=
+
+Object.values(cart)
 
 .reduce((a,b)=>a+b,0);
 
@@ -1130,9 +1208,17 @@ ${p.name} × ${q}
 
 <span class="qty">
 
-<button onclick="remove(${i})">−</button>
+<button onclick="remove(${i})">
 
-<button onclick="add(${i})">+</button>
+−
+
+</button>
+
+<button onclick="add(${i})">
+
++
+
+</button>
 
 </span>
 
@@ -1162,15 +1248,21 @@ return;
 
 }
 
-let name=document.getElementById("name")
+let name=
+
+document.getElementById("name")
 
 .value.trim();
 
-let phone=document.getElementById("phone")
+let phone=
+
+document.getElementById("phone")
 
 .value.trim();
 
-let address=document.getElementById("address")
+let address=
+
+document.getElementById("address")
 
 .value.trim();
 
@@ -1230,7 +1322,9 @@ window.open(
 
 function openPhoto(src){
 
-document.getElementById("fullPhoto").src=src;
+document.getElementById("fullPhoto")
+
+.src=src;
 
 document.getElementById("photoModal")
 
@@ -1246,7 +1340,9 @@ document.getElementById("photoModal")
 
 .style.display="none";
 
-document.getElementById("fullPhoto").src="";
+document.getElementById("fullPhoto")
+
+.src="";
 
 document.body.style.overflow="";
 
