@@ -114,7 +114,7 @@ margin:20px 0 12px
 
 /* =========================
 
-   SPECIAL OFFER
+   SPECIAL OFFER - COMPACT
 
 ========================= */
 
@@ -124,47 +124,47 @@ background:linear-gradient(135deg,#fff1eb,#ffffff);
 
 border:2px solid #b85b42;
 
-border-radius:18px;
+border-radius:16px;
 
-padding:13px 11px;
+padding:10px 9px;
 
-margin:8px 0 16px;
+margin:8px 0 13px;
 
 text-align:center;
 
-box-shadow:0 4px 14px #00000010
+box-shadow:0 3px 12px #00000010
 
 }
 
 .offer-title{
 
-font-size:21px;
+font-size:19px;
 
 font-weight:800;
 
 color:#7b2d26;
 
-margin-bottom:9px
+margin-bottom:6px
 
 }
 
 .offer-item{
 
-font-size:14px;
+font-size:13px;
 
-line-height:1.45;
+line-height:1.35;
 
 color:#2b211e;
 
 background:#fff;
 
-border-radius:12px;
+border-radius:10px;
 
-padding:9px 7px;
+padding:7px 6px;
 
-margin:6px 0;
+margin:5px 0;
 
-box-shadow:0 2px 7px #00000008
+box-shadow:0 2px 6px #00000008
 
 }
 
@@ -176,27 +176,27 @@ color:#7b2d26
 
 .offer-or{
 
-font-size:12px;
+font-size:11px;
 
 font-weight:bold;
 
 color:#888;
 
-margin:4px 0
+margin:3px 0
 
 }
 
 .offer-delivery{
 
-margin-top:8px;
+margin-top:6px;
 
-font-size:12px;
+font-size:11px;
 
 font-weight:bold;
 
 color:#7b2d26;
 
-line-height:1.5
+line-height:1.4
 
 }
 
@@ -222,7 +222,7 @@ outline:none;
 
 background:#fff;
 
-margin-top:8px;
+margin-top:5px;
 
 box-shadow:0 3px 12px #00000008
 
@@ -790,11 +790,7 @@ OR
 
 <div class="offer-delivery">
 
-🚚 FREE DELIVERY
-
-<br>
-
-📍 Deralakatte → Thokkottu
+🚚 FREE DELIVERY &nbsp; • &nbsp; 📍 Deralakatte → Thokkottu
 
 </div>
 
@@ -1214,11 +1210,7 @@ let cart={};
 
 let selectedCategory="all";
 
-/* =========================
-
-   CATEGORY
-
-========================= */
+/* CATEGORY */
 
 function setCategory(category,button){
 
@@ -1240,11 +1232,7 @@ filterProducts();
 
 }
 
-/* =========================
-
-   FILTER PRODUCTS
-
-========================= */
+/* FILTER PRODUCTS */
 
 function filterProducts(){
 
@@ -1422,11 +1410,7 @@ found
 
 }
 
-/* =========================
-
-   ADD TO CART
-
-========================= */
+/* ADD */
 
 function add(i){
 
@@ -1438,11 +1422,7 @@ renderCart();
 
 }
 
-/* =========================
-
-   REMOVE
-
-========================= */
+/* REMOVE */
 
 function remove(i){
 
@@ -1458,11 +1438,7 @@ renderCart();
 
 }
 
-/* =========================
-
-   CART
-
-========================= */
+/* CART */
 
 function renderCart(){
 
@@ -1572,11 +1548,7 @@ document
 
 }
 
-/* =========================
-
-   WHATSAPP ORDER
-
-========================= */
+/* WHATSAPP ORDER */
 
 function sendOrder(){
 
@@ -1586,11 +1558,7 @@ Object.keys(cart);
 
 if(!keys.length){
 
-alert(
-
-"Please add an item."
-
-);
+alert("Please add an item.");
 
 return;
 
@@ -1668,11 +1636,7 @@ msg+=
 
 });
 
-/* =========================
-
-   SPECIAL OFFER CHECK
-
-========================= */
+/* SPECIAL OFFER */
 
 let tenderQty=
 
@@ -1716,7 +1680,7 @@ offerMessages.push(
 
 }
 
-/* OFFER IN WHATSAPP */
+/* OFFER MESSAGE */
 
 let offer="";
 
@@ -1764,11 +1728,7 @@ window.open(
 
 }
 
-/* =========================
-
-   PHOTO
-
-========================= */
+/* PHOTO */
 
 function openPhoto(src){
 
@@ -1822,15 +1782,9 @@ closePhoto();
 
 }
 
-}
+});
 
-);
-
-/* =========================
-
-   STICKY CART
-
-========================= */
+/* STICKY CART */
 
 const stickyCart=
 
@@ -1894,11 +1848,7 @@ orderSection
 
 );
 
-/* =========================
-
-   START
-
-========================= */
+/* START */
 
 filterProducts();
 
