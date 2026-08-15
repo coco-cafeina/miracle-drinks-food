@@ -108,6 +108,90 @@ margin:20px 0 12px
 
 }
 
+/* SPECIAL OFFER */
+
+.offer-banner{
+
+background:linear-gradient(135deg,#fff1eb,#ffffff);
+
+border:2px solid #b85b42;
+
+border-radius:20px;
+
+padding:18px 15px;
+
+margin:8px 0 20px;
+
+text-align:center;
+
+box-shadow:0 5px 18px #00000012
+
+}
+
+.offer-title{
+
+font-size:23px;
+
+font-weight:bold;
+
+color:#7b2d26;
+
+margin-bottom:12px
+
+}
+
+.offer-item{
+
+font-size:16px;
+
+line-height:1.6;
+
+color:#2b211e;
+
+background:#fff;
+
+border-radius:13px;
+
+padding:11px 8px;
+
+margin:8px 0;
+
+box-shadow:0 2px 8px #00000008
+
+}
+
+.offer-item b{
+
+color:#7b2d26
+
+}
+
+.offer-or{
+
+font-size:13px;
+
+font-weight:bold;
+
+color:#888;
+
+margin:5px 0
+
+}
+
+.offer-delivery{
+
+margin-top:12px;
+
+font-size:13px;
+
+font-weight:bold;
+
+color:#7b2d26;
+
+line-height:1.6
+
+}
+
 /* SEARCH */
 
 .search-box{
@@ -628,6 +712,50 @@ border:0
 
 <main class="wrap">
 
+<!-- SPECIAL OFFER -->
+
+<div class="offer-banner">
+
+<div class="offer-title">
+
+🔥 SPECIAL OFFER
+
+</div>
+
+<div class="offer-item">
+
+🥤 <b>BUY 3 TENDER MIRACLE</b><br>
+
+🍔 <b>GET 1 ZINGER BURGER FREE</b>
+
+</div>
+
+<div class="offer-or">
+
+OR
+
+</div>
+
+<div class="offer-item">
+
+🍔 <b>BUY 3 ZINGER BURGER</b><br>
+
+🥤 <b>GET 1 TENDER MIRACLE FREE</b>
+
+</div>
+
+<div class="offer-delivery">
+
+🚚 FREE DELIVERY<br>
+
+📍 Deralakatte → Thokkottu
+
+</div>
+
+</div>
+
+<!-- SEARCH -->
+
 <input
 
 class="search-box"
@@ -641,6 +769,8 @@ placeholder="🔍 Search food & drinks..."
 oninput="filterProducts()"
 
 >
+
+<!-- FILTER -->
 
 <div class="filters">
 
@@ -694,17 +824,49 @@ onclick="setCategory('roll',this)">
 
 </div>
 
-<h2 id="milkshakeTitle">🥤 Milkshake</h2>
+<!-- PRODUCTS -->
 
-<div class="grid" id="milkshake"></div>
+<h2 id="milkshakeTitle">
 
-<h2 id="burgerTitle">🍔 Burger</h2>
+🥤 Milkshake
 
-<div class="grid" id="burger"></div>
+</h2>
 
-<h2 id="rollTitle">🌯 Roll & Sandwich</h2>
+<div
 
-<div class="grid" id="roll"></div>
+class="grid"
+
+id="milkshake">
+
+</div>
+
+<h2 id="burgerTitle">
+
+🍔 Burger
+
+</h2>
+
+<div
+
+class="grid"
+
+id="burger">
+
+</div>
+
+<h2 id="rollTitle">
+
+🌯 Roll & Sandwich
+
+</h2>
+
+<div
+
+class="grid"
+
+id="roll">
+
+</div>
 
 <div
 
@@ -718,19 +880,39 @@ style="display:none">
 
 </div>
 
+<!-- CART -->
+
 <section class="cart">
 
-<h2>🛒 Your Order</h2>
+<h2>
+
+🛒 Your Order
+
+</h2>
 
 <div id="cart">
 
-<p class="empty">Your cart is empty.</p>
+<p class="empty">
+
+Your cart is empty.
+
+</p>
 
 </div>
 
-<div class="total" id="total"></div>
+<div
 
-<h3>Delivery Details</h3>
+class="total"
+
+id="total">
+
+</div>
+
+<h3>
+
+Delivery Details
+
+</h3>
 
 <input
 
@@ -750,7 +932,9 @@ id="address"
 
 rows="3"
 
-placeholder="Full delivery address"></textarea>
+placeholder="Full delivery address">
+
+</textarea>
 
 <button
 
@@ -771,6 +955,8 @@ Order on WhatsApp
 © Miracle Drinks and Food • Coco Cafeina
 
 </footer>
+
+<!-- STICKY CART -->
 
 <button
 
@@ -797,6 +983,8 @@ id="cartCount">
 </span>
 
 </button>
+
+<!-- FULL SCREEN PHOTO -->
 
 <div
 
@@ -984,9 +1172,15 @@ function setCategory(category,button){
 
 selectedCategory=category;
 
-document.querySelectorAll(".filter-btn")
+document
 
-.forEach(btn=>btn.classList.remove("active"));
+.querySelectorAll(".filter-btn")
+
+.forEach(btn=>{
+
+btn.classList.remove("active");
+
+});
 
 button.classList.add("active");
 
@@ -1008,33 +1202,47 @@ let search=document
 
 let found=false;
 
-["milkshake","burger","roll"].forEach(cat=>{
+["milkshake","burger","roll"]
 
-let container=document.getElementById(cat);
+.forEach(cat=>{
 
-let title=document.getElementById(cat+"Title");
+let container=
 
-/* FIXED:
+document.getElementById(cat);
 
-   Each category container now receives
+let title=
 
-   ONLY its own products.
+document.getElementById(cat+"Title");
+
+/* IMPORTANT FIX:
+
+   Each section shows ONLY its own products.
 
 */
 
-let visibleProducts=products.filter(p=>{
+let visibleProducts=
+
+products.filter(p=>{
 
 let categoryMatch=
 
-(selectedCategory==="all" || p.cat===selectedCategory)
+(selectedCategory==="all" ||
+
+p.cat===selectedCategory)
 
 && p.cat===cat;
 
 let searchMatch=
 
-p.name.toLowerCase().includes(search);
+p.name
 
-return categoryMatch && searchMatch;
+.toLowerCase()
+
+.includes(search);
+
+return categoryMatch &&
+
+searchMatch;
 
 });
 
@@ -1046,9 +1254,13 @@ container.style.display="grid";
 
 container.innerHTML=
 
-visibleProducts.map(p=>{
+visibleProducts
 
-let i=products.indexOf(p);
+.map(p=>{
+
+let i=
+
+products.indexOf(p);
 
 found=true;
 
@@ -1056,11 +1268,19 @@ return `
 
 <div class="card">
 
-${p.popular
+${
 
-? '<div class="popular">⭐ Popular</div>'
+p.popular
 
-: ''}
+?
+
+'<div class="popular">⭐ Popular</div>'
+
+:
+
+''
+
+}
 
 <img
 
@@ -1114,7 +1334,9 @@ Add
 
 `;
 
-}).join("");
+})
+
+.join("");
 
 }else{
 
@@ -1126,15 +1348,29 @@ container.style.display="none";
 
 });
 
-document.getElementById("noResults")
+document
 
-.style.display=found?"none":"block";
+.getElementById("noResults")
+
+.style.display=
+
+found
+
+?
+
+"none"
+
+:
+
+"block";
 
 }
 
 function add(i){
 
-cart[i]=(cart[i]||0)+1;
+cart[i]=
+
+(cart[i]||0)+1;
 
 renderCart();
 
@@ -1154,9 +1390,13 @@ renderCart();
 
 function renderCart(){
 
-let keys=Object.keys(cart);
+let keys=
 
-let box=document.getElementById("cart");
+Object.keys(cart);
+
+let box=
+
+document.getElementById("cart");
 
 let count=
 
@@ -1164,7 +1404,9 @@ Object.values(cart)
 
 .reduce((a,b)=>a+b,0);
 
-document.getElementById("cartCount")
+document
+
+.getElementById("cartCount")
 
 .textContent=count;
 
@@ -1174,7 +1416,9 @@ box.innerHTML=
 
 '<p class="empty">Your cart is empty.</p>';
 
-document.getElementById("total")
+document
+
+.getElementById("total")
 
 .textContent="";
 
@@ -1184,13 +1428,17 @@ return;
 
 let total=0;
 
-box.innerHTML=keys.map(i=>{
+box.innerHTML=
+
+keys.map(i=>{
 
 let p=products[i];
 
 let q=cart[i];
 
-total+=p.price*q;
+total+=
+
+p.price*q;
 
 return `
 
@@ -1208,13 +1456,17 @@ ${p.name} × ${q}
 
 <span class="qty">
 
-<button onclick="remove(${i})">
+<button
+
+onclick="remove(${i})">
 
 −
 
 </button>
 
-<button onclick="add(${i})">
+<button
+
+onclick="add(${i})">
 
 +
 
@@ -1228,21 +1480,33 @@ ${p.name} × ${q}
 
 `;
 
-}).join("");
+})
 
-document.getElementById("total")
+.join("");
 
-.textContent="Total: ₹"+total;
+document
+
+.getElementById("total")
+
+.textContent=
+
+"Total: ₹"+total;
 
 }
 
 function sendOrder(){
 
-let keys=Object.keys(cart);
+let keys=
+
+Object.keys(cart);
 
 if(!keys.length){
 
-alert("Please add an item.");
+alert(
+
+"Please add an item."
+
+);
 
 return;
 
@@ -1250,23 +1514,39 @@ return;
 
 let name=
 
-document.getElementById("name")
+document
 
-.value.trim();
+.getElementById("name")
+
+.value
+
+.trim();
 
 let phone=
 
-document.getElementById("phone")
+document
 
-.value.trim();
+.getElementById("phone")
+
+.value
+
+.trim();
 
 let address=
 
-document.getElementById("address")
+document
 
-.value.trim();
+.getElementById("address")
 
-if(!name||!phone||!address){
+.value
+
+.trim();
+
+if(!name ||
+
+!phone ||
+
+!address){
 
 alert(
 
@@ -1288,7 +1568,9 @@ keys.forEach(i=>{
 
 let p=products[i];
 
-total+=p.price*cart[i];
+total+=
+
+p.price*cart[i];
 
 msg+=
 
@@ -1296,11 +1578,45 @@ msg+=
 
 });
 
+/* OFFER INFORMATION IN WHATSAPP ORDER */
+
+let tenderQty=
+
+cart[0]||0;
+
+let zingerQty=
+
+cart[4]||0;
+
+let offer="";
+
+if(tenderQty>=3){
+
+offer=
+
+`%0A🔥 *SPECIAL OFFER APPLIED*%0A`+
+
+`🥤 Buy 3 Tender Miracle → 🍔 1 Zinger Burger FREE%0A`;
+
+}
+
+if(zingerQty>=3){
+
+offer=
+
+`%0A🔥 *SPECIAL OFFER APPLIED*%0A`+
+
+`🍔 Buy 3 Zinger Burger → 🥤 1 Tender Miracle FREE%0A`;
+
+}
+
 msg+=
 
 `%0A*Total: ₹${total}*%0A`+
 
-`*Delivery:* FREE%0A`+
+offer+
+
+`%0A*Delivery:* FREE%0A`+
 
 `*Area:* Deralakatte to Thokkottu%0A%0A`+
 
@@ -1312,7 +1628,9 @@ msg+=
 
 window.open(
 
-"https://wa.me/"+WA+"?text="+msg,
+"https://wa.me/"+WA+
+
+"?text="+msg,
 
 "_blank"
 
@@ -1322,11 +1640,15 @@ window.open(
 
 function openPhoto(src){
 
-document.getElementById("fullPhoto")
+document
+
+.getElementById("fullPhoto")
 
 .src=src;
 
-document.getElementById("photoModal")
+document
+
+.getElementById("photoModal")
 
 .style.display="flex";
 
@@ -1336,11 +1658,15 @@ document.body.style.overflow="hidden";
 
 function closePhoto(){
 
-document.getElementById("photoModal")
+document
+
+.getElementById("photoModal")
 
 .style.display="none";
 
-document.getElementById("fullPhoto")
+document
+
+.getElementById("fullPhoto")
 
 .src="";
 
@@ -1348,9 +1674,15 @@ document.body.style.overflow="";
 
 }
 
-document.getElementById("photoModal")
+document
 
-.addEventListener("click",function(e){
+.getElementById("photoModal")
+
+.addEventListener(
+
+"click",
+
+function(e){
 
 if(e.target===this){
 
@@ -1362,37 +1694,63 @@ closePhoto();
 
 const stickyCart=
 
-document.getElementById("stickyCart");
+document.getElementById(
+
+"stickyCart"
+
+);
 
 const orderSection=
 
-document.querySelector(".cart");
+document.querySelector(
+
+".cart"
+
+);
 
 const cartObserver=
 
-new IntersectionObserver(entries=>{
+new IntersectionObserver(
+
+entries=>{
 
 entries.forEach(entry=>{
 
 if(entry.isIntersecting){
 
-stickyCart.classList.add("hide-cart");
+stickyCart
+
+.classList
+
+.add("hide-cart");
 
 }else{
 
-stickyCart.classList.remove("hide-cart");
+stickyCart
+
+.classList
+
+.remove("hide-cart");
 
 }
 
 });
 
-},{
+},
+
+{
 
 threshold:0.15
 
-});
+}
 
-cartObserver.observe(orderSection);
+);
+
+cartObserver.observe(
+
+orderSection
+
+);
 
 filterProducts();
 
