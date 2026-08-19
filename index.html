@@ -8,15 +8,15 @@
 
 <meta name="viewport" content="width=device-width,initial-scale=1">
 
-<meta name="theme-color" content="#7b2d26">
+<meta name="theme-color" content="#174d35">
 
-<title>Miracle Drinks and Food</title>
+<title>COCO CAFEINA • Drinks & Food</title>
 
 <style>
 
 *{
 
-box-sizing:border-box
+box-sizing:border-box;
 
 }
 
@@ -30,19 +30,7 @@ color:#2b211e;
 
 font-family:Arial,sans-serif;
 
-padding-bottom:78px
-
-}
-
-header{
-
-background:linear-gradient(135deg,#6f241f,#b85b42);
-
-color:#fff;
-
-padding:28px 18px;
-
-border-radius:0 0 28px 28px
+padding-bottom:85px;
 
 }
 
@@ -52,23 +40,61 @@ max-width:720px;
 
 margin:auto;
 
-padding:18px
+padding:18px;
 
 }
 
-h1{
+/* =========================
 
-margin:0;
+   HEADER
 
-font-size:29px
+========================= */
+
+header{
+
+background:linear-gradient(135deg,#123d2b,#1f6848);
+
+color:#fff;
+
+padding:20px 18px 24px;
+
+border-radius:0 0 28px 28px;
+
+box-shadow:0 5px 20px #00000018;
 
 }
 
-header p{
+.brand-header{
 
-margin:7px 0 0;
+text-align:center;
 
-opacity:.9
+}
+
+.brand-logo{
+
+width:145px;
+
+max-width:55%;
+
+height:auto;
+
+display:block;
+
+margin:0 auto 8px;
+
+object-fit:contain;
+
+}
+
+.brand-subtitle{
+
+font-size:14px;
+
+margin:2px 0 10px;
+
+opacity:.9;
+
+letter-spacing:.3px;
 
 }
 
@@ -76,75 +102,97 @@ opacity:.9
 
 display:inline-block;
 
-margin-top:12px;
-
-padding:7px 12px;
+padding:7px 13px;
 
 border-radius:20px;
 
-background:#fff1eb;
+background:#fff;
 
-color:#7b2d26;
+color:#174d35;
 
-font-size:13px;
+font-size:12px;
 
-font-weight:bold
+font-weight:bold;
 
 }
 
 .delivery-area{
 
-margin:8px 0 0;
+margin:9px 0 0;
 
-font-size:14px;
+font-size:13px;
 
 font-weight:bold;
 
-color:#fff
-
-}
-
-h2{
-
-font-size:21px;
-
-margin:20px 0 12px
+color:#fff;
 
 }
 
 /* =========================
 
-   SPECIAL OFFER - COMPACT
+   HERO ORDER BUTTON
+
+========================= */
+
+.hero-order{
+
+width:100%;
+
+border:0;
+
+border-radius:14px;
+
+padding:13px;
+
+margin-top:15px;
+
+background:#d7a62a;
+
+color:#173b29;
+
+font-size:16px;
+
+font-weight:800;
+
+box-shadow:0 4px 12px #00000020;
+
+cursor:pointer;
+
+}
+
+/* =========================
+
+   OFFER
 
 ========================= */
 
 .offer-banner{
 
-background:linear-gradient(135deg,#fff1eb,#ffffff);
+background:linear-gradient(135deg,#fff7df,#ffffff);
 
-border:2px solid #b85b42;
+border:1.5px solid #d7a62a;
 
-border-radius:16px;
+border-radius:18px;
 
-padding:10px 9px;
+padding:13px 10px;
 
-margin:8px 0 13px;
+margin:16px 0;
 
 text-align:center;
 
-box-shadow:0 3px 12px #00000010
+box-shadow:0 4px 15px #00000010;
 
 }
 
 .offer-title{
 
-font-size:19px;
+font-size:20px;
 
 font-weight:800;
 
-color:#7b2d26;
+color:#174d35;
 
-margin-bottom:6px
+margin-bottom:7px;
 
 }
 
@@ -152,25 +200,23 @@ margin-bottom:6px
 
 font-size:13px;
 
-line-height:1.35;
-
-color:#2b211e;
+line-height:1.4;
 
 background:#fff;
 
-border-radius:10px;
+border-radius:11px;
 
-padding:7px 6px;
+padding:8px 6px;
 
 margin:5px 0;
 
-box-shadow:0 2px 6px #00000008
+box-shadow:0 2px 7px #00000008;
 
 }
 
 .offer-item b{
 
-color:#7b2d26
+color:#174d35;
 
 }
 
@@ -182,21 +228,19 @@ font-weight:bold;
 
 color:#888;
 
-margin:3px 0
+margin:3px;
 
 }
 
 .offer-delivery{
 
-margin-top:6px;
+margin-top:7px;
 
 font-size:11px;
 
 font-weight:bold;
 
-color:#7b2d26;
-
-line-height:1.4
+color:#174d35;
 
 }
 
@@ -222,15 +266,13 @@ outline:none;
 
 background:#fff;
 
-margin-top:5px;
-
-box-shadow:0 3px 12px #00000008
+box-shadow:0 3px 12px #00000008;
 
 }
 
 .search-box:focus{
 
-border-color:#7b2d26
+border-color:#174d35;
 
 }
 
@@ -248,15 +290,15 @@ gap:8px;
 
 overflow-x:auto;
 
-padding:12px 0 4px;
+padding:12px 0 5px;
 
-scrollbar-width:none
+scrollbar-width:none;
 
 }
 
 .filters::-webkit-scrollbar{
 
-display:none
+display:none;
 
 }
 
@@ -264,27 +306,61 @@ display:none
 
 white-space:nowrap;
 
-border:1px solid #7b2d26;
+border:1px solid #174d35;
 
 background:#fff;
 
-color:#7b2d26;
+color:#174d35;
 
-padding:9px 13px;
+padding:9px 14px;
 
 border-radius:20px;
 
 font-size:13px;
 
-font-weight:bold
+font-weight:bold;
 
 }
 
 .filter-btn.active{
 
-background:#7b2d26;
+background:#174d35;
 
-color:#fff
+color:#fff;
+
+}
+
+/* =========================
+
+   SECTION TITLES
+
+========================= */
+
+h2{
+
+font-size:21px;
+
+margin:20px 0 12px;
+
+}
+
+.section-heading{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+}
+
+.section-heading span{
+
+font-size:12px;
+
+font-weight:normal;
+
+color:#888;
 
 }
 
@@ -298,7 +374,7 @@ color:#fff
 
 display:grid;
 
-gap:12px
+gap:14px;
 
 }
 
@@ -306,15 +382,15 @@ gap:12px
 
 background:#fff;
 
-padding:0;
-
-border-radius:17px;
+border-radius:18px;
 
 overflow:hidden;
 
 box-shadow:0 4px 18px #00000010;
 
-position:relative
+position:relative;
+
+border:1px solid #f0e9e4;
 
 }
 
@@ -322,7 +398,7 @@ position:relative
 
 width:100%;
 
-height:190px;
+height:195px;
 
 object-fit:cover;
 
@@ -336,13 +412,13 @@ cursor:pointer;
 
 user-select:none;
 
--webkit-user-drag:none
+-webkit-user-drag:none;
 
 }
 
 .info{
 
-padding:14px 15px 16px;
+padding:14px;
 
 display:flex;
 
@@ -350,37 +426,39 @@ align-items:center;
 
 justify-content:space-between;
 
-gap:12px
+gap:12px;
 
 }
 
 .card h3{
 
-margin:0 0 4px;
+margin:0 0 5px;
 
-font-size:17px
+font-size:17px;
+
+color:#222;
 
 }
 
 .description{
 
-font-size:13px;
+font-size:12.5px;
 
 color:#777;
 
 line-height:1.4;
 
-margin:0 0 6px
+margin:0 0 7px;
 
 }
 
 .price{
 
-font-weight:bold;
+font-weight:800;
 
-color:#7b2d26;
+color:#174d35;
 
-font-size:17px
+font-size:17px;
 
 }
 
@@ -390,15 +468,23 @@ border:0;
 
 border-radius:11px;
 
-padding:10px 14px;
+padding:10px 15px;
 
 font-weight:bold;
 
-background:#7b2d26;
+background:#174d35;
 
 color:#fff;
 
-flex-shrink:0
+flex-shrink:0;
+
+cursor:pointer;
+
+}
+
+.add:active{
+
+transform:scale(.96);
 
 }
 
@@ -412,27 +498,33 @@ flex-shrink:0
 
 position:absolute;
 
-top:12px;
+top:11px;
 
-left:12px;
+left:11px;
 
 background:#fff;
 
-color:#7b2d26;
+color:#174d35;
 
 padding:6px 10px;
 
 border-radius:18px;
 
-font-size:12px;
+font-size:11px;
 
 font-weight:bold;
 
 box-shadow:0 3px 10px #00000025;
 
-z-index:2
+z-index:2;
 
 }
+
+/* =========================
+
+   NO RESULTS
+
+========================= */
 
 .no-results{
 
@@ -444,7 +536,7 @@ color:#777;
 
 background:#fff;
 
-border-radius:15px
+border-radius:15px;
 
 }
 
@@ -462,9 +554,15 @@ background:#fff;
 
 padding:18px;
 
-border-radius:18px;
+border-radius:20px;
 
-box-shadow:0 4px 18px #00000010
+box-shadow:0 4px 18px #00000010;
+
+}
+
+.cart-title{
+
+margin-top:0;
 
 }
 
@@ -478,9 +576,17 @@ align-items:center;
 
 border-bottom:1px solid #eee;
 
-padding:9px 0;
+padding:11px 0;
 
-gap:10px
+gap:10px;
+
+font-size:14px;
+
+}
+
+.qty{
+
+white-space:nowrap;
 
 }
 
@@ -488,7 +594,15 @@ gap:10px
 
 padding:5px 9px;
 
-margin-left:4px
+margin-left:4px;
+
+border:1px solid #ddd;
+
+background:#fff;
+
+border-radius:7px;
+
+font-weight:bold;
 
 }
 
@@ -498,7 +612,81 @@ font-size:19px;
 
 font-weight:bold;
 
-margin:14px 0
+margin:14px 0;
+
+color:#174d35;
+
+}
+
+/* =========================
+
+   OFFER CART
+
+========================= */
+
+.cart-offer{
+
+background:#fff7df;
+
+border:1px solid #d7a62a;
+
+border-radius:13px;
+
+padding:11px;
+
+margin:10px 0;
+
+font-size:13px;
+
+line-height:1.5;
+
+color:#174d35;
+
+font-weight:bold;
+
+}
+
+.cart-free{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding:9px 0;
+
+border-bottom:1px dashed #ddd;
+
+font-size:14px;
+
+}
+
+.free-badge{
+
+background:#174d35;
+
+color:#fff;
+
+padding:4px 8px;
+
+border-radius:10px;
+
+font-size:11px;
+
+font-weight:bold;
+
+}
+
+.delivery-free{
+
+font-size:13px;
+
+color:#174d35;
+
+font-weight:bold;
+
+margin:8px 0;
 
 }
 
@@ -514,7 +702,17 @@ border:1px solid #ddd;
 
 border-radius:11px;
 
-font-size:15px
+font-size:15px;
+
+outline:none;
+
+}
+
+input:focus,
+
+textarea:focus{
+
+border-color:#174d35;
 
 }
 
@@ -532,17 +730,27 @@ margin-top:8px;
 
 border:0;
 
-border-radius:11px;
+border-radius:12px;
 
-padding:12px
+padding:13px;
+
+font-weight:bold;
+
+cursor:pointer;
 
 }
 
 .empty{
 
-color:#777
+color:#777;
 
 }
+
+/* =========================
+
+   FOOTER
+
+========================= */
 
 footer{
 
@@ -552,7 +760,19 @@ color:#888;
 
 font-size:12px;
 
-padding:25px
+padding:25px 18px;
+
+}
+
+.footer-brand{
+
+font-weight:bold;
+
+color:#174d35;
+
+font-size:14px;
+
+margin-bottom:5px;
 
 }
 
@@ -576,7 +796,7 @@ width:calc(100% - 32px);
 
 max-width:680px;
 
-background:#7b2d26;
+background:#174d35;
 
 color:#fff;
 
@@ -584,7 +804,7 @@ border:0;
 
 border-radius:14px;
 
-padding:11px 16px;
+padding:12px 16px;
 
 font-size:15px;
 
@@ -600,45 +820,39 @@ justify-content:space-between;
 
 align-items:center;
 
-cursor:pointer
+cursor:pointer;
 
 }
 
 .sticky-cart .cart-label{
 
-background:none;
-
 color:#fff;
-
-padding:0;
-
-font-size:15px
 
 }
 
 .sticky-cart .count{
 
-background:#fff;
+background:#d7a62a;
 
-color:#7b2d26;
+color:#173b29;
 
 border-radius:18px;
 
 padding:3px 9px;
 
-font-size:13px
+font-size:13px;
 
 }
 
 .sticky-cart.hide-cart{
 
-display:none
+display:none;
 
 }
 
 /* =========================
 
-   FULL SCREEN PHOTO
+   PHOTO MODAL
 
 ========================= */
 
@@ -664,7 +878,7 @@ align-items:center;
 
 justify-content:center;
 
-padding:20px
+padding:20px;
 
 }
 
@@ -676,7 +890,7 @@ max-height:90vh;
 
 object-fit:contain;
 
-border-radius:15px
+border-radius:15px;
 
 }
 
@@ -712,7 +926,87 @@ cursor:pointer;
 
 padding:0;
 
-border:0
+border:0;
+
+}
+
+/* =========================
+
+   MOBILE
+
+========================= */
+
+@media(max-width:480px){
+
+.wrap{
+
+padding:15px;
+
+}
+
+header{
+
+padding:18px 15px 22px;
+
+}
+
+.brand-logo{
+
+width:135px;
+
+}
+
+.photo{
+
+height:185px;
+
+}
+
+.offer-title{
+
+font-size:19px;
+
+}
+
+.card h3{
+
+font-size:16px;
+
+}
+
+.info{
+
+padding:13px;
+
+}
+
+.add{
+
+padding:9px 13px;
+
+}
+
+}
+
+/* =========================
+
+   SMALL DESKTOP
+
+========================= */
+
+@media(min-width:600px){
+
+.grid{
+
+grid-template-columns:1fr 1fr;
+
+}
+
+.photo{
+
+height:185px;
+
+}
 
 }
 
@@ -722,13 +1016,31 @@ border:0
 
 <body>
 
+<!-- =========================
+
+     HEADER
+
+========================= -->
+
 <header>
 
-<div class="wrap">
+<div class="wrap brand-header">
 
-<h1>Miracle Drinks and Food</h1>
+<img
 
-<p>Coco Cafeina • Fresh Food & Drinks</p>
+class="brand-logo"
+
+src="logo.png"
+
+alt="COCO CAFEINA Logo"
+
+>
+
+<div class="brand-subtitle">
+
+Fresh Drinks • Food • Made Fresh
+
+</div>
 
 <span class="badge">
 
@@ -741,6 +1053,16 @@ border:0
 📍 Deralakatte → Thokkottu
 
 </p>
+
+<button
+
+class="hero-order"
+
+onclick="document.getElementById('milkshake').scrollIntoView({behavior:'smooth'})">
+
+🛒 ORDER NOW
+
+</button>
 
 </div>
 
@@ -790,13 +1112,17 @@ OR
 
 <div class="offer-delivery">
 
-🚚 FREE DELIVERY &nbsp; • &nbsp; 📍 Deralakatte → Thokkottu
+🚚 FREE DELIVERY • 📍 Deralakatte → Thokkottu
 
 </div>
 
 </div>
 
-<!-- SEARCH -->
+<!-- =========================
+
+     SEARCH
+
+========================= -->
 
 <input
 
@@ -812,7 +1138,11 @@ oninput="filterProducts()"
 
 >
 
-<!-- FILTER -->
+<!-- =========================
+
+     FILTER
+
+========================= -->
 
 <div class="filters">
 
@@ -866,13 +1196,27 @@ onclick="setCategory('roll',this)">
 
 </div>
 
-<!-- PRODUCTS -->
+<!-- =========================
+
+     PRODUCTS
+
+========================= -->
+
+<div class="section-heading">
 
 <h2 id="milkshakeTitle">
 
 🥤 Milkshake
 
 </h2>
+
+<span>
+
+Fresh Drinks
+
+</span>
+
+</div>
 
 <div
 
@@ -882,11 +1226,21 @@ id="milkshake">
 
 </div>
 
+<div class="section-heading">
+
 <h2 id="burgerTitle">
 
 🍔 Burger
 
 </h2>
+
+<span>
+
+Fresh Food
+
+</span>
+
+</div>
 
 <div
 
@@ -896,11 +1250,21 @@ id="burger">
 
 </div>
 
+<div class="section-heading">
+
 <h2 id="rollTitle">
 
 🌯 Roll & Sandwich
 
 </h2>
+
+<span>
+
+Freshly Made
+
+</span>
+
+</div>
 
 <div
 
@@ -922,11 +1286,15 @@ style="display:none">
 
 </div>
 
-<!-- CART -->
+<!-- =========================
+
+     CART
+
+========================= -->
 
 <section class="cart">
 
-<h2>
+<h2 class="cart-title">
 
 🛒 Your Order
 
@@ -944,9 +1312,23 @@ Your cart is empty.
 
 <div
 
+id="cartOffer">
+
+</div>
+
+<div
+
 class="total"
 
 id="total">
+
+</div>
+
+<div
+
+class="delivery-free">
+
+🚚 FREE DELIVERY • Deralakatte → Thokkottu
 
 </div>
 
@@ -960,13 +1342,19 @@ Delivery Details
 
 id="name"
 
-placeholder="Your name">
+placeholder="Your name"
+
+>
 
 <input
 
 id="phone"
 
-placeholder="Mobile number">
+placeholder="Mobile number"
+
+type="tel"
+
+>
 
 <textarea
 
@@ -984,7 +1372,7 @@ class="order"
 
 onclick="sendOrder()">
 
-Order on WhatsApp
+💬 ORDER ON WHATSAPP
 
 </button>
 
@@ -994,11 +1382,25 @@ Order on WhatsApp
 
 <footer>
 
-© Miracle Drinks and Food • Coco Cafeina
+<div class="footer-brand">
+
+🥥 COCO CAFEINA
+
+</div>
+
+Fresh Drinks • Food • Made Fresh
+
+<br><br>
+
+© Miracle Drinks and Food
 
 </footer>
 
-<!-- STICKY CART -->
+<!-- =========================
+
+     STICKY CART
+
+========================= -->
 
 <button
 
@@ -1026,7 +1428,11 @@ id="cartCount">
 
 </button>
 
-<!-- FULL SCREEN PHOTO -->
+<!-- =========================
+
+     PHOTO MODAL
+
+========================= -->
 
 <div
 
@@ -1057,6 +1463,12 @@ alt="Food">
 <script>
 
 const WA="919945093204";
+
+/* =========================
+
+   PRODUCTS
+
+========================= */
 
 const products=[
 
@@ -1210,7 +1622,11 @@ let cart={};
 
 let selectedCategory="all";
 
-/* CATEGORY */
+/* =========================
+
+   CATEGORY
+
+========================= */
 
 function setCategory(category,button){
 
@@ -1232,7 +1648,11 @@ filterProducts();
 
 }
 
-/* FILTER PRODUCTS */
+/* =========================
+
+   FILTER
+
+========================= */
 
 function filterProducts(){
 
@@ -1366,7 +1786,7 @@ class="add"
 
 onclick="add(${i})">
 
-Add
++ Add
 
 </button>
 
@@ -1410,7 +1830,11 @@ found
 
 }
 
-/* ADD */
+/* =========================
+
+   ADD
+
+========================= */
 
 function add(i){
 
@@ -1422,7 +1846,11 @@ renderCart();
 
 }
 
-/* REMOVE */
+/* =========================
+
+   REMOVE
+
+========================= */
 
 function remove(i){
 
@@ -1438,7 +1866,81 @@ renderCart();
 
 }
 
-/* CART */
+/* =========================
+
+   OFFER CALCULATION
+
+========================= */
+
+function calculateOffers(){
+
+let tenderQty=
+
+cart[0] || 0;
+
+let zingerQty=
+
+cart[4] || 0;
+
+let offers=[];
+
+/* 3 Tender = 1 Zinger */
+
+if(tenderQty>=3){
+
+let freeZinger=
+
+Math.floor(tenderQty/3);
+
+offers.push({
+
+type:"tender",
+
+buyQty:freeZinger*3,
+
+freeQty:freeZinger,
+
+text:
+
+`🥤 Buy ${freeZinger*3} Tender Miracle → 🍔 ${freeZinger} Zinger Burger FREE`
+
+});
+
+}
+
+/* 3 Zinger = 1 Tender */
+
+if(zingerQty>=3){
+
+let freeTender=
+
+Math.floor(zingerQty/3);
+
+offers.push({
+
+type:"zinger",
+
+buyQty:freeTender*3,
+
+freeQty:freeTender,
+
+text:
+
+`🍔 Buy ${freeTender*3} Zinger Burger → 🥤 ${freeTender} Tender Miracle FREE`
+
+});
+
+}
+
+return offers;
+
+}
+
+/* =========================
+
+   CART
+
+========================= */
 
 function renderCart(){
 
@@ -1474,6 +1976,12 @@ document
 
 .textContent="";
 
+document
+
+.getElementById("cartOffer")
+
+.innerHTML="";
+
 return;
 
 }
@@ -1500,7 +2008,7 @@ return `
 
 <span>
 
-${p.name} × ${q}
+${p.icon} ${p.name} × ${q}
 
 </span>
 
@@ -1538,6 +2046,58 @@ onclick="add(${i})">
 
 .join("");
 
+/* OFFERS */
+
+let offers=
+
+calculateOffers();
+
+let offerBox=
+
+document.getElementById("cartOffer");
+
+if(offers.length){
+
+offerBox.innerHTML=
+
+`
+
+<div class="cart-offer">
+
+🔥 SPECIAL OFFER APPLIED
+
+<br><br>
+
+${offers
+
+.map(o=>o.text)
+
+.join("<br>")}
+
+</div>
+
+`;
+
+}else{
+
+offerBox.innerHTML=
+
+`
+
+<div class="cart-offer"
+
+style="border-color:#eee;background:#fafafa;color:#777">
+
+🎁 Add 3 Tender Miracle or 3 Zinger Burger to unlock a FREE item.
+
+</div>
+
+`;
+
+}
+
+/* TOTAL */
+
 document
 
 .getElementById("total")
@@ -1548,7 +2108,11 @@ document
 
 }
 
-/* WHATSAPP ORDER */
+/* =========================
+
+   WHATSAPP ORDER
+
+========================= */
 
 function sendOrder(){
 
@@ -1618,7 +2182,9 @@ let total=0;
 
 let msg=
 
-"*New Order - Miracle Drinks and Food*%0A%0A";
+"*🥥 COCO CAFEINA*%0A"+
+
+"*New Order*%0A%0A";
 
 /* PRODUCTS */
 
@@ -1636,85 +2202,43 @@ msg+=
 
 });
 
-/* SPECIAL OFFER */
+/* OFFERS */
 
-let tenderQty=
+let offers=
 
-cart[0] || 0;
+calculateOffers();
 
-let zingerQty=
-
-cart[4] || 0;
-
-let offerMessages=[];
-
-/* 3 TENDER = 1 ZINGER FREE */
-
-if(tenderQty>=3){
-
-let freeZinger=
-
-Math.floor(tenderQty/3);
-
-offerMessages.push(
-
-`🥤 Buy ${freeZinger*3} Tender Miracle → 🍔 ${freeZinger} Zinger Burger FREE`
-
-);
-
-}
-
-/* 3 ZINGER = 1 TENDER FREE */
-
-if(zingerQty>=3){
-
-let freeTender=
-
-Math.floor(zingerQty/3);
-
-offerMessages.push(
-
-`🍔 Buy ${freeTender*3} Zinger Burger → 🥤 ${freeTender} Tender Miracle FREE`
-
-);
-
-}
-
-/* OFFER MESSAGE */
-
-let offer="";
-
-if(offerMessages.length){
-
-offer=
-
-`%0A🔥 *SPECIAL OFFER APPLIED*%0A`+
-
-offerMessages
-
-.map(x=>x+"%0A")
-
-.join("");
-
-}
-
-/* FINAL MESSAGE */
+if(offers.length){
 
 msg+=
 
-`%0A*Total: ₹${total}*%0A`+
+`%0A🔥 *SPECIAL OFFER APPLIED*%0A`;
 
-offer+
+offers.forEach(o=>{
 
-`%0A*Delivery:* FREE%0A`+
+msg+=
 
-`*Area:* Deralakatte to Thokkottu%0A%0A`+
+`• ${o.text}%0A`;
 
-`*Customer:* ${name}%0A`+
+});
 
-`*Phone:* ${phone}%0A`+
+}
 
-`*Delivery Address:* ${address}`;
+/* FINAL */
+
+msg+=
+
+`%0A💰 *Total: ₹${total}*%0A`+
+
+`🚚 *Delivery: FREE*%0A`+
+
+`📍 *Area: Deralakatte → Thokkottu*%0A%0A`+
+
+`👤 *Customer:* ${name}%0A`+
+
+`📞 *Phone:* ${phone}%0A`+
+
+`📍 *Delivery Address:* ${address}`;
 
 window.open(
 
@@ -1728,7 +2252,11 @@ window.open(
 
 }
 
-/* PHOTO */
+/* =========================
+
+   PHOTO
+
+========================= */
 
 function openPhoto(src){
 
@@ -1782,9 +2310,15 @@ closePhoto();
 
 }
 
-});
+}
 
-/* STICKY CART */
+);
+
+/* =========================
+
+   STICKY CART
+
+========================= */
 
 const stickyCart=
 
@@ -1818,9 +2352,7 @@ stickyCart
 
 .add("hide-cart");
 
-}
-
-else{
+}else{
 
 stickyCart
 
@@ -1838,9 +2370,7 @@ stickyCart
 
 threshold:0.15
 
-}
-
-);
+});
 
 cartObserver.observe(
 
@@ -1848,7 +2378,11 @@ orderSection
 
 );
 
-/* START */
+/* =========================
+
+   START
+
+========================= */
 
 filterProducts();
 
