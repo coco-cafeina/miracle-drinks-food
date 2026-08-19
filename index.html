@@ -584,6 +584,36 @@ font-size:14px;
 
 }
 
+/* FREE ITEM */
+
+.free-item{
+
+background:#f4fbf6;
+
+border:1px solid #d7a62a;
+
+border-radius:10px;
+
+padding:11px 10px;
+
+margin:8px 0;
+
+font-weight:bold;
+
+color:#174d35;
+
+}
+
+.free-price{
+
+color:#174d35;
+
+font-weight:800;
+
+white-space:nowrap;
+
+}
+
 .qty{
 
 white-space:nowrap;
@@ -1888,7 +1918,7 @@ cart[4] || 0;
 
 let offers=[];
 
-/* 3 Tender = 1 Zinger */
+/* 3 Tender = 1 Zinger FREE */
 
 if(tenderQty>=3){
 
@@ -1904,6 +1934,10 @@ buyQty:freeZinger*3,
 
 freeQty:freeZinger,
 
+freeProduct:"Zinger Burger",
+
+freeIcon:"🍔",
+
 text:
 
 `🥤 Buy ${freeZinger*3} Tender Miracle → 🍔 ${freeZinger} Zinger Burger FREE`
@@ -1912,7 +1946,7 @@ text:
 
 }
 
-/* 3 Zinger = 1 Tender */
+/* 3 Zinger = 1 Tender FREE */
 
 if(zingerQty>=3){
 
@@ -1927,6 +1961,10 @@ type:"zinger",
 buyQty:freeTender*3,
 
 freeQty:freeTender,
+
+freeProduct:"Tender Miracle",
+
+freeIcon:"🥤",
 
 text:
 
@@ -1956,6 +1994,8 @@ let box=
 
 document.getElementById("cart");
 
+/* PAID ITEM COUNT */
+
 let count=
 
 Object.values(cart)
@@ -1967,6 +2007,8 @@ document
 .getElementById("cartCount")
 
 .textContent=count;
+
+/* EMPTY */
 
 if(!keys.length){
 
@@ -1989,6 +2031,12 @@ document
 return;
 
 }
+
+/* =========================
+
+   PAID PRODUCTS
+
+========================= */
 
 let total=0;
 
@@ -2050,11 +2098,47 @@ onclick="add(${i})">
 
 .join("");
 
-/* OFFERS */
+/* =========================
+
+   FREE ITEMS
+
+========================= */
 
 let offers=
 
 calculateOffers();
+
+offers.forEach(o=>{
+
+box.innerHTML+=`
+
+<div class="item free-item">
+
+<span>
+
+${o.freeIcon}
+
+${o.freeProduct} × ${o.freeQty}
+
+</span>
+
+<span class="free-price">
+
+₹0 FREE
+
+</span>
+
+</div>
+
+`;
+
+});
+
+/* =========================
+
+   OFFER MESSAGE
+
+========================= */
 
 let offerBox=
 
@@ -2076,19 +2160,23 @@ ${offers
 
 .map(o=>o.text)
 
-.join("<br>")}
+.join("<br><br>")}
 
 </div>
 
 `;
 
-}else{
+}
+
+else{
 
 offerBox.innerHTML=
 
 `
 
-<div class="cart-offer"
+<div
+
+class="cart-offer"
 
 style="border-color:#eee;background:#fafafa;color:#777">
 
@@ -2100,7 +2188,11 @@ style="border-color:#eee;background:#fafafa;color:#777">
 
 }
 
-/* TOTAL */
+/* =========================
+
+   TOTAL
+
+========================= */
 
 document
 
@@ -2182,6 +2274,12 @@ return;
 
 }
 
+/* =========================
+
+   TOTAL
+
+========================= */
+
 let total=0;
 
 let msg=
@@ -2190,23 +2288,35 @@ let msg=
 
 "*New Order*%0A%0A";
 
-/* PRODUCTS */
+/* =========================
+
+   PAID PRODUCTS
+
+========================= */
 
 keys.forEach(i=>{
 
 let p=products[i];
 
-total+=
+let qty=cart[i];
 
-p.price*cart[i];
+let itemTotal=
+
+p.price*qty;
+
+total+=itemTotal;
 
 msg+=
 
-`• ${p.name} × ${cart[i]} = ₹${p.price*cart[i]}%0A`;
+`• ${p.icon} ${p.name} × ${qty} = ₹${itemTotal}%0A`;
 
 });
 
-/* OFFERS */
+/* =========================
+
+   FREE ITEMS
+
+========================= */
 
 let offers=
 
@@ -2224,11 +2334,19 @@ msg+=
 
 `• ${o.text}%0A`;
 
+msg+=
+
+`🎁 *FREE: ${o.freeIcon} ${o.freeProduct} × ${o.freeQty} — ₹0*%0A`;
+
 });
 
 }
 
-/* FINAL */
+/* =========================
+
+   FINAL
+
+========================= */
 
 msg+=
 
@@ -2326,19 +2444,11 @@ closePhoto();
 
 const stickyCart=
 
-document.getElementById(
-
-"stickyCart"
-
-);
+document.getElementById("stickyCart");
 
 const orderSection=
 
-document.querySelector(
-
-".cart"
-
-);
+document.querySelector(".cart");
 
 const cartObserver=
 
@@ -2356,7 +2466,9 @@ stickyCart
 
 .add("hide-cart");
 
-}else{
+}
+
+else{
 
 stickyCart
 
@@ -2374,13 +2486,11 @@ stickyCart
 
 threshold:0.15
 
-});
-
-cartObserver.observe(
-
-orderSection
+}
 
 );
+
+cartObserver.observe(orderSection);
 
 /* =========================
 
