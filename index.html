@@ -1108,7 +1108,9 @@ Fresh Drinks • Food • Made Fresh
 
 class="hero-order"
 
-onclick="document.getElementById('milkshake').scrollIntoView({behavior:'smooth'})">
+onclick="document.getElementById('milkshake').scrollIntoView({behavior:'smooth'})"
+
+>
 
 🛒 ORDER NOW
 
@@ -1202,7 +1204,9 @@ class="filter-btn active"
 
 data-category="all"
 
-onclick="setCategory('all',this)">
+onclick="setCategory('all',this)"
+
+>
 
 All
 
@@ -1214,7 +1218,9 @@ class="filter-btn"
 
 data-category="milkshake"
 
-onclick="setCategory('milkshake',this)">
+onclick="setCategory('milkshake',this)"
+
+>
 
 🥤 Milkshake
 
@@ -1226,7 +1232,9 @@ class="filter-btn"
 
 data-category="burger"
 
-onclick="setCategory('burger',this)">
+onclick="setCategory('burger',this)"
+
+>
 
 🍔 Burger
 
@@ -1238,7 +1246,9 @@ class="filter-btn"
 
 data-category="roll"
 
-onclick="setCategory('roll',this)">
+onclick="setCategory('roll',this)"
+
+>
 
 🌯 Roll & Sandwich
 
@@ -1330,7 +1340,9 @@ class="no-results"
 
 id="noResults"
 
-style="display:none">
+style="display:none"
+
+>
 
 😔 No food or drink found.
 
@@ -1376,7 +1388,9 @@ id="total">
 
 <div
 
-class="delivery-free">
+class="delivery-free"
+
+>
 
 🚚 FREE DELIVERY • Deralakatte → Thokkottu
 
@@ -1412,9 +1426,9 @@ id="address"
 
 rows="3"
 
-placeholder="Full delivery address">
+placeholder="Full delivery address"
 
-</textarea>
+></textarea>
 
 <button
 
@@ -1422,7 +1436,9 @@ class="order"
 
 id="orderButton"
 
-onclick="sendOrder()">
+onclick="sendOrder()"
+
+>
 
 💬 ORDER ON WHATSAPP
 
@@ -1460,7 +1476,9 @@ class="sticky-cart"
 
 id="stickyCart"
 
-onclick="document.querySelector('.cart').scrollIntoView({behavior:'smooth'})">
+onclick="document.querySelector('.cart').scrollIntoView({behavior:'smooth'})"
+
+>
 
 <span class="cart-label">
 
@@ -1472,7 +1490,9 @@ onclick="document.querySelector('.cart').scrollIntoView({behavior:'smooth'})">
 
 class="count"
 
-id="cartCount">
+id="cartCount"
+
+>
 
 0
 
@@ -1490,13 +1510,17 @@ id="cartCount">
 
 class="photo-modal"
 
-id="photoModal">
+id="photoModal"
+
+>
 
 <button
 
 class="close-photo"
 
-onclick="closePhoto()">
+onclick="closePhoto()"
+
+>
 
 ×
 
@@ -1508,7 +1532,9 @@ id="fullPhoto"
 
 src=""
 
-alt="Food">
+alt="Food"
+
+>
 
 </div>
 
@@ -1762,11 +1788,17 @@ let found=false;
 
 .forEach(cat=>{
 
-let container=document.getElementById(cat);
+let container=
 
-let title=document.getElementById(cat+"Title");
+document.getElementById(cat);
 
-let visibleProducts=products.filter(p=>{
+let title=
+
+document.getElementById(cat+"Title");
+
+let visibleProducts=
+
+products.filter(p=>{
 
 let categoryMatch=
 
@@ -1786,7 +1818,9 @@ p.name
 
 .includes(search);
 
-return categoryMatch && searchMatch;
+return categoryMatch &&
+
+searchMatch;
 
 });
 
@@ -1802,7 +1836,9 @@ visibleProducts
 
 .map(p=>{
 
-let i=products.indexOf(p);
+let i=
+
+products.indexOf(p);
 
 found=true;
 
@@ -1864,7 +1900,9 @@ ${p.desc}
 
 class="add"
 
-onclick="add(${i})">
+onclick="add(${i})"
+
+>
 
 + Add
 
@@ -1918,7 +1956,9 @@ found
 
 function add(i){
 
-cart[i]=(cart[i]||0)+1;
+cart[i]=
+
+(cart[i]||0)+1;
 
 renderCart();
 
@@ -1952,9 +1992,13 @@ renderCart();
 
 function calculateOffers(){
 
-let tenderQty=cart[0]||0;
+let tenderQty=
 
-let zingerQty=cart[4]||0;
+cart[0]||0;
+
+let zingerQty=
+
+cart[4]||0;
 
 let offers=[];
 
@@ -2026,9 +2070,13 @@ return offers;
 
 function renderCart(){
 
-let keys=Object.keys(cart);
+let keys=
 
-let box=document.getElementById("cart");
+Object.keys(cart);
+
+let box=
+
+document.getElementById("cart");
 
 /* PAID ITEM COUNT */
 
@@ -2082,7 +2130,9 @@ let p=products[i];
 
 let q=cart[i];
 
-total+=p.price*q;
+total+=
+
+p.price*q;
 
 return `
 
@@ -2102,7 +2152,9 @@ ${p.icon} ${p.name} × ${q}
 
 <button
 
-onclick="remove(${i})">
+onclick="remove(${i})"
+
+>
 
 −
 
@@ -2110,7 +2162,9 @@ onclick="remove(${i})">
 
 <button
 
-onclick="add(${i})">
+onclick="add(${i})"
+
+>
 
 +
 
@@ -2130,7 +2184,9 @@ onclick="add(${i})">
 
 /* FREE ITEMS */
 
-let offers=calculateOffers();
+let offers=
+
+calculateOffers();
 
 offers.forEach(o=>{
 
@@ -2198,7 +2254,9 @@ offerBox.innerHTML=
 
 class="cart-offer"
 
-style="border-color:#eee;background:#fafafa;color:#777">
+style="border-color:#eee;background:#fafafa;color:#777"
+
+>
 
 🎁 Add 3 Tender Miracle or 3 Zinger Burger to unlock a FREE item.
 
@@ -2214,7 +2272,9 @@ document
 
 .getElementById("total")
 
-.textContent="Total: ₹"+total;
+.textContent=
+
+"Total: ₹"+total;
 
 }
 
@@ -2222,11 +2282,15 @@ document
 
    FIREBASE + WHATSAPP ORDER
 
+   FIXED VERSION
+
 ========================= */
 
 async function sendOrder(){
 
-let keys=Object.keys(cart);
+let keys=
+
+Object.keys(cart);
 
 if(!keys.length){
 
@@ -2236,7 +2300,9 @@ return;
 
 }
 
-let name=document
+let name=
+
+document
 
 .getElementById("name")
 
@@ -2244,7 +2310,9 @@ let name=document
 
 .trim();
 
-let phone=document
+let phone=
+
+document
 
 .getElementById("phone")
 
@@ -2252,7 +2320,9 @@ let phone=document
 
 .trim();
 
-let address=document
+let address=
+
+document
 
 .getElementById("address")
 
@@ -2284,7 +2354,9 @@ document.getElementById("orderButton");
 
 orderButton.disabled=true;
 
-orderButton.textContent="⏳ Processing Order...";
+orderButton.textContent=
+
+"⏳ Processing Order...";
 
 /* =========================
 
@@ -2294,13 +2366,17 @@ orderButton.textContent="⏳ Processing Order...";
 
 let total=0;
 
-let items=keys.map(i=>{
+let items=
+
+keys.map(i=>{
 
 let p=products[i];
 
 let qty=cart[i];
 
-let itemTotal=p.price*qty;
+let itemTotal=
+
+p.price*qty;
 
 total+=itemTotal;
 
@@ -2326,9 +2402,13 @@ itemTotal:itemTotal
 
 ========================= */
 
-let offers=calculateOffers();
+let offers=
 
-let freeItems=offers.map(o=>{
+calculateOffers();
+
+let freeItems=
+
+offers.map(o=>{
 
 return{
 
@@ -2345,6 +2425,58 @@ free:true
 };
 
 });
+
+/* =========================
+
+   WHATSAPP MESSAGE
+
+========================= */
+
+let msg=
+
+"*🥥 COCO CAFEINA*%0A"+
+
+"*New Order*%0A%0A";
+
+/* PAID PRODUCTS */
+
+keys.forEach(i=>{
+
+let p=products[i];
+
+let qty=cart[i];
+
+let itemTotal=
+
+p.price*qty;
+
+msg+=
+
+`• ${p.icon} ${p.name} × ${qty} = ₹${itemTotal}%0A`;
+
+});
+
+/* FREE ITEMS */
+
+if(offers.length){
+
+msg+=
+
+`%0A🔥 *SPECIAL OFFER APPLIED*%0A`;
+
+offers.forEach(o=>{
+
+msg+=
+
+`• ${o.text}%0A`;
+
+msg+=
+
+`🎁 *FREE: ${o.freeIcon} ${o.freeProduct} × ${o.freeQty} — ₹0*%0A`;
+
+});
+
+}
 
 /* =========================
 
@@ -2378,11 +2510,13 @@ firebase.firestore.FieldValue.serverTimestamp()
 
 /* =========================
 
-   SAVE TO FIRESTORE
+   SAVE TO FIREBASE
 
 ========================= */
 
-let orderId="";
+let orderId=
+
+"Not Saved";
 
 try{
 
@@ -2394,7 +2528,9 @@ await db
 
 .add(orderData);
 
-orderId=docRef.id;
+orderId=
+
+docRef.id;
 
 console.log(
 
@@ -2416,79 +2552,35 @@ error
 
 );
 
-orderButton.disabled=false;
+/*
 
-orderButton.textContent=
+Firebase save fail ಆದರೂ
 
-"💬 ORDER ON WHATSAPP";
+WhatsApp order ನಿಲ್ಲಬಾರದು.
 
-alert(
+*/
 
-"Order save ಆಗಲಿಲ್ಲ. Firebase permission/settings ಪರಿಶೀಲಿಸಬೇಕು."
+orderId=
 
-);
-
-return;
+"Firebase-Save-Failed";
 
 }
 
 /* =========================
 
-   WHATSAPP MESSAGE
+   ADD ORDER ID
 
 ========================= */
-
-let msg=
-
-"*🥥 COCO CAFEINA*%0A"+
-
-"*New Order*%0A%0A";
-
-/* PAID PRODUCTS */
-
-keys.forEach(i=>{
-
-let p=products[i];
-
-let qty=cart[i];
-
-let itemTotal=p.price*qty;
-
-msg+=
-
-`• ${p.icon} ${p.name} × ${qty} = ₹${itemTotal}%0A`;
-
-});
-
-/* FREE ITEMS */
-
-if(offers.length){
-
-msg+=
-
-`%0A🔥 *SPECIAL OFFER APPLIED*%0A`;
-
-offers.forEach(o=>{
-
-msg+=
-
-`• ${o.text}%0A`;
-
-msg+=
-
-`🎁 *FREE: ${o.freeIcon} ${o.freeProduct} × ${o.freeQty} — ₹0*%0A`;
-
-});
-
-}
-
-/* ORDER ID */
 
 msg+=
 
 `%0A🧾 *Order ID:* ${orderId}`;
 
-/* CUSTOMER DETAILS */
+/* =========================
+
+   CUSTOMER DETAILS
+
+========================= */
 
 msg+=
 
@@ -2510,7 +2602,7 @@ msg+=
 
 ========================= */
 
-window.open(
+let whatsappURL=
 
 "https://wa.me/"+
 
@@ -2518,23 +2610,37 @@ WA+
 
 "?text="+
 
-msg,
+msg;
 
-"_blank"
+/*
 
-);
+Use location.href instead of window.open.
+
+This works better on mobile/iPhone
+
+and avoids popup blocking.
+
+*/
+
+window.location.href=
+
+whatsappURL;
 
 /* =========================
 
-   SUCCESS
+   RESET BUTTON
 
 ========================= */
+
+setTimeout(()=>{
 
 orderButton.disabled=false;
 
 orderButton.textContent=
 
 "💬 ORDER ON WHATSAPP";
+
+},3000);
 
 }
 
