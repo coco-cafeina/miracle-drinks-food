@@ -12,6 +12,16 @@
 
 <title>COCO CAFEINA • Drinks & Food</title>
 
+<!-- =========================
+
+     FIREBASE
+
+========================= -->
+
+<script src="https://www.gstatic.com/firebasejs/12.17.0/firebase-app-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/12.17.0/firebase-firestore-compat.js"></script>
+
 <style>
 
 *{
@@ -770,6 +780,14 @@ cursor:pointer;
 
 }
 
+.order:disabled{
+
+opacity:.7;
+
+cursor:wait;
+
+}
+
 .empty{
 
 color:#777;
@@ -1055,8 +1073,6 @@ height:185px;
 <header>
 
 <div class="wrap brand-header">
-
-<!-- COCO CAFEINA LOGO -->
 
 <img
 
@@ -1404,6 +1420,8 @@ placeholder="Full delivery address">
 
 class="order"
 
+id="orderButton"
+
 onclick="sendOrder()">
 
 💬 ORDER ON WHATSAPP
@@ -1496,7 +1514,45 @@ alt="Food">
 
 <script>
 
+/* =========================
+
+   WHATSAPP
+
+========================= */
+
 const WA="919945093204";
+
+/* =========================
+
+   FIREBASE CONFIG
+
+========================= */
+
+const firebaseConfig={
+
+apiKey:"AIzaSyABdyflDhA_syt9igT9bkjwAjzDQbdl760",
+
+authDomain:"coco-cafeina.firebaseapp.com",
+
+projectId:"coco-cafeina",
+
+storageBucket:"coco-cafeina.firebasestorage.app",
+
+messagingSenderId:"1001937326141",
+
+appId:"1:1001937326141:web:206c27faba6590c2199a54"
+
+};
+
+/* =========================
+
+   INITIALIZE FIREBASE
+
+========================= */
+
+firebase.initializeApp(firebaseConfig);
+
+const db=firebase.firestore();
 
 /* =========================
 
@@ -1706,17 +1762,11 @@ let found=false;
 
 .forEach(cat=>{
 
-let container=
+let container=document.getElementById(cat);
 
-document.getElementById(cat);
+let title=document.getElementById(cat+"Title");
 
-let title=
-
-document.getElementById(cat+"Title");
-
-let visibleProducts=
-
-products.filter(p=>{
+let visibleProducts=products.filter(p=>{
 
 let categoryMatch=
 
@@ -1736,9 +1786,7 @@ p.name
 
 .includes(search);
 
-return categoryMatch &&
-
-searchMatch;
+return categoryMatch && searchMatch;
 
 });
 
@@ -1754,9 +1802,7 @@ visibleProducts
 
 .map(p=>{
 
-let i=
-
-products.indexOf(p);
+let i=products.indexOf(p);
 
 found=true;
 
@@ -1872,9 +1918,7 @@ found
 
 function add(i){
 
-cart[i]=
-
-(cart[i]||0)+1;
+cart[i]=(cart[i]||0)+1;
 
 renderCart();
 
@@ -1908,13 +1952,9 @@ renderCart();
 
 function calculateOffers(){
 
-let tenderQty=
+let tenderQty=cart[0]||0;
 
-cart[0] || 0;
-
-let zingerQty=
-
-cart[4] || 0;
+let zingerQty=cart[4]||0;
 
 let offers=[];
 
@@ -1986,13 +2026,9 @@ return offers;
 
 function renderCart(){
 
-let keys=
+let keys=Object.keys(cart);
 
-Object.keys(cart);
-
-let box=
-
-document.getElementById("cart");
+let box=document.getElementById("cart");
 
 /* PAID ITEM COUNT */
 
@@ -2032,11 +2068,7 @@ return;
 
 }
 
-/* =========================
-
-   PAID PRODUCTS
-
-========================= */
+/* PAID PRODUCTS */
 
 let total=0;
 
@@ -2050,9 +2082,7 @@ let p=products[i];
 
 let q=cart[i];
 
-total+=
-
-p.price*q;
+total+=p.price*q;
 
 return `
 
@@ -2098,15 +2128,9 @@ onclick="add(${i})">
 
 .join("");
 
-/* =========================
+/* FREE ITEMS */
 
-   FREE ITEMS
-
-========================= */
-
-let offers=
-
-calculateOffers();
+let offers=calculateOffers();
 
 offers.forEach(o=>{
 
@@ -2134,11 +2158,7 @@ ${o.freeProduct} × ${o.freeQty}
 
 });
 
-/* =========================
-
-   OFFER MESSAGE
-
-========================= */
+/* OFFER MESSAGE */
 
 let offerBox=
 
@@ -2188,33 +2208,25 @@ style="border-color:#eee;background:#fafafa;color:#777">
 
 }
 
-/* =========================
-
-   TOTAL
-
-========================= */
+/* TOTAL */
 
 document
 
 .getElementById("total")
 
-.textContent=
-
-"Total: ₹"+total;
+.textContent="Total: ₹"+total;
 
 }
 
 /* =========================
 
-   WHATSAPP ORDER
+   FIREBASE + WHATSAPP ORDER
 
 ========================= */
 
-function sendOrder(){
+async function sendOrder(){
 
-let keys=
-
-Object.keys(cart);
+let keys=Object.keys(cart);
 
 if(!keys.length){
 
@@ -2224,9 +2236,7 @@ return;
 
 }
 
-let name=
-
-document
+let name=document
 
 .getElementById("name")
 
@@ -2234,9 +2244,7 @@ document
 
 .trim();
 
-let phone=
-
-document
+let phone=document
 
 .getElementById("phone")
 
@@ -2244,9 +2252,7 @@ document
 
 .trim();
 
-let address=
-
-document
+let address=document
 
 .getElementById("address")
 
@@ -2254,15 +2260,7 @@ document
 
 .trim();
 
-if(
-
-!name ||
-
-!phone ||
-
-!address
-
-){
+if(!name || !phone || !address){
 
 alert(
 
@@ -2276,39 +2274,49 @@ return;
 
 /* =========================
 
-   TOTAL
+   DISABLE BUTTON
+
+========================= */
+
+let orderButton=
+
+document.getElementById("orderButton");
+
+orderButton.disabled=true;
+
+orderButton.textContent="⏳ Processing Order...";
+
+/* =========================
+
+   TOTAL + ITEMS
 
 ========================= */
 
 let total=0;
 
-let msg=
-
-"*🥥 COCO CAFEINA*%0A"+
-
-"*New Order*%0A%0A";
-
-/* =========================
-
-   PAID PRODUCTS
-
-========================= */
-
-keys.forEach(i=>{
+let items=keys.map(i=>{
 
 let p=products[i];
 
 let qty=cart[i];
 
-let itemTotal=
-
-p.price*qty;
+let itemTotal=p.price*qty;
 
 total+=itemTotal;
 
-msg+=
+return{
 
-`• ${p.icon} ${p.name} × ${qty} = ₹${itemTotal}%0A`;
+name:p.name,
+
+icon:p.icon,
+
+price:p.price,
+
+quantity:qty,
+
+itemTotal:itemTotal
+
+};
 
 });
 
@@ -2318,9 +2326,141 @@ msg+=
 
 ========================= */
 
-let offers=
+let offers=calculateOffers();
 
-calculateOffers();
+let freeItems=offers.map(o=>{
+
+return{
+
+name:o.freeProduct,
+
+icon:o.freeIcon,
+
+quantity:o.freeQty,
+
+price:0,
+
+free:true
+
+};
+
+});
+
+/* =========================
+
+   FIREBASE ORDER DATA
+
+========================= */
+
+let orderData={
+
+customerName:name,
+
+phone:phone,
+
+address:address,
+
+items:items,
+
+freeItems:freeItems,
+
+total:total,
+
+status:"pending",
+
+deliveryArea:"Deralakatte → Thokkottu",
+
+createdAt:
+
+firebase.firestore.FieldValue.serverTimestamp()
+
+};
+
+/* =========================
+
+   SAVE TO FIRESTORE
+
+========================= */
+
+let orderId="";
+
+try{
+
+const docRef=
+
+await db
+
+.collection("orders")
+
+.add(orderData);
+
+orderId=docRef.id;
+
+console.log(
+
+"COCO CAFEINA Order Saved:",
+
+orderId
+
+);
+
+}
+
+catch(error){
+
+console.error(
+
+"Firebase Order Error:",
+
+error
+
+);
+
+orderButton.disabled=false;
+
+orderButton.textContent=
+
+"💬 ORDER ON WHATSAPP";
+
+alert(
+
+"Order save ಆಗಲಿಲ್ಲ. Firebase permission/settings ಪರಿಶೀಲಿಸಬೇಕು."
+
+);
+
+return;
+
+}
+
+/* =========================
+
+   WHATSAPP MESSAGE
+
+========================= */
+
+let msg=
+
+"*🥥 COCO CAFEINA*%0A"+
+
+"*New Order*%0A%0A";
+
+/* PAID PRODUCTS */
+
+keys.forEach(i=>{
+
+let p=products[i];
+
+let qty=cart[i];
+
+let itemTotal=p.price*qty;
+
+msg+=
+
+`• ${p.icon} ${p.name} × ${qty} = ₹${itemTotal}%0A`;
+
+});
+
+/* FREE ITEMS */
 
 if(offers.length){
 
@@ -2342,15 +2482,17 @@ msg+=
 
 }
 
-/* =========================
-
-   FINAL
-
-========================= */
+/* ORDER ID */
 
 msg+=
 
-`%0A💰 *Total: ₹${total}*%0A`+
+`%0A🧾 *Order ID:* ${orderId}`;
+
+/* CUSTOMER DETAILS */
+
+msg+=
+
+`%0A%0A💰 *Total: ₹${total}*%0A`+
 
 `🚚 *Delivery: FREE*%0A`+
 
@@ -2362,15 +2504,37 @@ msg+=
 
 `📍 *Delivery Address:* ${address}`;
 
+/* =========================
+
+   OPEN WHATSAPP
+
+========================= */
+
 window.open(
 
-"https://wa.me/"+WA+
+"https://wa.me/"+
 
-"?text="+msg,
+WA+
+
+"?text="+
+
+msg,
 
 "_blank"
 
 );
+
+/* =========================
+
+   SUCCESS
+
+========================= */
+
+orderButton.disabled=false;
+
+orderButton.textContent=
+
+"💬 ORDER ON WHATSAPP";
 
 }
 
