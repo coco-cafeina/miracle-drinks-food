@@ -172,6 +172,36 @@ cursor:pointer;
 
 /* =========================
 
+   TRACK BUTTON
+
+========================= */
+
+.hero-track{
+
+width:100%;
+
+border:1px solid #ffffff55;
+
+border-radius:14px;
+
+padding:12px;
+
+margin-top:9px;
+
+background:#ffffff16;
+
+color:#fff;
+
+font-size:15px;
+
+font-weight:800;
+
+cursor:pointer;
+
+}
+
+/* =========================
+
    OFFER
 
 ========================= */
@@ -547,6 +577,264 @@ color:#777;
 background:#fff;
 
 border-radius:15px;
+
+}
+
+/* =========================
+
+   ORDER TRACKING
+
+========================= */
+
+.track-order{
+
+margin-top:25px;
+
+background:#fff;
+
+padding:18px;
+
+border-radius:20px;
+
+box-shadow:0 4px 18px #00000010;
+
+border:1px solid #eee;
+
+}
+
+.track-title{
+
+margin-top:0;
+
+color:#174d35;
+
+}
+
+.track-description{
+
+color:#777;
+
+font-size:13px;
+
+line-height:1.5;
+
+margin:0 0 12px;
+
+}
+
+.track-button{
+
+width:100%;
+
+background:#174d35;
+
+color:#fff;
+
+font-size:16px;
+
+margin-top:4px;
+
+border:0;
+
+border-radius:12px;
+
+padding:13px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+}
+
+.track-button:disabled{
+
+opacity:.7;
+
+cursor:wait;
+
+}
+
+.status-card{
+
+background:#f8fbf9;
+
+border:1px solid #d7a62a;
+
+border-radius:15px;
+
+padding:15px;
+
+margin-top:15px;
+
+}
+
+.status-order-id{
+
+font-size:12px;
+
+color:#777;
+
+margin-bottom:12px;
+
+word-break:break-all;
+
+}
+
+.status-order-id strong{
+
+color:#222;
+
+font-size:13px;
+
+}
+
+.status-current{
+
+font-size:20px;
+
+font-weight:800;
+
+color:#174d35;
+
+margin-bottom:15px;
+
+}
+
+.status-step{
+
+display:flex;
+
+align-items:center;
+
+gap:10px;
+
+padding:9px 0;
+
+font-size:14px;
+
+color:#aaa;
+
+}
+
+.status-step.active{
+
+color:#174d35;
+
+font-weight:bold;
+
+}
+
+.status-dot{
+
+width:13px;
+
+height:13px;
+
+border-radius:50%;
+
+background:#ddd;
+
+flex-shrink:0;
+
+}
+
+.status-step.active .status-dot{
+
+background:#174d35;
+
+}
+
+.status-step.current .status-dot{
+
+background:#d7a62a;
+
+box-shadow:0 0 0 4px #fff3cf;
+
+}
+
+.status-cancelled{
+
+background:#fff3f3;
+
+border:1px solid #e3aaaa;
+
+color:#a33;
+
+border-radius:12px;
+
+padding:13px;
+
+font-size:14px;
+
+font-weight:bold;
+
+line-height:1.5;
+
+margin-top:10px;
+
+}
+
+.status-success{
+
+background:#f1faf4;
+
+border:1px solid #b8ddc3;
+
+color:#174d35;
+
+border-radius:12px;
+
+padding:11px;
+
+font-size:13px;
+
+margin-top:12px;
+
+line-height:1.5;
+
+}
+
+.status-error{
+
+background:#fff3f3;
+
+border:1px solid #f0cccc;
+
+color:#a33;
+
+padding:12px;
+
+border-radius:11px;
+
+font-size:13px;
+
+line-height:1.5;
+
+margin-top:12px;
+
+}
+
+.status-loading{
+
+text-align:center;
+
+padding:14px;
+
+color:#777;
+
+font-size:13px;
+
+}
+
+.status-updated{
+
+font-size:11px;
+
+color:#888;
+
+margin-top:12px;
+
+text-align:center;
 
 }
 
@@ -1116,6 +1404,18 @@ onclick="document.getElementById('milkshake').scrollIntoView({behavior:'smooth'}
 
 </button>
 
+<button
+
+class="hero-track"
+
+onclick="document.getElementById('trackOrder').scrollIntoView({behavior:'smooth'})"
+
+>
+
+📦 TRACK MY ORDER
+
+</button>
+
 </div>
 
 </header>
@@ -1350,11 +1650,95 @@ style="display:none"
 
 <!-- =========================
 
+     TRACK MY ORDER
+
+========================= -->
+
+<section
+
+class="track-order"
+
+id="trackOrder"
+
+>
+
+<h2 class="track-title">
+
+📦 Track My Order
+
+</h2>
+
+<p class="track-description">
+
+Enter your <b>Order ID</b> and the same
+
+<b>mobile number</b> used while ordering.
+
+<br>
+
+🔄 Status will update automatically when COCO CAFEINA updates your order.
+
+</p>
+
+<input
+
+id="trackOrderId"
+
+placeholder="🧾 Enter Order ID"
+
+autocomplete="off"
+
+>
+
+<input
+
+id="trackPhone"
+
+placeholder="📱 Mobile number"
+
+type="tel"
+
+autocomplete="tel"
+
+>
+
+<button
+
+class="track-button"
+
+id="trackButton"
+
+onclick="trackOrder()"
+
+>
+
+🔎 CHECK ORDER STATUS
+
+</button>
+
+<div
+
+id="orderStatusResult"
+
+>
+
+</div>
+
+</section>
+
+<!-- =========================
+
      CART
 
 ========================= -->
 
-<section class="cart">
+<section
+
+class="cart"
+
+id="orderCart"
+
+>
 
 <h2 class="cart-title">
 
@@ -1476,7 +1860,7 @@ class="sticky-cart"
 
 id="stickyCart"
 
-onclick="document.querySelector('.cart').scrollIntoView({behavior:'smooth'})"
+onclick="document.getElementById('orderCart').scrollIntoView({behavior:'smooth'})"
 
 >
 
@@ -2280,9 +2664,927 @@ document
 
 /* =========================
 
-   FIREBASE + WHATSAPP ORDER
+   PHONE NORMALIZER
 
-   FIXED VERSION
+========================= */
+
+function normalizePhone(phone){
+
+let value=
+
+String(phone||"")
+
+.replace(/\D/g,"");
+
+/*
+
+Supports:
+
+9945093204
+
+09945093204
+
+919945093204
+
++91 9945093204
+
+*/
+
+if(
+
+value.length===12 &&
+
+value.startsWith("91")
+
+){
+
+value=value.substring(2);
+
+}
+
+if(
+
+value.length===11 &&
+
+value.startsWith("0")
+
+){
+
+value=value.substring(1);
+
+}
+
+return value;
+
+}
+
+/* =========================
+
+   HTML ESCAPE
+
+========================= */
+
+function escapeHtml(value){
+
+return String(value||"")
+
+.replace(/&/g,"&amp;")
+
+.replace(/</g,"&lt;")
+
+.replace(/>/g,"&gt;")
+
+.replace(/"/g,"&quot;")
+
+.replace(/'/g,"&#039;");
+
+}
+
+/* =========================
+
+   CUSTOMER ORDER TRACKING
+
+========================= */
+
+/*
+
+This stores the Firestore listener.
+
+When admin changes the status,
+
+onSnapshot automatically receives
+
+the new status.
+
+*/
+
+let stopOrderTracking=null;
+
+/* =========================
+
+   SHOW ORDER STATUS
+
+========================= */
+
+function showOrderStatus(orderId,order){
+
+let statusRaw=
+
+String(order.status||"pending")
+
+.toLowerCase()
+
+.trim();
+
+/*
+
+Convert different status formats
+
+to one standard format.
+
+*/
+
+let status=statusRaw
+
+.replace(/[\s_-]/g,"");
+
+/* =========================
+
+   CANCELLED
+
+========================= */
+
+if(status==="cancelled"){
+
+document
+
+.getElementById("orderStatusResult")
+
+.innerHTML=`
+
+<div class="status-card">
+
+<div class="status-order-id">
+
+🧾 Order ID:<br>
+
+<strong>${escapeHtml(orderId)}</strong>
+
+</div>
+
+<div class="status-current" style="color:#a33;">
+
+❌ Cancelled
+
+</div>
+
+<div class="status-cancelled">
+
+❌ This order has been cancelled.<br><br>
+
+Please contact COCO CAFEINA if you need more information.
+
+</div>
+
+${
+
+order.statusUpdatedAt
+
+?
+
+`
+
+<div class="status-updated">
+
+Last updated:
+
+${formatStatusTime(order.statusUpdatedAt)}
+
+</div>
+
+`
+
+:
+
+""
+
+}
+
+</div>
+
+`;
+
+return;
+
+}
+
+/* =========================
+
+   NORMAL STATUS FLOW
+
+========================= */
+
+let statuses=[
+
+"pending",
+
+"confirmed",
+
+"preparing",
+
+"outfordelivery",
+
+"delivered"
+
+];
+
+let displayNames={
+
+pending:"Pending",
+
+confirmed:"Confirmed",
+
+preparing:"Preparing",
+
+outfordelivery:"Out For Delivery",
+
+delivered:"Delivered"
+
+};
+
+let statusIndex=
+
+statuses.indexOf(status);
+
+/*
+
+Unknown status:
+
+show Pending rather than breaking
+
+the tracking interface.
+
+*/
+
+if(statusIndex===-1){
+
+statusIndex=0;
+
+status="pending";
+
+}
+
+let currentStatus=
+
+displayNames[status]||"Pending";
+
+/* =========================
+
+   STATUS STEPS
+
+========================= */
+
+let steps=[
+
+{
+
+key:"pending",
+
+icon:"🟡",
+
+name:"Pending"
+
+},
+
+{
+
+key:"confirmed",
+
+icon:"🟢",
+
+name:"Confirmed"
+
+},
+
+{
+
+key:"preparing",
+
+icon:"👨‍🍳",
+
+name:"Preparing"
+
+},
+
+{
+
+key:"outfordelivery",
+
+icon:"🚚",
+
+name:"Out For Delivery"
+
+},
+
+{
+
+key:"delivered",
+
+icon:"✅",
+
+name:"Delivered"
+
+}
+
+];
+
+let stepsHTML="";
+
+steps.forEach((step,index)=>{
+
+let active=
+
+index<=statusIndex
+
+?
+
+"active"
+
+:
+
+"";
+
+let current=
+
+index===statusIndex
+
+?
+
+"current"
+
+:
+
+"";
+
+stepsHTML+=`
+
+<div class="status-step ${active} ${current}">
+
+<div class="status-dot"></div>
+
+<span>
+
+${step.icon} ${step.name}
+
+</span>
+
+</div>
+
+`;
+
+});
+
+/* =========================
+
+   SUCCESS MESSAGE
+
+========================= */
+
+let successMessage="";
+
+if(status==="delivered"){
+
+successMessage=`
+
+<div class="status-success">
+
+✅ <b>Order Delivered</b>
+
+<br>
+
+Thank you for ordering from COCO CAFEINA! 🥥
+
+</div>
+
+`;
+
+}
+
+else if(status==="outfordelivery"){
+
+successMessage=`
+
+<div class="status-success">
+
+🚚 <b>Your order is out for delivery.</b>
+
+<br>
+
+Please keep your phone available for the delivery.
+
+</div>
+
+`;
+
+}
+
+else if(status==="preparing"){
+
+successMessage=`
+
+<div class="status-success">
+
+👨‍🍳 <b>Your order is being prepared.</b>
+
+<br>
+
+Fresh food & drinks are being prepared for you.
+
+</div>
+
+`;
+
+}
+
+/* =========================
+
+   DISPLAY
+
+========================= */
+
+document
+
+.getElementById("orderStatusResult")
+
+.innerHTML=`
+
+<div class="status-card">
+
+<div class="status-order-id">
+
+🧾 Order ID:<br>
+
+<strong>
+
+${escapeHtml(orderId)}
+
+</strong>
+
+</div>
+
+<div class="status-current">
+
+Current Status:<br>
+
+${currentStatus}
+
+</div>
+
+${stepsHTML}
+
+${successMessage}
+
+${
+
+order.statusUpdatedAt
+
+?
+
+`
+
+<div class="status-updated">
+
+Last updated:
+
+${formatStatusTime(order.statusUpdatedAt)}
+
+</div>
+
+`
+
+:
+
+""
+
+}
+
+</div>
+
+`;
+
+}
+
+/* =========================
+
+   STATUS TIME
+
+========================= */
+
+function formatStatusTime(timestamp){
+
+try{
+
+if(
+
+timestamp &&
+
+typeof timestamp.toDate==="function"
+
+){
+
+let date=
+
+timestamp.toDate();
+
+return date.toLocaleString(
+
+"en-IN",
+
+{
+
+dateStyle:"medium",
+
+timeStyle:"short"
+
+}
+
+);
+
+}
+
+return "";
+
+}
+
+catch(error){
+
+return "";
+
+}
+
+}
+
+/* =========================
+
+   TRACK ORDER
+
+========================= */
+
+async function trackOrder(){
+
+let orderId=
+
+document
+
+.getElementById("trackOrderId")
+
+.value
+
+.trim();
+
+let phone=
+
+document
+
+.getElementById("trackPhone")
+
+.value
+
+.trim();
+
+let result=
+
+document
+
+.getElementById("orderStatusResult");
+
+let trackButton=
+
+document
+
+.getElementById("trackButton");
+
+/* =========================
+
+   VALIDATION
+
+========================= */
+
+if(!orderId || !phone){
+
+result.innerHTML=`
+
+<div class="status-error">
+
+⚠️ Please enter your <b>Order ID</b> and <b>mobile number</b>.
+
+</div>
+
+`;
+
+return;
+
+}
+
+/* =========================
+
+   STOP PREVIOUS LISTENER
+
+========================= */
+
+if(
+
+typeof stopOrderTracking==="function"
+
+){
+
+stopOrderTracking();
+
+stopOrderTracking=null;
+
+}
+
+/* =========================
+
+   LOADING
+
+========================= */
+
+trackButton.disabled=true;
+
+trackButton.textContent=
+
+"⏳ Checking Order...";
+
+result.innerHTML=`
+
+<div class="status-loading">
+
+⏳ Checking your order...
+
+</div>
+
+`;
+
+try{
+
+const docRef=
+
+db
+
+.collection("orders")
+
+.doc(orderId);
+
+/* =========================
+
+   FIRST CHECK
+
+========================= */
+
+const docSnap=
+
+await docRef.get();
+
+if(!docSnap.exists){
+
+result.innerHTML=`
+
+<div class="status-error">
+
+❌ <b>Order not found.</b>
+
+<br><br>
+
+Please check your Order ID and try again.
+
+</div>
+
+`;
+
+trackButton.disabled=false;
+
+trackButton.textContent=
+
+"🔎 CHECK ORDER STATUS";
+
+return;
+
+}
+
+/* =========================
+
+   PHONE CHECK
+
+========================= */
+
+const firstOrder=
+
+docSnap.data();
+
+let customerPhone=
+
+normalizePhone(firstOrder.phone);
+
+let enteredPhone=
+
+normalizePhone(phone);
+
+if(
+
+!customerPhone ||
+
+customerPhone!==enteredPhone
+
+){
+
+result.innerHTML=`
+
+<div class="status-error">
+
+❌ <b>Mobile number does not match this order.</b>
+
+<br><br>
+
+Please enter the same mobile number used while placing the order.
+
+</div>
+
+`;
+
+trackButton.disabled=false;
+
+trackButton.textContent=
+
+"🔎 CHECK ORDER STATUS";
+
+return;
+
+}
+
+/* =========================
+
+   SHOW FIRST STATUS
+
+========================= */
+
+showOrderStatus(
+
+orderId,
+
+firstOrder
+
+);
+
+/* =========================
+
+   REAL-TIME LISTENER
+
+========================= */
+
+stopOrderTracking=
+
+docRef.onSnapshot(
+
+snapshot=>{
+
+if(!snapshot.exists){
+
+result.innerHTML=`
+
+<div class="status-error">
+
+❌ This order is no longer available.
+
+</div>
+
+`;
+
+return;
+
+}
+
+const order=
+
+snapshot.data();
+
+/*
+
+Security check again on every update.
+
+*/
+
+let savedPhone=
+
+normalizePhone(order.phone);
+
+if(
+
+savedPhone!==enteredPhone
+
+){
+
+if(
+
+typeof stopOrderTracking==="function"
+
+){
+
+stopOrderTracking();
+
+stopOrderTracking=null;
+
+}
+
+result.innerHTML=`
+
+<div class="status-error">
+
+❌ Unable to verify this order.
+
+</div>
+
+`;
+
+return;
+
+}
+
+/*
+
+This is the important part:
+
+When admin changes status,
+
+showOrderStatus() runs again
+
+automatically.
+
+*/
+
+showOrderStatus(
+
+orderId,
+
+order
+
+);
+
+},
+
+error=>{
+
+console.error(
+
+"Order Tracking Listener Error:",
+
+error
+
+);
+
+result.innerHTML=`
+
+<div class="status-error">
+
+❌ Unable to receive live order updates.
+
+<br><br>
+
+Please refresh the page and try again.
+
+</div>
+
+`;
+
+}
+
+);
+
+}
+
+catch(error){
+
+console.error(
+
+"Order Tracking Error:",
+
+error
+
+);
+
+result.innerHTML=`
+
+<div class="status-error">
+
+❌ Unable to check the order right now.
+
+<br><br>
+
+Please try again.
+
+</div>
+
+`;
+
+}
+
+/* =========================
+
+   RESET BUTTON
+
+========================= */
+
+trackButton.disabled=false;
+
+trackButton.textContent=
+
+"🔄 REFRESH ORDER STATUS";
+
+}
+
+/* =========================
+
+   FIREBASE + WHATSAPP ORDER
 
 ========================= */
 
@@ -2350,7 +3652,9 @@ return;
 
 let orderButton=
 
-document.getElementById("orderButton");
+document
+
+.getElementById("orderButton");
 
 orderButton.disabled=true;
 
@@ -2712,13 +4016,31 @@ closePhoto();
 
 ========================= */
 
+/*
+
+IMPORTANT FIX:
+
+Previously this used:
+
+document.querySelector(".cart")
+
+Now it specifically uses:
+
+#orderCart
+
+So the new Tracking section
+
+will NOT interfere with Sticky Cart.
+
+*/
+
 const stickyCart=
 
 document.getElementById("stickyCart");
 
 const orderSection=
 
-document.querySelector(".cart");
+document.getElementById("orderCart");
 
 const cartObserver=
 
