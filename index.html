@@ -12,12 +12,6 @@
 
 <title>COCO CAFEINA • Drinks & Food</title>
 
-<!-- =========================
-
-     FIREBASE
-
-========================= -->
-
 <script src="https://www.gstatic.com/firebasejs/12.17.0/firebase-app-compat.js"></script>
 
 <script src="https://www.gstatic.com/firebasejs/12.17.0/firebase-firestore-compat.js"></script>
@@ -840,6 +834,126 @@ text-align:center;
 
 /* =========================
 
+   TRACKING DETAILS
+
+========================= */
+
+.tracking-details{
+
+margin:14px 0 0;
+
+border-top:1px solid #e7ece8;
+
+padding-top:12px;
+
+}
+
+.tracking-section-title{
+
+font-size:13px;
+
+font-weight:800;
+
+color:#174d35;
+
+margin:0 0 8px;
+
+}
+
+.tracking-item{
+
+display:flex;
+
+justify-content:space-between;
+
+gap:10px;
+
+padding:8px 0;
+
+border-bottom:1px dashed #ddd;
+
+font-size:13px;
+
+line-height:1.4;
+
+}
+
+.tracking-item:last-child{
+
+border-bottom:0;
+
+}
+
+.tracking-free{
+
+color:#174d35;
+
+font-weight:bold;
+
+}
+
+.tracking-total{
+
+display:flex;
+
+justify-content:space-between;
+
+gap:10px;
+
+margin-top:10px;
+
+padding-top:10px;
+
+border-top:1px solid #ddd;
+
+font-size:17px;
+
+font-weight:800;
+
+color:#174d35;
+
+}
+
+.tracking-route{
+
+background:#fff;
+
+border-radius:10px;
+
+padding:10px;
+
+margin-top:10px;
+
+font-size:13px;
+
+color:#174d35;
+
+font-weight:bold;
+
+border:1px solid #e5ece7;
+
+}
+
+.saved-order-note{
+
+background:#f1faf4;
+
+border:1px solid #b8ddc3;
+
+color:#174d35;
+
+border-radius:10px;
+
+padding:9px 10px;
+
+margin:10px 0;
+
+font-size:12px;
+
+}
+
+/* =========================
+
    CART
 
 ========================= */
@@ -1322,6 +1436,12 @@ padding:9px 13px;
 
 }
 
+.tracking-item{
+
+font-size:12.5px;
+
+}
+
 }
 
 /* =========================
@@ -1679,6 +1799,8 @@ Enter your <b>Order ID</b> and the same
 🔄 Status will update automatically when COCO CAFEINA updates your order.
 
 </p>
+
+<div id="savedOrderNote"></div>
 
 <input
 
@@ -2462,8 +2584,6 @@ let box=
 
 document.getElementById("cart");
 
-/* PAID ITEM COUNT */
-
 let count=
 
 Object.values(cart)
@@ -2475,8 +2595,6 @@ document
 .getElementById("cartCount")
 
 .textContent=count;
-
-/* EMPTY */
 
 if(!keys.length){
 
@@ -2499,8 +2617,6 @@ document
 return;
 
 }
-
-/* PAID PRODUCTS */
 
 let total=0;
 
@@ -2566,8 +2682,6 @@ onclick="add(${i})"
 
 .join("");
 
-/* FREE ITEMS */
-
 let offers=
 
 calculateOffers();
@@ -2597,8 +2711,6 @@ ${o.freeProduct} × ${o.freeQty}
 `;
 
 });
-
-/* OFFER MESSAGE */
 
 let offerBox=
 
@@ -2650,8 +2762,6 @@ style="border-color:#eee;background:#fafafa;color:#777"
 
 }
 
-/* TOTAL */
-
 document
 
 .getElementById("total")
@@ -2675,20 +2785,6 @@ let value=
 String(phone||"")
 
 .replace(/\D/g,"");
-
-/*
-
-Supports:
-
-9945093204
-
-09945093204
-
-919945093204
-
-+91 9945093204
-
-*/
 
 if(
 
@@ -2726,7 +2822,7 @@ return value;
 
 function escapeHtml(value){
 
-return String(value||"")
+return String(value??"")
 
 .replace(/&/g,"&amp;")
 
@@ -2742,23 +2838,109 @@ return String(value||"")
 
 /* =========================
 
-   CUSTOMER ORDER TRACKING
+   ORDER TRACKING LISTENER
 
 ========================= */
 
-/*
-
-This stores the Firestore listener.
-
-When admin changes the status,
-
-onSnapshot automatically receives
-
-the new status.
-
-*/
-
 let stopOrderTracking=null;
+
+/* =========================
+
+   TRACKING ITEMS
+
+========================= */
+
+function renderTrackingItems(order){
+
+let paidItems=(order.items||[])
+
+.map(i=>{
+
+let quantity=Number(i.quantity||0);
+
+let itemTotal=Number(i.itemTotal||0);
+
+return `
+
+<div class="tracking-item">
+
+<span>
+
+${escapeHtml(i.icon||"")}
+
+${escapeHtml(i.name||"")}
+
+× ${quantity}
+
+</span>
+
+<b>
+
+₹${itemTotal}
+
+</b>
+
+</div>
+
+`;
+
+})
+
+.join("");
+
+let freeItems=(order.freeItems||[])
+
+.map(i=>{
+
+let quantity=Number(i.quantity||0);
+
+return `
+
+<div class="tracking-item tracking-free">
+
+<span>
+
+🎁
+
+${escapeHtml(i.icon||"")}
+
+${escapeHtml(i.name||"")}
+
+× ${quantity}
+
+</span>
+
+<b>
+
+₹0 FREE
+
+</b>
+
+</div>
+
+`;
+
+})
+
+.join("");
+
+if(!paidItems && !freeItems){
+
+return `
+
+<div class="tracking-item">
+
+<span>No item details available.</span>
+
+</div>
+
+`;
+
+}
+
+return paidItems+freeItems;
+
+}
 
 /* =========================
 
@@ -2776,17 +2958,29 @@ String(order.status||"pending")
 
 .trim();
 
-/*
-
-Convert different status formats
-
-to one standard format.
-
-*/
-
 let status=statusRaw
 
 .replace(/[\s_-]/g,"");
+
+/* =========================
+
+   ORDER DETAILS
+
+========================= */
+
+let trackingItems=
+
+renderTrackingItems(order);
+
+let orderTotal=
+
+Number(order.total||0);
+
+let deliveryRoute=
+
+order.deliveryArea||
+
+"Deralakatte → Thokkottu";
 
 /* =========================
 
@@ -2808,23 +3002,59 @@ document
 
 🧾 Order ID:<br>
 
-<strong>${escapeHtml(orderId)}</strong>
+<strong>
+
+${escapeHtml(orderId)}
+
+</strong>
 
 </div>
 
 <div class="status-current" style="color:#a33;">
 
-❌ Cancelled
+❌ Order Cancelled
 
 </div>
 
 <div class="status-cancelled">
 
-❌ This order has been cancelled.<br><br>
+❌ <b>Order Cancelled</b>
 
-Please contact COCO CAFEINA if you need more information.
+<br>
+
+This order has been cancelled by COCO CAFEINA.
 
 </div>
+
+<div class="tracking-details">
+
+<div class="tracking-section-title">
+
+🛍️ Ordered Items
+
+</div>
+
+${trackingItems}
+
+<div class="tracking-total">
+
+<span>💰 Total Amount</span>
+
+<span>₹${orderTotal}</span>
+
+</div>
+
+<div class="tracking-route">
+
+🚚 Delivery Route:<br>
+
+${escapeHtml(deliveryRoute)}
+
+</div>
+
+</div>
+
+<div class="status-updated">
 
 ${
 
@@ -2832,23 +3062,15 @@ order.statusUpdatedAt
 
 ?
 
-`
-
-<div class="status-updated">
-
-Last updated:
-
-${formatStatusTime(order.statusUpdatedAt)}
-
-</div>
-
-`
+`🕒 Last updated: ${formatStatusTime(order.statusUpdatedAt)}`
 
 :
 
 ""
 
 }
+
+</div>
 
 </div>
 
@@ -2895,16 +3117,6 @@ delivered:"Delivered"
 let statusIndex=
 
 statuses.indexOf(status);
-
-/*
-
-Unknown status:
-
-show Pending rather than breaking
-
-the tracking interface.
-
-*/
 
 if(statusIndex===-1){
 
@@ -3124,6 +3336,44 @@ ${stepsHTML}
 
 ${successMessage}
 
+/* ORDER DETAILS */
+
+<div class="tracking-details">
+
+<div class="tracking-section-title">
+
+🛍️ Ordered Items
+
+</div>
+
+${trackingItems}
+
+<div class="tracking-total">
+
+<span>
+
+💰 Total Amount
+
+</span>
+
+<span>
+
+₹${orderTotal}
+
+</span>
+
+</div>
+
+<div class="tracking-route">
+
+🚚 Delivery Route:<br>
+
+${escapeHtml(deliveryRoute)}
+
+</div>
+
+</div>
+
 ${
 
 order.statusUpdatedAt
@@ -3134,7 +3384,7 @@ order.statusUpdatedAt
 
 <div class="status-updated">
 
-Last updated:
+🕒 Last updated:
 
 ${formatStatusTime(order.statusUpdatedAt)}
 
@@ -3206,11 +3456,145 @@ return "";
 
 /* =========================
 
+   SAVE LAST ORDER
+
+========================= */
+
+function saveLastOrder(orderId,phone){
+
+try{
+
+localStorage.setItem(
+
+"cocoCafeinaLastOrder",
+
+JSON.stringify({
+
+orderId:orderId,
+
+phone:phone
+
+})
+
+);
+
+}
+
+catch(error){
+
+console.error(
+
+"Unable to save last order:",
+
+error
+
+);
+
+}
+
+}
+
+/* =========================
+
+   LOAD SAVED ORDER
+
+========================= */
+
+function loadSavedOrder(){
+
+try{
+
+const saved=
+
+JSON.parse(
+
+localStorage.getItem(
+
+"cocoCafeinaLastOrder"
+
+)||"null"
+
+);
+
+if(
+
+!saved ||
+
+!saved.orderId ||
+
+!saved.phone
+
+){
+
+return;
+
+}
+
+document
+
+.getElementById("trackOrderId")
+
+.value=
+
+saved.orderId;
+
+document
+
+.getElementById("trackPhone")
+
+.value=
+
+saved.phone;
+
+document
+
+.getElementById("savedOrderNote")
+
+.innerHTML=`
+
+<div class="saved-order-note">
+
+💾 <b>Your last order was loaded automatically.</b>
+
+<br>
+
+Order ID: ${escapeHtml(saved.orderId)}
+
+</div>
+
+`;
+
+/*
+
+Automatically check the saved order.
+
+*/
+
+trackOrder(true);
+
+}
+
+catch(error){
+
+console.error(
+
+"Saved order loading error:",
+
+error
+
+);
+
+}
+
+}
+
+/* =========================
+
    TRACK ORDER
 
 ========================= */
 
-async function trackOrder(){
+async function trackOrder(autoLoad=false){
 
 let orderId=
 
@@ -3252,6 +3636,8 @@ document
 
 if(!orderId || !phone){
 
+if(!autoLoad){
+
 result.innerHTML=`
 
 <div class="status-error">
@@ -3261,6 +3647,8 @@ result.innerHTML=`
 </div>
 
 `;
+
+}
 
 return;
 
@@ -3404,6 +3792,20 @@ return;
 
 /* =========================
 
+   SAVE VERIFIED ORDER
+
+========================= */
+
+saveLastOrder(
+
+orderId,
+
+phone
+
+);
+
+/* =========================
+
    SHOW FIRST STATUS
 
 ========================= */
@@ -3448,12 +3850,6 @@ const order=
 
 snapshot.data();
 
-/*
-
-Security check again on every update.
-
-*/
-
 let savedPhone=
 
 normalizePhone(order.phone);
@@ -3492,13 +3888,11 @@ return;
 
 /*
 
-This is the important part:
+Admin changes status:
 
-When admin changes status,
+showOrderStatus()
 
-showOrderStatus() runs again
-
-automatically.
+runs automatically.
 
 */
 
@@ -3822,6 +4216,8 @@ let orderId=
 
 "Not Saved";
 
+let firebaseSaved=false;
+
 try{
 
 const docRef=
@@ -3836,11 +4232,31 @@ orderId=
 
 docRef.id;
 
+firebaseSaved=true;
+
 console.log(
 
 "COCO CAFEINA Order Saved:",
 
 orderId
+
+);
+
+/*
+
+IMPORTANT:
+
+Save Order ID only after
+
+Firebase successfully creates it.
+
+*/
+
+saveLastOrder(
+
+orderId,
+
+phone
 
 );
 
@@ -3855,14 +4271,6 @@ console.error(
 error
 
 );
-
-/*
-
-Firebase save fail ಆದರೂ
-
-WhatsApp order ನಿಲ್ಲಬಾರದು.
-
-*/
 
 orderId=
 
@@ -3918,11 +4326,55 @@ msg;
 
 /*
 
-Use location.href instead of window.open.
+If Firebase succeeded,
 
-This works better on mobile/iPhone
+automatically prepare tracking
 
-and avoids popup blocking.
+information for the customer.
+
+*/
+
+if(firebaseSaved){
+
+document
+
+.getElementById("trackOrderId")
+
+.value=
+
+orderId;
+
+document
+
+.getElementById("trackPhone")
+
+.value=
+
+phone;
+
+document
+
+.getElementById("savedOrderNote")
+
+.innerHTML=`
+
+<div class="saved-order-note">
+
+✅ <b>Order ID saved automatically.</b>
+
+<br>
+
+You can track this order anytime.
+
+</div>
+
+`;
+
+}
+
+/*
+
+Use location.href on mobile.
 
 */
 
@@ -4016,24 +4468,6 @@ closePhoto();
 
 ========================= */
 
-/*
-
-IMPORTANT FIX:
-
-Previously this used:
-
-document.querySelector(".cart")
-
-Now it specifically uses:
-
-#orderCart
-
-So the new Tracking section
-
-will NOT interfere with Sticky Cart.
-
-*/
-
 const stickyCart=
 
 document.getElementById("stickyCart");
@@ -4093,6 +4527,16 @@ cartObserver.observe(orderSection);
 filterProducts();
 
 renderCart();
+
+/*
+
+Load the last successful order
+
+automatically.
+
+*/
+
+loadSavedOrder();
 
 </script>
 
