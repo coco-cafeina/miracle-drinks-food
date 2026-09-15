@@ -20,89 +20,103 @@
 
 <style>
 
-*{box-sizing:border-box}
+*{
 
-body{
-
-  margin:0;
-
-  background:#f6f7f5;
-
-  color:#222;
-
-  font-family:Arial,sans-serif
+box-sizing:border-box
 
 }
 
+body{
+
+margin:0;
+
+background:#f6f7f5;
+
+color:#222;
+
+font-family:Arial,sans-serif
+
+}
+
+/* HEADER */
+
 .top{
 
-  background:linear-gradient(135deg,#123d2b,#1f6848);
+background:linear-gradient(135deg,#123d2b,#1f6848);
 
-  color:#fff;
+color:#fff;
 
-  padding:18px;
+padding:18px;
 
-  position:sticky;
+position:sticky;
 
-  top:0;
+top:0;
 
-  z-index:10
+z-index:10
 
 }
 
 .top-inner{
 
-  max-width:1100px;
+max-width:1100px;
 
-  margin:auto;
+margin:auto;
 
-  display:flex;
+display:flex;
 
-  justify-content:space-between;
+justify-content:space-between;
 
-  align-items:center;
+align-items:center;
 
-  gap:12px
+gap:12px
 
 }
 
 .top h1{
 
-  margin:0;
+margin:0;
 
-  font-size:21px
+font-size:21px
 
 }
 
 .btn{
 
-  border:0;
+border:0;
 
-  border-radius:10px;
+border-radius:10px;
 
-  padding:10px 13px;
+padding:10px 13px;
 
-  font-weight:bold;
+font-weight:bold;
 
-  cursor:pointer
+cursor:pointer
 
 }
 
 .logout{
 
-  background:#fff;
+background:#fff;
 
-  color:#174d35
+color:#174d35
 
 }
 
+/* GENERAL */
+
 .wrap{
 
-  max-width:1100px;
+max-width:1100px;
 
-  margin:auto;
+margin:auto;
 
-  padding:18px
+padding:18px
+
+}
+
+.hidden{
+
+display:none!important
 
 }
 
@@ -110,133 +124,131 @@ body{
 
 .login{
 
-  max-width:420px;
+max-width:420px;
 
-  margin:50px auto;
+margin:50px auto;
 
-  background:#fff;
+background:#fff;
 
-  padding:22px;
+padding:22px;
 
-  border-radius:18px;
+border-radius:18px;
 
-  box-shadow:0 5px 25px #00000012
+box-shadow:0 5px 25px #00000012
 
 }
 
 .login h2{
 
-  margin-top:0;
+margin-top:0;
 
-  color:#174d35
+color:#174d35
 
 }
 
 .login input{
 
-  width:100%;
+width:100%;
 
-  padding:13px;
+padding:13px;
 
-  margin:6px 0 10px;
+margin:6px 0 10px;
 
-  border:1px solid #ddd;
+border:1px solid #ddd;
 
-  border-radius:10px;
+border-radius:10px;
 
-  font-size:15px
+font-size:15px
 
 }
 
 .primary{
 
-  width:100%;
+width:100%;
 
-  background:#174d35;
+background:#174d35;
 
-  color:#fff
+color:#fff
 
 }
 
 .error{
 
-  color:#b42318;
+color:#b42318;
 
-  font-size:13px;
+font-size:13px;
 
-  margin:8px 0
+margin:8px 0
 
 }
 
 /* DASHBOARD */
 
-.dashboard{
-
-  margin-bottom:22px
-
-}
-
 .dashboard-title{
 
-  font-size:20px;
+font-size:25px;
 
-  font-weight:bold;
+font-weight:bold;
 
-  color:#174d35;
+color:#174d35;
 
-  margin:0 0 12px
+margin:5px 0 14px
 
 }
 
 .dashboard-grid{
 
-  display:grid;
+display:grid;
 
-  grid-template-columns:repeat(4,1fr);
+grid-template-columns:repeat(4,1fr);
 
-  gap:12px
+gap:12px;
+
+margin-bottom:24px
 
 }
 
 .stat-card{
 
-  background:#fff;
+background:#fff;
 
-  border-radius:16px;
+border-radius:18px;
 
-  padding:17px;
+padding:18px;
 
-  border:1px solid #e8ece8;
+border:1px solid #e5eae6;
 
-  box-shadow:0 4px 18px #0000000c
+box-shadow:0 4px 18px #0000000c
 
 }
 
 .stat-icon{
 
-  font-size:25px
+font-size:27px
 
 }
 
 .stat-label{
 
-  color:#666;
+color:#666;
 
-  font-size:13px;
+font-size:13px;
 
-  margin-top:7px
+margin-top:8px;
+
+font-weight:bold
 
 }
 
 .stat-value{
 
-  font-size:26px;
+font-size:27px;
 
-  font-weight:bold;
+font-weight:bold;
 
-  color:#174d35;
+color:#174d35;
 
-  margin-top:5px
+margin-top:5px
 
 }
 
@@ -244,97 +256,99 @@ body{
 
 .date-report{
 
-  background:#fff;
+background:#fff;
 
-  border:1px solid #e8ece8;
+border:1px solid #e5eae6;
 
-  border-radius:16px;
+border-radius:18px;
 
-  padding:17px;
+padding:18px;
 
-  margin-bottom:20px;
+margin-bottom:22px;
 
-  box-shadow:0 4px 18px #0000000c
+box-shadow:0 4px 18px #0000000c
 
 }
 
 .date-report-title{
 
-  font-size:17px;
+font-size:21px;
 
-  font-weight:bold;
+font-weight:bold;
 
-  color:#174d35;
+color:#174d35;
 
-  margin-bottom:12px
+margin-bottom:14px
 
 }
 
 .date-controls{
 
-  display:flex;
+display:flex;
 
-  gap:8px;
+gap:8px;
 
-  flex-wrap:wrap;
+flex-wrap:wrap;
 
-  align-items:center
+align-items:center
 
 }
 
 .date-controls input{
 
-  padding:11px;
+padding:11px;
 
-  border:1px solid #ddd;
+border:1px solid #ddd;
 
-  border-radius:10px;
+border-radius:10px;
 
-  background:#fff;
+background:#fff;
 
-  font-size:15px
+font-size:15px
 
 }
 
 .date-results{
 
-  display:grid;
+display:grid;
 
-  grid-template-columns:repeat(2,1fr);
+grid-template-columns:repeat(4,1fr);
 
-  gap:12px;
+gap:10px;
 
-  margin-top:14px
+margin-top:15px
 
 }
 
 .date-result{
 
-  background:#f6f7f5;
+background:#f6f7f5;
 
-  border-radius:12px;
+border-radius:13px;
 
-  padding:14px
+padding:13px
 
 }
 
 .date-result-label{
 
-  color:#666;
+color:#666;
 
-  font-size:13px
+font-size:12px;
+
+font-weight:bold
 
 }
 
 .date-result-value{
 
-  color:#174d35;
+color:#174d35;
 
-  font-size:22px;
+font-size:22px;
 
-  font-weight:bold;
+font-weight:bold;
 
-  margin-top:4px
+margin-top:5px
 
 }
 
@@ -342,13 +356,13 @@ body{
 
 .toolbar{
 
-  display:flex;
+display:flex;
 
-  gap:8px;
+gap:8px;
 
-  flex-wrap:wrap;
+flex-wrap:wrap;
 
-  margin-bottom:16px
+margin-bottom:16px
 
 }
 
@@ -356,13 +370,13 @@ body{
 
 .toolbar select{
 
-  padding:11px;
+padding:11px;
 
-  border:1px solid #ddd;
+border:1px solid #ddd;
 
-  border-radius:10px;
+border-radius:10px;
 
-  background:#fff
+background:#fff
 
 }
 
@@ -370,139 +384,139 @@ body{
 
 .orders{
 
-  display:grid;
+display:grid;
 
-  gap:14px
+gap:14px
 
 }
 
 .order-card{
 
-  background:#fff;
+background:#fff;
 
-  border-radius:16px;
+border-radius:16px;
 
-  padding:16px;
+padding:16px;
 
-  box-shadow:0 4px 18px #00000010;
+box-shadow:0 4px 18px #00000010;
 
-  border:1px solid #e8ece8
+border:1px solid #e8ece8
 
 }
 
 .order-head{
 
-  display:flex;
+display:flex;
 
-  justify-content:space-between;
+justify-content:space-between;
 
-  gap:10px;
+gap:10px;
 
-  align-items:flex-start
+align-items:flex-start
 
 }
 
 .order-id{
 
-  font-size:12px;
+font-size:12px;
 
-  color:#777;
+color:#777;
 
-  word-break:break-all
+word-break:break-all
 
 }
 
 .customer{
 
-  font-size:18px;
+font-size:18px;
 
-  font-weight:bold;
+font-weight:bold;
 
-  color:#174d35
+color:#174d35
 
 }
 
 .meta{
 
-  font-size:13px;
+font-size:13px;
 
-  color:#555;
+color:#555;
 
-  line-height:1.5;
+line-height:1.5;
 
-  margin:8px 0
+margin:8px 0
 
 }
 
 .items{
 
-  border-top:1px solid #eee;
+border-top:1px solid #eee;
 
-  border-bottom:1px solid #eee;
+border-bottom:1px solid #eee;
 
-  padding:8px 0;
+padding:8px 0;
 
-  margin:10px 0
+margin:10px 0
 
 }
 
 .item-row{
 
-  display:flex;
+display:flex;
 
-  justify-content:space-between;
+justify-content:space-between;
 
-  gap:10px;
+gap:10px;
 
-  padding:6px 0;
+padding:6px 0;
 
-  font-size:14px
+font-size:14px
 
 }
 
 .free{
 
-  color:#174d35;
+color:#174d35;
 
-  font-weight:bold
+font-weight:bold
 
 }
 
 .bottom{
 
-  display:flex;
+display:flex;
 
-  justify-content:space-between;
+justify-content:space-between;
 
-  align-items:center;
+align-items:center;
 
-  gap:10px;
+gap:10px;
 
-  flex-wrap:wrap
+flex-wrap:wrap
 
 }
 
 .total{
 
-  font-size:19px;
+font-size:19px;
 
-  font-weight:bold;
+font-weight:bold;
 
-  color:#174d35
+color:#174d35
 
 }
 
 .status{
 
-  padding:9px;
+padding:9px;
 
-  border-radius:9px;
+border-radius:9px;
 
-  border:1px solid #ddd;
+border:1px solid #ddd;
 
-  background:#fff;
+background:#fff;
 
-  font-weight:bold
+font-weight:bold
 
 }
 
@@ -510,91 +524,117 @@ body{
 
 .loading{
 
-  padding:35px;
+padding:35px;
 
-  text-align:center;
+text-align:center;
 
-  color:#777;
+color:#777;
 
-  background:#fff;
+background:#fff;
 
-  border-radius:16px
-
-}
-
-.hidden{
-
-  display:none!important
+border-radius:16px
 
 }
 
-@media(max-width:800px){
+/* MOBILE */
 
-  .dashboard-grid{
+@media(max-width:850px){
 
-    grid-template-columns:repeat(2,1fr)
+.dashboard-grid{
 
-  }
+grid-template-columns:repeat(2,1fr)
+
+}
+
+.date-results{
+
+grid-template-columns:repeat(2,1fr)
+
+}
 
 }
 
 @media(max-width:600px){
 
-  .wrap{
+.wrap{
 
-    padding:12px
+padding:12px
 
-  }
+}
 
-  .top-inner{
+.top-inner{
 
-    align-items:flex-start
+align-items:flex-start
 
-  }
+}
 
-  .top h1{
+.top h1{
 
-    font-size:18px
+font-size:18px
 
-  }
+}
 
-  .order-head{
+.order-head{
 
-    display:block
+display:block
 
-  }
+}
 
-  .bottom{
+.bottom{
 
-    align-items:flex-start
+align-items:flex-start
 
-  }
+}
 
-  .date-results{
+.dashboard-title{
 
-    grid-template-columns:1fr
+font-size:23px
 
-  }
+}
 
-  .dashboard-grid{
+.dashboard-grid{
 
-    grid-template-columns:repeat(2,1fr);
+grid-template-columns:repeat(2,1fr);
 
-    gap:9px
+gap:9px
 
-  }
+}
 
-  .stat-card{
+.stat-card{
 
-    padding:13px
+padding:13px
 
-  }
+}
 
-  .stat-value{
+.stat-icon{
 
-    font-size:22px
+font-size:23px
 
-  }
+}
+
+.stat-value{
+
+font-size:22px
+
+}
+
+.date-results{
+
+grid-template-columns:repeat(2,1fr)
+
+}
+
+.date-result{
+
+padding:11px
+
+}
+
+.date-result-value{
+
+font-size:19px
+
+}
 
 }
 
@@ -608,37 +648,41 @@ body{
 
 <div id="loginView" class="login">
 
-  <h2>🥥 COCO CAFEINA</h2>
+<h2>🥥 COCO CAFEINA</h2>
 
-  <p>Admin Orders</p>
+<p>Admin Orders</p>
 
-  <input
+<input
 
-    id="email"
+id="email"
 
-    type="email"
+type="email"
 
-    placeholder="Admin email"
+placeholder="Admin email"
 
-    autocomplete="username">
+autocomplete="username">
 
-  <input
+<input
 
-    id="password"
+id="password"
 
-    type="password"
+type="password"
 
-    placeholder="Password"
+placeholder="Password"
 
-    autocomplete="current-password">
+autocomplete="current-password">
 
-  <div id="loginError" class="error"></div>
+<div id="loginError" class="error"></div>
 
-  <button class="btn primary" onclick="login()">
+<button
 
-    🔐 LOGIN
+class="btn primary"
 
-  </button>
+onclick="login()">
+
+🔐 LOGIN
+
+</button>
 
 </div>
 
@@ -648,249 +692,565 @@ body{
 
 <header class="top">
 
-  <div class="top-inner">
+<div class="top-inner">
 
-    <h1>🥥 COCO CAFEINA • Orders</h1>
+<h1>
 
-    <button class="btn logout" onclick="logout()">
+🥥 COCO CAFEINA • Orders
 
-      Logout
+</h1>
 
-    </button>
+<button
 
-  </div>
+class="btn logout"
+
+onclick="logout()">
+
+Logout
+
+</button>
+
+</div>
 
 </header>
 
 <main class="wrap">
 
-<!-- DASHBOARD -->
+<!-- DASHBOARD TITLE -->
 
-<section class="dashboard">
+<div class="dashboard-title">
 
-  <div class="dashboard-title">
+📊 Admin Dashboard
 
-    📊 Admin Dashboard
+</div>
 
-  </div>
+<!-- TODAY DASHBOARD -->
 
-  <div class="dashboard-grid">
+<div class="dashboard-grid">
 
-    <div class="stat-card">
+<!-- TODAY ORDERS -->
 
-      <div class="stat-icon">📊</div>
+<div class="stat-card">
 
-      <div class="stat-label">TODAY'S ORDERS</div>
+<div class="stat-icon">
 
-      <div class="stat-value" id="todayOrders">0</div>
+📊
 
-    </div>
+</div>
 
-    <div class="stat-card">
+<div class="stat-label">
 
-      <div class="stat-icon">💰</div>
+TODAY'S ORDERS
 
-      <div class="stat-label">TODAY'S SALES</div>
+</div>
 
-      <div class="stat-value" id="todaySales">₹0</div>
+<div
 
-    </div>
+class="stat-value"
 
-    <div class="stat-card">
+id="todayOrders">
 
-      <div class="stat-icon">📦</div>
+0
 
-      <div class="stat-label">PENDING ORDERS</div>
+</div>
 
-      <div class="stat-value" id="pendingOrders">0</div>
+</div>
 
-    </div>
+<!-- TODAY SALES -->
 
-    <div class="stat-card">
+<div class="stat-card">
 
-      <div class="stat-icon">🚚</div>
+<div class="stat-icon">
 
-      <div class="stat-label">OUT FOR DELIVERY</div>
+💰
 
-      <div class="stat-value" id="deliveryOrders">0</div>
+</div>
 
-    </div>
+<div class="stat-label">
 
-  </div>
+TODAY'S SALES
 
-</section>
+</div>
 
-<!-- DATE WISE REPORT -->
+<div
+
+class="stat-value"
+
+id="todaySales">
+
+₹0
+
+</div>
+
+</div>
+
+<!-- PENDING TODAY -->
+
+<div class="stat-card">
+
+<div class="stat-icon">
+
+📦
+
+</div>
+
+<div class="stat-label">
+
+PENDING TODAY
+
+</div>
+
+<div
+
+class="stat-value"
+
+id="todayPending">
+
+0
+
+</div>
+
+</div>
+
+<!-- CONFIRMED TODAY -->
+
+<div class="stat-card">
+
+<div class="stat-icon">
+
+✅
+
+</div>
+
+<div class="stat-label">
+
+CONFIRMED TODAY
+
+</div>
+
+<div
+
+class="stat-value"
+
+id="todayConfirmed">
+
+0
+
+</div>
+
+</div>
+
+<!-- PREPARING TODAY -->
+
+<div class="stat-card">
+
+<div class="stat-icon">
+
+👨‍🍳
+
+</div>
+
+<div class="stat-label">
+
+PREPARING TODAY
+
+</div>
+
+<div
+
+class="stat-value"
+
+id="todayPreparing">
+
+0
+
+</div>
+
+</div>
+
+<!-- OUT FOR DELIVERY -->
+
+<div class="stat-card">
+
+<div class="stat-icon">
+
+🚚
+
+</div>
+
+<div class="stat-label">
+
+OUT FOR DELIVERY TODAY
+
+</div>
+
+<div
+
+class="stat-value"
+
+id="todayDelivery">
+
+0
+
+</div>
+
+</div>
+
+<!-- DELIVERED TODAY -->
+
+<div class="stat-card">
+
+<div class="stat-icon">
+
+🎉
+
+</div>
+
+<div class="stat-label">
+
+DELIVERED TODAY
+
+</div>
+
+<div
+
+class="stat-value"
+
+id="todayDelivered">
+
+0
+
+</div>
+
+</div>
+
+<!-- CANCELLED TODAY -->
+
+<div class="stat-card">
+
+<div class="stat-icon">
+
+❌
+
+</div>
+
+<div class="stat-label">
+
+CANCELLED TODAY
+
+</div>
+
+<div
+
+class="stat-value"
+
+id="todayCancelled">
+
+0
+
+</div>
+
+</div>
+
+</div>
+
+<!-- DATE-WISE REPORT -->
 
 <section class="date-report">
 
-  <div class="date-report-title">
+<div class="date-report-title">
 
-    📅 Date-wise Sales & Orders
+📅 Date-wise Sales & Orders
 
-  </div>
+</div>
 
-  <div class="date-controls">
+<div class="date-controls">
 
-    <input
+<input
 
-      type="date"
+type="date"
 
-      id="reportDate"
+id="reportDate"
 
-      onchange="updateDateReport()">
+onchange="updateDateReport()">
 
-    <button
+<button
 
-      class="btn"
+class="btn"
 
-      onclick="setTodayReport()">
+onclick="setTodayReport()">
 
-      📅 Today
+📅 Today
 
-    </button>
+</button>
 
-    <button
+<button
 
-      class="btn"
+class="btn"
 
-      onclick="updateDateReport()">
+onclick="updateDateReport()">
 
-      🔄 Refresh Report
+🔄 Refresh Report
 
-    </button>
+</button>
 
-  </div>
+</div>
 
-  <div class="date-results">
+<!-- SELECTED DATE RESULTS -->
 
-    <div class="date-result">
+<div class="date-results">
 
-      <div class="date-result-label">
+<div class="date-result">
 
-        📦 Orders on selected date
+<div class="date-result-label">
 
-      </div>
+📦 TOTAL ORDERS
 
-      <div
+</div>
 
-        class="date-result-value"
+<div
 
-        id="selectedDateOrders">
+class="date-result-value"
 
-        0
+id="selectedDateOrders">
 
-      </div>
+0
 
-    </div>
+</div>
 
-    <div class="date-result">
+</div>
 
-      <div class="date-result-label">
+<div class="date-result">
 
-        💰 Sales on selected date
+<div class="date-result-label">
 
-      </div>
+💰 TOTAL SALES
 
-      <div
+</div>
 
-        class="date-result-value"
+<div
 
-        id="selectedDateSales">
+class="date-result-value"
 
-        ₹0
+id="selectedDateSales">
 
-      </div>
+₹0
 
-    </div>
+</div>
 
-  </div>
+</div>
+
+<div class="date-result">
+
+<div class="date-result-label">
+
+📦 PENDING
+
+</div>
+
+<div
+
+class="date-result-value"
+
+id="selectedPending">
+
+0
+
+</div>
+
+</div>
+
+<div class="date-result">
+
+<div class="date-result-label">
+
+✅ CONFIRMED
+
+</div>
+
+<div
+
+class="date-result-value"
+
+id="selectedConfirmed">
+
+0
+
+</div>
+
+</div>
+
+<div class="date-result">
+
+<div class="date-result-label">
+
+👨‍🍳 PREPARING
+
+</div>
+
+<div
+
+class="date-result-value"
+
+id="selectedPreparing">
+
+0
+
+</div>
+
+</div>
+
+<div class="date-result">
+
+<div class="date-result-label">
+
+🚚 OUT FOR DELIVERY
+
+</div>
+
+<div
+
+class="date-result-value"
+
+id="selectedDelivery">
+
+0
+
+</div>
+
+</div>
+
+<div class="date-result">
+
+<div class="date-result-label">
+
+🎉 DELIVERED
+
+</div>
+
+<div
+
+class="date-result-value"
+
+id="selectedDelivered">
+
+0
+
+</div>
+
+</div>
+
+<div class="date-result">
+
+<div class="date-result-label">
+
+❌ CANCELLED
+
+</div>
+
+<div
+
+class="date-result-value"
+
+id="selectedCancelled">
+
+0
+
+</div>
+
+</div>
+
+</div>
 
 </section>
 
-<!-- ORDER SEARCH -->
+<!-- SEARCH / FILTER -->
 
 <div class="toolbar">
 
-  <input
+<input
 
-    id="search"
+id="search"
 
-    placeholder="🔍 Search customer / phone / order ID"
+placeholder="🔍 Search customer / phone / order ID"
 
-    oninput="renderOrders()">
+oninput="renderOrders()">
 
-  <select
+<select
 
-    id="statusFilter"
+id="statusFilter"
 
-    onchange="renderOrders()">
+onchange="renderOrders()">
 
-    <option value="all">
+<option value="all">
 
-      All Status
+All Status
 
-    </option>
+</option>
 
-    <option value="pending">
+<option value="pending">
 
-      Pending
+Pending
 
-    </option>
+</option>
 
-    <option value="confirmed">
+<option value="confirmed">
 
-      Confirmed
+Confirmed
 
-    </option>
+</option>
 
-    <option value="preparing">
+<option value="preparing">
 
-      Preparing
+Preparing
 
-    </option>
+</option>
 
-    <option value="out_for_delivery">
+<option value="out_for_delivery">
 
-      Out for delivery
+Out for delivery
 
-    </option>
+</option>
 
-    <option value="delivered">
+<option value="delivered">
 
-      Delivered
+Delivered
 
-    </option>
+</option>
 
-    <option value="cancelled">
+<option value="cancelled">
 
-      Cancelled
+Cancelled
 
-    </option>
+</option>
 
-  </select>
+</select>
 
-  <button
+<button
 
-    class="btn"
+class="btn"
 
-    onclick="loadOrders()">
+onclick="loadOrders()">
 
-    🔄 Refresh
+🔄 Refresh
 
-  </button>
+</button>
 
 </div>
 
 <!-- ORDERS -->
 
-<div id="orders" class="orders">
+<div
 
-  <div class="loading">
+id="orders"
 
-    Loading orders...
+class="orders">
 
-  </div>
+<div class="loading">
+
+Loading orders...
+
+</div>
 
 </div>
 
@@ -902,59 +1262,67 @@ body{
 
 /* FIREBASE */
 
-const firebaseConfig = {
+const firebaseConfig={
 
-  apiKey:"AIzaSyABdyflDhA_syt9igT9bkjwAjzDQbdl760",
+apiKey:"AIzaSyABdyflDhA_syt9igT9bkjwAjzDQbdl760",
 
-  authDomain:"coco-cafeina.firebaseapp.com",
+authDomain:"coco-cafeina.firebaseapp.com",
 
-  projectId:"coco-cafeina",
+projectId:"coco-cafeina",
 
-  storageBucket:"coco-cafeina.firebasestorage.app",
+storageBucket:"coco-cafeina.firebasestorage.app",
 
-  messagingSenderId:"1001937326141",
+messagingSenderId:"1001937326141",
 
-  appId:"1:1001937326141:web:206c27faba6590c2199a54"
+appId:"1:1001937326141:web:206c27faba6590c2199a54"
 
 };
 
 firebase.initializeApp(firebaseConfig);
 
-const auth = firebase.auth();
+const auth=firebase.auth();
 
-const db = firebase.firestore();
+const db=firebase.firestore();
 
-let orders = [];
+let orders=[];
 
-/* AUTH */
+/* AUTH STATE */
 
-auth.onAuthStateChanged(u => {
+auth.onAuthStateChanged(u=>{
 
-  if(u){
+if(u){
 
-    document.getElementById("loginView")
+document
 
-      .classList.add("hidden");
+.getElementById("loginView")
 
-    document.getElementById("appView")
+.classList.add("hidden");
 
-      .classList.remove("hidden");
+document
 
-    setTodayReport();
+.getElementById("appView")
 
-    loadOrders();
+.classList.remove("hidden");
 
-  }else{
+setTodayReport();
 
-    document.getElementById("loginView")
+loadOrders();
 
-      .classList.remove("hidden");
+}else{
 
-    document.getElementById("appView")
+document
 
-      .classList.add("hidden");
+.getElementById("loginView")
 
-  }
+.classList.remove("hidden");
+
+document
+
+.getElementById("appView")
+
+.classList.add("hidden");
+
+}
 
 });
 
@@ -962,53 +1330,57 @@ auth.onAuthStateChanged(u => {
 
 async function login(){
 
-  const e =
+const e=
 
-    document.getElementById("email")
+document
 
-    .value.trim();
+.getElementById("email")
 
-  const p =
+.value
 
-    document.getElementById("password")
+.trim();
 
-    .value;
+const p=
 
-  const er =
+document
 
-    document.getElementById("loginError");
+.getElementById("password")
 
-  er.textContent = "";
+.value;
 
-  if(!e || !p){
+const er=
 
-    er.textContent =
+document
 
-      "Enter email and password.";
+.getElementById("loginError");
 
-    return;
+er.textContent="";
 
-  }
+if(!e||!p){
 
-  try{
+er.textContent=
 
-    await auth.signInWithEmailAndPassword(
+"Enter email and password.";
 
-      e,
+return;
 
-      p
+}
 
-    );
+try{
 
-  }catch(x){
+await auth
 
-    console.error(x);
+.signInWithEmailAndPassword(e,p);
 
-    er.textContent =
+}catch(x){
 
-      "Login failed. Check the admin account and password.";
+console.error(x);
 
-  }
+er.textContent=
+
+"Login failed. Check the admin account and password.";
+
+}
 
 }
 
@@ -1016,7 +1388,7 @@ async function login(){
 
 function logout(){
 
-  auth.signOut();
+auth.signOut();
 
 }
 
@@ -1024,127 +1396,113 @@ function logout(){
 
 async function loadOrders(){
 
-  const ordersEl =
+const ordersEl=
 
-    document.getElementById("orders");
+document.getElementById("orders");
 
-  ordersEl.innerHTML =
+ordersEl.innerHTML=
 
-    '<div class="loading">Loading orders...</div>';
+'<div class="loading">Loading orders...</div>';
 
-  try{
+try{
 
-    /*
+const s=
 
-      Load latest 500 orders.
+await db
 
-      This gives the dashboard more data
+.collection("orders")
 
-      for date-wise calculations.
+.orderBy("createdAt","desc")
 
-    */
+.limit(500)
 
-    const s =
+.get();
 
-      await db
+orders=
 
-        .collection("orders")
+s.docs.map(d=>({
 
-        .orderBy("createdAt","desc")
+id:d.id,
 
-        .limit(500)
+...d.data()
 
-        .get();
+}));
 
-    orders =
+updateDashboard();
 
-      s.docs.map(d => ({
+updateDateReport();
 
-        id:d.id,
+renderOrders();
 
-        ...d.data()
+}catch(e){
 
-      }));
+console.error(e);
 
-    updateDashboard();
+ordersEl.innerHTML=
 
-    updateDateReport();
-
-    renderOrders();
-
-  }catch(e){
-
-    console.error(e);
-
-    ordersEl.innerHTML =
-
-      '<div class="empty">Could not load orders. Check Firestore Rules and Authentication.</div>';
-
-  }
+'<div class="empty">Could not load orders. Check Firestore Rules and Authentication.</div>';
 
 }
 
-/* DATE HELPERS */
+}
+
+/* GET DATE KEY */
 
 function getDateKey(value){
 
-  if(!value) return "";
+if(!value)return"";
 
-  try{
+try{
 
-    let d;
+let d;
 
-    if(
+if(
 
-      value &&
+value &&
 
-      typeof value.toDate === "function"
+typeof value.toDate==="function"
 
-    ){
+){
 
-      d = value.toDate();
+d=value.toDate();
 
-    }else{
+}else{
 
-      d = new Date(value);
-
-    }
-
-    if(isNaN(d.getTime())) return "";
-
-    const y =
-
-      d.getFullYear();
-
-    const m =
-
-      String(d.getMonth()+1)
-
-      .padStart(2,"0");
-
-    const day =
-
-      String(d.getDate())
-
-      .padStart(2,"0");
-
-    return `${y}-${m}-${day}`;
-
-  }catch(e){
-
-    return "";
-
-  }
+d=new Date(value);
 
 }
 
+if(isNaN(d.getTime()))return"";
+
+const y=d.getFullYear();
+
+const m=
+
+String(d.getMonth()+1)
+
+.padStart(2,"0");
+
+const day=
+
+String(d.getDate())
+
+.padStart(2,"0");
+
+return `${y}-${m}-${day}`;
+
+}catch(e){
+
+return"";
+
+}
+
+}
+
+/* TODAY */
+
 function todayKey(){
 
-  return getDateKey(
-
-    new Date()
-
-  );
+return getDateKey(new Date());
 
 }
 
@@ -1152,15 +1510,13 @@ function todayKey(){
 
 function setTodayReport(){
 
-  const input =
+const input=
 
-    document.getElementById("reportDate");
+document.getElementById("reportDate");
 
-  input.value =
+input.value=todayKey();
 
-    todayKey();
-
-  updateDateReport();
+updateDateReport();
 
 }
 
@@ -1168,161 +1524,295 @@ function setTodayReport(){
 
 function updateDashboard(){
 
-  const today =
+const today=todayKey();
 
-    todayKey();
+let todayCount=0;
 
-  let todayCount = 0;
+let todaySales=0;
 
-  let todaySales = 0;
+let pending=0;
 
-  let pending = 0;
+let confirmed=0;
 
-  let delivery = 0;
+let preparing=0;
 
-  orders.forEach(o => {
+let delivery=0;
 
-    const status =
+let delivered=0;
 
-      o.status || "pending";
+let cancelled=0;
 
-    /*
+orders.forEach(o=>{
 
-      Today's orders
+const status=
 
-    */
+o.status || "pending";
 
-    if(
+/* ONLY TODAY */
 
-      getDateKey(o.createdAt) === today
+if(
 
-    ){
+getDateKey(o.createdAt)!==today
 
-      todayCount++;
+)return;
 
-      /*
+todayCount++;
 
-        Cancelled orders are not included
+/* SALES */
 
-        in today's sales.
+if(status!=="cancelled"){
 
-      */
+todaySales+=
 
-      if(status !== "cancelled"){
-
-        todaySales +=
-
-          Number(o.total || 0);
-
-      }
-
-    }
-
-    /*
-
-      Current pending count
-
-    */
-
-    if(status === "pending"){
-
-      pending++;
-
-    }
-
-    /*
-
-      Current out-for-delivery count
-
-    */
-
-    if(status === "out_for_delivery"){
-
-      delivery++;
-
-    }
-
-  });
-
-  document.getElementById("todayOrders")
-
-    .textContent = todayCount;
-
-  document.getElementById("todaySales")
-
-    .textContent =
-
-      "₹" + todaySales.toLocaleString("en-IN");
-
-  document.getElementById("pendingOrders")
-
-    .textContent = pending;
-
-  document.getElementById("deliveryOrders")
-
-    .textContent = delivery;
+Number(o.total||0);
 
 }
 
-/* DATE-WISE REPORT */
+/* STATUS */
+
+if(status==="pending"){
+
+pending++;
+
+}
+
+if(status==="confirmed"){
+
+confirmed++;
+
+}
+
+if(status==="preparing"){
+
+preparing++;
+
+}
+
+if(status==="out_for_delivery"){
+
+delivery++;
+
+}
+
+if(status==="delivered"){
+
+delivered++;
+
+}
+
+if(status==="cancelled"){
+
+cancelled++;
+
+}
+
+});
+
+/* DISPLAY */
+
+document
+
+.getElementById("todayOrders")
+
+.textContent=todayCount;
+
+document
+
+.getElementById("todaySales")
+
+.textContent=
+
+"₹"+
+
+todaySales.toLocaleString("en-IN");
+
+document
+
+.getElementById("todayPending")
+
+.textContent=pending;
+
+document
+
+.getElementById("todayConfirmed")
+
+.textContent=confirmed;
+
+document
+
+.getElementById("todayPreparing")
+
+.textContent=preparing;
+
+document
+
+.getElementById("todayDelivery")
+
+.textContent=delivery;
+
+document
+
+.getElementById("todayDelivered")
+
+.textContent=delivered;
+
+document
+
+.getElementById("todayCancelled")
+
+.textContent=cancelled;
+
+}
+
+/* DATE REPORT */
 
 function updateDateReport(){
 
-  const selected =
+const selected=
 
-    document.getElementById("reportDate").value;
+document
 
-  if(!selected){
+.getElementById("reportDate")
 
-    return;
+.value;
 
-  }
+if(!selected)return;
 
-  let count = 0;
+let count=0;
 
-  let sales = 0;
+let sales=0;
 
-  orders.forEach(o => {
+let pending=0;
 
-    if(
+let confirmed=0;
 
-      getDateKey(o.createdAt) === selected
+let preparing=0;
 
-    ){
+let delivery=0;
 
-      count++;
+let delivered=0;
 
-      if(
+let cancelled=0;
 
-        (o.status || "pending")
+orders.forEach(o=>{
 
-        !== "cancelled"
+if(
 
-      ){
+getDateKey(o.createdAt)!==
 
-        sales +=
+selected
 
-          Number(o.total || 0);
+)return;
 
-      }
+count++;
 
-    }
+const status=
 
-  });
+o.status || "pending";
 
-  document.getElementById(
+/* SALES */
 
-    "selectedDateOrders"
+if(status!=="cancelled"){
 
-  ).textContent = count;
+sales+=
 
-  document.getElementById(
+Number(o.total||0);
 
-    "selectedDateSales"
+}
 
-  ).textContent =
+/* STATUS */
 
-    "₹" + sales.toLocaleString("en-IN");
+if(status==="pending"){
+
+pending++;
+
+}
+
+if(status==="confirmed"){
+
+confirmed++;
+
+}
+
+if(status==="preparing"){
+
+preparing++;
+
+}
+
+if(status==="out_for_delivery"){
+
+delivery++;
+
+}
+
+if(status==="delivered"){
+
+delivered++;
+
+}
+
+if(status==="cancelled"){
+
+cancelled++;
+
+}
+
+});
+
+/* DISPLAY */
+
+document
+
+.getElementById("selectedDateOrders")
+
+.textContent=count;
+
+document
+
+.getElementById("selectedDateSales")
+
+.textContent=
+
+"₹"+
+
+sales.toLocaleString("en-IN");
+
+document
+
+.getElementById("selectedPending")
+
+.textContent=pending;
+
+document
+
+.getElementById("selectedConfirmed")
+
+.textContent=confirmed;
+
+document
+
+.getElementById("selectedPreparing")
+
+.textContent=preparing;
+
+document
+
+.getElementById("selectedDelivery")
+
+.textContent=delivery;
+
+document
+
+.getElementById("selectedDelivered")
+
+.textContent=delivered;
+
+document
+
+.getElementById("selectedCancelled")
+
+.textContent=cancelled;
 
 }
 
@@ -1330,33 +1820,35 @@ function updateDateReport(){
 
 function dateText(ts){
 
-  if(!ts)
+if(!ts)
 
-    return "Date pending";
+return"Date pending";
 
-  try{
+try{
 
-    return ts.toDate()
+return ts
 
-      .toLocaleString(
+.toDate()
 
-        "en-IN",
+.toLocaleString(
 
-        {
+"en-IN",
 
-          dateStyle:"medium",
+{
 
-          timeStyle:"short"
+dateStyle:"medium",
 
-        }
+timeStyle:"short"
 
-      );
+}
 
-  }catch(e){
+);
 
-    return "Date pending";
+}catch(e){
 
-  }
+return"Date pending";
+
+}
 
 }
 
@@ -1364,45 +1856,45 @@ function dateText(ts){
 
 function label(s){
 
-  return (s || "pending")
+return(s||"pending")
 
-    .replaceAll("_"," ")
+.replaceAll("_"," ")
 
-    .replace(
+.replace(
 
-      /\b\w/g,
+/\b\w/g,
 
-      c => c.toUpperCase()
+c=>c.toUpperCase()
 
-    );
+);
 
 }
 
-/* HTML ESCAPE */
+/* ESCAPE HTML */
 
 function esc(v){
 
-  return String(v ?? "")
+return String(v??"")
 
-    .replace(
+.replace(
 
-      /[&<>"']/g,
+/[&<>"']/g,
 
-      c => ({
+c=>({
 
-        "&":"&amp;",
+"&":"&amp;",
 
-        "<":"&lt;",
+"<":"&lt;",
 
-        ">":"&gt;",
+">":"&gt;",
 
-        '"':"&quot;",
+'"':"&quot;",
 
-        "'":"&#39;"
+"'":"&#39;"
 
-      }[c])
+}[c])
 
-    );
+);
 
 }
 
@@ -1410,393 +1902,377 @@ function esc(v){
 
 function renderOrders(){
 
-  const q =
+const q=
 
-    document
+document
 
-      .getElementById("search")
+.getElementById("search")
 
-      .value
+.value
 
-      .toLowerCase()
+.toLowerCase()
 
-      .trim();
+.trim();
 
-  const f =
+const f=
 
-    document
+document
 
-      .getElementById("statusFilter")
+.getElementById("statusFilter")
 
-      .value;
+.value;
 
-  const arr =
+const arr=
 
-    orders.filter(o =>
+orders.filter(o=>(
 
-      (
+!q ||
 
-        !q ||
+[
 
-        [
+o.id,
 
-          o.id,
+o.customerName,
 
-          o.customerName,
+o.phone,
 
-          o.phone,
+o.address
 
-          o.address
+]
 
-        ]
+.join(" ")
 
-        .join(" ")
+.toLowerCase()
 
-        .toLowerCase()
+.includes(q)
 
-        .includes(q)
+)&&(
 
-      )
+f==="all" ||
 
-      &&
+(o.status||"pending")===f
 
-      (
+));
 
-        f === "all" ||
+const box=
 
-        (o.status || "pending") === f
+document.getElementById("orders");
 
-      )
+if(!arr.length){
 
-    );
+box.innerHTML=
 
-  const box =
+'<div class="empty">No orders found.</div>';
 
-    document.getElementById("orders");
-
-  if(!arr.length){
-
-    box.innerHTML =
-
-      '<div class="empty">No orders found.</div>';
-
-    return;
-
-  }
-
-  box.innerHTML =
-
-    arr.map(o => {
-
-      const items =
-
-        (o.items || [])
-
-        .map(i =>
-
-          `<div class="item-row">
-
-            <span>
-
-              ${esc(i.icon || "")}
-
-              ${esc(i.name)}
-
-              × ${esc(i.quantity)}
-
-            </span>
-
-            <b>
-
-              ₹${Number(i.itemTotal || 0)}
-
-            </b>
-
-          </div>`
-
-        )
-
-        .join("");
-
-      const free =
-
-        (o.freeItems || [])
-
-        .map(i =>
-
-          `<div class="item-row free">
-
-            <span>
-
-              🎁
-
-              ${esc(i.icon || "")}
-
-              ${esc(i.name)}
-
-              × ${esc(i.quantity)}
-
-            </span>
-
-            <span>
-
-              FREE
-
-            </span>
-
-          </div>`
-
-        )
-
-        .join("");
-
-      return `
-
-      <article class="order-card">
-
-        <div class="order-head">
-
-          <div>
-
-            <div class="customer">
-
-              👤
-
-              ${esc(
-
-                o.customerName ||
-
-                "Customer"
-
-              )}
-
-            </div>
-
-            <div class="order-id">
-
-              Order ID:
-
-              ${esc(o.id)}
-
-            </div>
-
-          </div>
-
-          <select
-
-            class="status"
-
-            onchange="updateStatus(
-
-              '${esc(o.id)}',
-
-              this.value
-
-            )">
-
-            ${
-
-              [
-
-                "pending",
-
-                "confirmed",
-
-                "preparing",
-
-                "out_for_delivery",
-
-                "delivered",
-
-                "cancelled"
-
-              ]
-
-              .map(s =>
-
-                `<option
-
-                  value="${s}"
-
-                  ${
-
-                    (o.status || "pending")
-
-                    === s
-
-                    ? "selected"
-
-                    : ""
-
-                  }>
-
-                  ${label(s)}
-
-                </option>`
-
-              )
-
-              .join("")
-
-            }
-
-          </select>
-
-        </div>
-
-        <div class="meta">
-
-          📞
-
-          <a
-
-            href="tel:${esc(o.phone || "")}">
-
-            ${esc(o.phone || "")}
-
-          </a>
-
-          <br>
-
-          📍
-
-          ${esc(o.address || "")}
-
-          <br>
-
-          🚚
-
-          ${esc(
-
-            o.deliveryArea ||
-
-            "Deralakatte → Thokkottu"
-
-          )}
-
-          <br>
-
-          🕒
-
-          ${dateText(o.createdAt)}
-
-        </div>
-
-        <div class="items">
-
-          ${items}
-
-          ${free}
-
-        </div>
-
-        <div class="bottom">
-
-          <div class="total">
-
-            Total:
-
-            ₹${Number(o.total || 0)}
-
-          </div>
-
-          <a
-
-            class="btn"
-
-            href="https://wa.me/${
-
-              encodeURIComponent(
-
-                (o.phone || "")
-
-                .replace(/\D/g,"")
-
-              )
-
-            }"
-
-            target="_blank">
-
-            💬 WhatsApp Customer
-
-          </a>
-
-        </div>
-
-      </article>
-
-      `;
-
-    })
-
-    .join("");
+return;
 
 }
 
-/* UPDATE ORDER STATUS */
+box.innerHTML=
+
+arr.map(o=>{
+
+const items=
+
+(o.items||[])
+
+.map(i=>`
+
+<div class="item-row">
+
+<span>
+
+${esc(i.icon||"")}
+
+${esc(i.name)}
+
+× ${esc(i.quantity)}
+
+</span>
+
+<b>
+
+₹${Number(i.itemTotal||0)}
+
+</b>
+
+</div>
+
+`)
+
+.join("");
+
+const free=
+
+(o.freeItems||[])
+
+.map(i=>`
+
+<div class="item-row free">
+
+<span>
+
+🎁
+
+${esc(i.icon||"")}
+
+${esc(i.name)}
+
+× ${esc(i.quantity)}
+
+</span>
+
+<span>
+
+FREE
+
+</span>
+
+</div>
+
+`)
+
+.join("");
+
+return`
+
+<article class="order-card">
+
+<div class="order-head">
+
+<div>
+
+<div class="customer">
+
+👤
+
+${esc(
+
+o.customerName||
+
+"Customer"
+
+)}
+
+</div>
+
+<div class="order-id">
+
+Order ID:
+
+${esc(o.id)}
+
+</div>
+
+</div>
+
+<select
+
+class="status"
+
+onchange="updateStatus('${esc(o.id)}',this.value)">
+
+${
+
+[
+
+"pending",
+
+"confirmed",
+
+"preparing",
+
+"out_for_delivery",
+
+"delivered",
+
+"cancelled"
+
+]
+
+.map(s=>`
+
+<option
+
+value="${s}"
+
+${
+
+(o.status||"pending")===s
+
+?"selected"
+
+:""
+
+}>
+
+${label(s)}
+
+</option>
+
+`)
+
+.join("")
+
+}
+
+</select>
+
+</div>
+
+<div class="meta">
+
+📞
+
+<a
+
+href="tel:${esc(o.phone||"")}">
+
+${esc(o.phone||"")}
+
+</a>
+
+<br>
+
+📍
+
+${esc(o.address||"")}
+
+<br>
+
+🚚
+
+${esc(
+
+o.deliveryArea||
+
+"Deralakatte → Thokkottu"
+
+)}
+
+<br>
+
+🕒
+
+${dateText(o.createdAt)}
+
+</div>
+
+<div class="items">
+
+${items}
+
+${free}
+
+</div>
+
+<div class="bottom">
+
+<div class="total">
+
+Total:
+
+₹${Number(o.total||0)}
+
+</div>
+
+<a
+
+class="btn"
+
+href="https://wa.me/${
+
+encodeURIComponent(
+
+(o.phone||"")
+
+.replace(/\D/g,"")
+
+)
+
+}"
+
+target="_blank">
+
+💬 WhatsApp Customer
+
+</a>
+
+</div>
+
+</article>
+
+`;
+
+})
+
+.join("");
+
+}
+
+/* UPDATE STATUS */
 
 async function updateStatus(id,status){
 
-  try{
+try{
 
-    await db
+await db
 
-      .collection("orders")
+.collection("orders")
 
-      .doc(id)
+.doc(id)
 
-      .update({
+.update({
 
-        status:status,
+status:status,
 
-        statusUpdatedAt:
+statusUpdatedAt:
 
-          firebase.firestore
+firebase.firestore
 
-          .FieldValue
+.FieldValue
 
-          .serverTimestamp()
+.serverTimestamp()
 
-      });
+});
 
-    const o =
+const o=
 
-      orders.find(
+orders.find(
 
-        x => x.id === id
+x=>x.id===id
 
-      );
+);
 
-    if(o){
+if(o){
 
-      o.status = status;
+o.status=status;
 
-    }
+}
 
-    /*
+/*
 
-      Refresh dashboard immediately
+Refresh everything immediately
 
-    */
+*/
 
-    updateDashboard();
+updateDashboard();
 
-    updateDateReport();
+updateDateReport();
 
-    renderOrders();
+renderOrders();
 
-  }catch(e){
+}catch(e){
 
-    alert(
+alert(
 
-      "Status update failed. Check Firestore Rules."
+"Status update failed. Check Firestore Rules."
 
-    );
+);
 
-    console.error(e);
+console.error(e);
 
-  }
+}
 
 }
 
