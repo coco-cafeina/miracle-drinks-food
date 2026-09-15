@@ -20,11 +20,7 @@
 
 <style>
 
-*{
-
-box-sizing:border-box
-
-}
+*{box-sizing:border-box}
 
 body{
 
@@ -37,8 +33,6 @@ color:#222;
 font-family:Arial,sans-serif
 
 }
-
-/* HEADER */
 
 .top{
 
@@ -101,8 +95,6 @@ background:#fff;
 color:#174d35
 
 }
-
-/* GENERAL */
 
 .wrap{
 
@@ -686,7 +678,7 @@ onclick="login()">
 
 </div>
 
-<!-- ADMIN APP -->
+<!-- ADMIN -->
 
 <div id="appView" class="hidden">
 
@@ -716,7 +708,7 @@ Logout
 
 <main class="wrap">
 
-<!-- DASHBOARD TITLE -->
+<!-- DASHBOARD -->
 
 <div class="dashboard-title">
 
@@ -724,19 +716,11 @@ Logout
 
 </div>
 
-<!-- TODAY DASHBOARD -->
-
 <div class="dashboard-grid">
-
-<!-- TODAY ORDERS -->
 
 <div class="stat-card">
 
-<div class="stat-icon">
-
-📊
-
-</div>
+<div class="stat-icon">📊</div>
 
 <div class="stat-label">
 
@@ -756,15 +740,9 @@ id="todayOrders">
 
 </div>
 
-<!-- TODAY SALES -->
-
 <div class="stat-card">
 
-<div class="stat-icon">
-
-💰
-
-</div>
+<div class="stat-icon">💰</div>
 
 <div class="stat-label">
 
@@ -784,15 +762,9 @@ id="todaySales">
 
 </div>
 
-<!-- PENDING TODAY -->
-
 <div class="stat-card">
 
-<div class="stat-icon">
-
-📦
-
-</div>
+<div class="stat-icon">📦</div>
 
 <div class="stat-label">
 
@@ -812,15 +784,9 @@ id="todayPending">
 
 </div>
 
-<!-- CONFIRMED TODAY -->
-
 <div class="stat-card">
 
-<div class="stat-icon">
-
-✅
-
-</div>
+<div class="stat-icon">✅</div>
 
 <div class="stat-label">
 
@@ -840,15 +806,9 @@ id="todayConfirmed">
 
 </div>
 
-<!-- PREPARING TODAY -->
-
 <div class="stat-card">
 
-<div class="stat-icon">
-
-👨‍🍳
-
-</div>
+<div class="stat-icon">👨‍🍳</div>
 
 <div class="stat-label">
 
@@ -868,15 +828,9 @@ id="todayPreparing">
 
 </div>
 
-<!-- OUT FOR DELIVERY -->
-
 <div class="stat-card">
 
-<div class="stat-icon">
-
-🚚
-
-</div>
+<div class="stat-icon">🚚</div>
 
 <div class="stat-label">
 
@@ -896,15 +850,9 @@ id="todayDelivery">
 
 </div>
 
-<!-- DELIVERED TODAY -->
-
 <div class="stat-card">
 
-<div class="stat-icon">
-
-🎉
-
-</div>
+<div class="stat-icon">🎉</div>
 
 <div class="stat-label">
 
@@ -924,15 +872,9 @@ id="todayDelivered">
 
 </div>
 
-<!-- CANCELLED TODAY -->
-
 <div class="stat-card">
 
-<div class="stat-icon">
-
-❌
-
-</div>
+<div class="stat-icon">❌</div>
 
 <div class="stat-label">
 
@@ -954,7 +896,7 @@ id="todayCancelled">
 
 </div>
 
-<!-- DATE-WISE REPORT -->
+<!-- DATE-WISE -->
 
 <section class="date-report">
 
@@ -995,8 +937,6 @@ onclick="updateDateReport()">
 </button>
 
 </div>
-
-<!-- SELECTED DATE RESULTS -->
 
 <div class="date-results">
 
@@ -1164,7 +1104,7 @@ id="selectedCancelled">
 
 </section>
 
-<!-- SEARCH / FILTER -->
+<!-- SEARCH -->
 
 <div class="toolbar">
 
@@ -1238,8 +1178,6 @@ onclick="loadOrders()">
 
 </div>
 
-<!-- ORDERS -->
-
 <div
 
 id="orders"
@@ -1286,7 +1224,7 @@ const db=firebase.firestore();
 
 let orders=[];
 
-/* AUTH STATE */
+/* AUTH */
 
 auth.onAuthStateChanged(u=>{
 
@@ -1307,6 +1245,8 @@ document
 setTodayReport();
 
 loadOrders();
+
+loadTodayDashboard();
 
 }else{
 
@@ -1368,9 +1308,7 @@ return;
 
 try{
 
-await auth
-
-.signInWithEmailAndPassword(e,p);
+await auth.signInWithEmailAndPassword(e,p);
 
 }catch(x){
 
@@ -1392,87 +1330,29 @@ auth.signOut();
 
 }
 
-/* LOAD ORDERS */
+/*
 
-async function loadOrders(){
+==================================================
 
-const ordersEl=
+DATE QUERY SYSTEM
 
-document.getElementById("orders");
+==================================================
 
-ordersEl.innerHTML=
+This is the important change.
 
-'<div class="loading">Loading orders...</div>';
+Dashboard does NOT load the last 500 orders.
 
-try{
+Instead it asks Firestore only for the
 
-const s=
+specific date required.
 
-await db
+*/
 
-.collection("orders")
+/* DATE KEY */
 
-.orderBy("createdAt","desc")
+function todayKey(){
 
-.limit(500)
-
-.get();
-
-orders=
-
-s.docs.map(d=>({
-
-id:d.id,
-
-...d.data()
-
-}));
-
-updateDashboard();
-
-updateDateReport();
-
-renderOrders();
-
-}catch(e){
-
-console.error(e);
-
-ordersEl.innerHTML=
-
-'<div class="empty">Could not load orders. Check Firestore Rules and Authentication.</div>';
-
-}
-
-}
-
-/* GET DATE KEY */
-
-function getDateKey(value){
-
-if(!value)return"";
-
-try{
-
-let d;
-
-if(
-
-value &&
-
-typeof value.toDate==="function"
-
-){
-
-d=value.toDate();
-
-}else{
-
-d=new Date(value);
-
-}
-
-if(isNaN(d.getTime()))return"";
+const d=new Date();
 
 const y=d.getFullYear();
 
@@ -1490,45 +1370,179 @@ String(d.getDate())
 
 return `${y}-${m}-${day}`;
 
+}
+
+/* DATE RANGE */
+
+function getDateRange(dateKey){
+
+const parts=dateKey.split("-");
+
+const year=Number(parts[0]);
+
+const month=Number(parts[1])-1;
+
+const day=Number(parts[2]);
+
+/*
+
+India local date.
+
+00:00 of selected day
+
+to
+
+00:00 of next day
+
+*/
+
+const start=
+
+new Date(
+
+year,
+
+month,
+
+day,
+
+0,0,0,0
+
+);
+
+const end=
+
+new Date(
+
+year,
+
+month,
+
+day+1,
+
+0,0,0,0
+
+);
+
+return{
+
+start:
+
+firebase.firestore.Timestamp.fromDate(start),
+
+end:
+
+firebase.firestore.Timestamp.fromDate(end)
+
+};
+
+}
+
+/* GET ORDERS FOR ONE DATE */
+
+async function getOrdersForDate(dateKey){
+
+const range=
+
+getDateRange(dateKey);
+
+const snapshot=
+
+await db
+
+.collection("orders")
+
+.where(
+
+"createdAt",
+
+">=",
+
+range.start
+
+)
+
+.where(
+
+"createdAt",
+
+"<",
+
+range.end
+
+)
+
+.orderBy(
+
+"createdAt",
+
+"desc"
+
+)
+
+.get();
+
+return snapshot.docs.map(d=>({
+
+id:d.id,
+
+...d.data()
+
+}));
+
+}
+
+/*
+
+==================================================
+
+TODAY DASHBOARD
+
+==================================================
+
+*/
+
+async function loadTodayDashboard(){
+
+try{
+
+const today=
+
+todayKey();
+
+const todayOrders=
+
+await getOrdersForDate(today);
+
+calculateStats(
+
+todayOrders,
+
+"today"
+
+);
+
 }catch(e){
 
-return"";
+console.error(
+
+"Today's dashboard error:",
+
+e
+
+);
 
 }
 
 }
 
-/* TODAY */
+/* CALCULATE TODAY STATS */
 
-function todayKey(){
+function calculateStats(arr,type){
 
-return getDateKey(new Date());
+let total=arr.length;
 
-}
-
-/* SET TODAY */
-
-function setTodayReport(){
-
-const input=
-
-document.getElementById("reportDate");
-
-input.value=todayKey();
-
-updateDateReport();
-
-}
-
-/* DASHBOARD */
-
-function updateDashboard(){
-
-const today=todayKey();
-
-let todayCount=0;
-
-let todaySales=0;
+let sales=0;
 
 let pending=0;
 
@@ -1542,33 +1556,27 @@ let delivered=0;
 
 let cancelled=0;
 
-orders.forEach(o=>{
+arr.forEach(o=>{
 
 const status=
 
 o.status || "pending";
 
-/* ONLY TODAY */
+/*
 
-if(
+Cancelled orders are not counted
 
-getDateKey(o.createdAt)!==today
+as sales.
 
-)return;
-
-todayCount++;
-
-/* SALES */
+*/
 
 if(status!=="cancelled"){
 
-todaySales+=
+sales+=
 
 Number(o.total||0);
 
 }
-
-/* STATUS */
 
 if(status==="pending"){
 
@@ -1608,13 +1616,13 @@ cancelled++;
 
 });
 
-/* DISPLAY */
+if(type==="today"){
 
 document
 
 .getElementById("todayOrders")
 
-.textContent=todayCount;
+.textContent=total;
 
 document
 
@@ -1624,7 +1632,7 @@ document
 
 "₹"+
 
-todaySales.toLocaleString("en-IN");
+sales.toLocaleString("en-IN");
 
 document
 
@@ -1664,9 +1672,19 @@ document
 
 }
 
-/* DATE REPORT */
+}
 
-function updateDateReport(){
+/*
+
+==================================================
+
+DATE-WISE REPORT
+
+==================================================
+
+*/
+
+async function updateDateReport(){
 
 const selected=
 
@@ -1678,7 +1696,19 @@ document
 
 if(!selected)return;
 
-let count=0;
+try{
+
+/*
+
+Only the selected date is downloaded.
+
+*/
+
+const arr=
+
+await getOrdersForDate(selected);
+
+let count=arr.length;
 
 let sales=0;
 
@@ -1694,23 +1724,11 @@ let delivered=0;
 
 let cancelled=0;
 
-orders.forEach(o=>{
-
-if(
-
-getDateKey(o.createdAt)!==
-
-selected
-
-)return;
-
-count++;
+arr.forEach(o=>{
 
 const status=
 
 o.status || "pending";
-
-/* SALES */
 
 if(status!=="cancelled"){
 
@@ -1719,8 +1737,6 @@ sales+=
 Number(o.total||0);
 
 }
-
-/* STATUS */
 
 if(status==="pending"){
 
@@ -1759,8 +1775,6 @@ cancelled++;
 }
 
 });
-
-/* DISPLAY */
 
 document
 
@@ -1813,6 +1827,138 @@ document
 .getElementById("selectedCancelled")
 
 .textContent=cancelled;
+
+}catch(e){
+
+console.error(
+
+"Date report error:",
+
+e
+
+);
+
+/*
+
+If Firestore asks for an index,
+
+show a useful message.
+
+*/
+
+if(
+
+e &&
+
+e.message &&
+
+e.message.toLowerCase()
+
+.includes("index")
+
+){
+
+alert(
+
+"Firestore needs an index for this date report. Open the Firebase console link shown in the browser error to create it."
+
+);
+
+}
+
+}
+
+}
+
+/* SET TODAY */
+
+function setTodayReport(){
+
+document
+
+.getElementById("reportDate")
+
+.value=todayKey();
+
+updateDateReport();
+
+}
+
+/*
+
+==================================================
+
+ORDERS LIST
+
+==================================================
+
+The order list is separate from the dashboard.
+
+Only latest 100 orders are loaded.
+
+*/
+
+async function loadOrders(){
+
+const ordersEl=
+
+document.getElementById("orders");
+
+ordersEl.innerHTML=
+
+'<div class="loading">Loading latest orders...</div>';
+
+try{
+
+const s=
+
+await db
+
+.collection("orders")
+
+.orderBy("createdAt","desc")
+
+.limit(100)
+
+.get();
+
+orders=
+
+s.docs.map(d=>({
+
+id:d.id,
+
+...d.data()
+
+}));
+
+renderOrders();
+
+/*
+
+Refresh today's dashboard too.
+
+*/
+
+loadTodayDashboard();
+
+/*
+
+Refresh currently selected date report.
+
+*/
+
+updateDateReport();
+
+}catch(e){
+
+console.error(e);
+
+ordersEl.innerHTML=
+
+'<div class="empty">Could not load orders. Check Firestore Rules and Authentication.</div>';
+
+}
 
 }
 
@@ -1870,7 +2016,7 @@ c=>c.toUpperCase()
 
 }
 
-/* ESCAPE HTML */
+/* ESCAPE */
 
 function esc(v){
 
@@ -2210,7 +2356,15 @@ target="_blank">
 
 }
 
-/* UPDATE STATUS */
+/*
+
+==================================================
+
+STATUS UPDATE
+
+==================================================
+
+*/
 
 async function updateStatus(id,status){
 
@@ -2236,6 +2390,12 @@ firebase.firestore
 
 });
 
+/*
+
+Update local order list.
+
+*/
+
 const o=
 
 orders.find(
@@ -2250,17 +2410,25 @@ o.status=status;
 
 }
 
+renderOrders();
+
 /*
 
-Refresh everything immediately
+Recalculate today's dashboard
+
+from today's Firestore data.
 
 */
 
-updateDashboard();
+await loadTodayDashboard();
 
-updateDateReport();
+/*
 
-renderOrders();
+Recalculate selected date report.
+
+*/
+
+await updateDateReport();
 
 }catch(e){
 
