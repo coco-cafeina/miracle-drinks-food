@@ -1,151 +1,1313 @@
-rules_version = '2';
+<!doctype html>
 
-service cloud.firestore {
+<html lang="en">
 
-  match /databases/{database}/documents {
+<head>
 
-    /* =========================
+<meta charset="utf-8">
 
-       ORDERS
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
-       ========================= */
+<meta name="theme-color" content="#174d35">
 
-    match /orders/{orderId} {
+<title>COCO CAFEINA • Admin Orders</title>
 
-      /* CUSTOMER CAN CREATE ORDER */
+<script src="https://www.gstatic.com/firebasejs/12.17.0/firebase-app-compat.js"></script>
 
-      allow create: if
+<script src="https://www.gstatic.com/firebasejs/12.17.0/firebase-auth-compat.js"></script>
 
-        request.resource.data.keys().hasAll([
+<script src="https://www.gstatic.com/firebasejs/12.17.0/firebase-firestore-compat.js"></script>
 
-          'customerName',
+<style>
 
-          'phone',
+*{box-sizing:border-box}
 
-          'address',
+body{margin:0;background:#f6f7f5;color:#222;font-family:Arial,sans-serif}
 
-          'items',
+.top{background:linear-gradient(135deg,#123d2b,#1f6848);color:#fff;padding:18px;position:sticky;top:0;z-index:10}
 
-          'freeItems',
+.top-inner{max-width:1100px;margin:auto;display:flex;justify-content:space-between;align-items:center;gap:12px}
 
-          'total',
+.top h1{margin:0;font-size:21px}
 
-          'status',
+.btn{border:0;border-radius:10px;padding:10px 13px;font-weight:bold;cursor:pointer}
 
-          'deliveryArea',
+.logout{background:#fff;color:#174d35}
 
-          'createdAt'
+.wrap{max-width:1100px;margin:auto;padding:18px}
 
-        ])
+.hidden{display:none!important}
 
-        &&
+.login{max-width:420px;margin:50px auto;background:#fff;padding:22px;border-radius:18px;box-shadow:0 5px 25px #00000012}
 
-        request.resource.data.status == 'pending'
+.login h2{margin-top:0;color:#174d35}
 
-        &&
+.login input{width:100%;padding:13px;margin:6px 0 10px;border:1px solid #ddd;border-radius:10px;font-size:15px}
 
-        request.resource.data.total >= 0;
+.primary{width:100%;background:#174d35;color:#fff}
 
-      /* CUSTOMER ORDER TRACKING */
+.error{color:#b42318;font-size:13px;margin:8px 0}
 
-      allow get: if true;
+.dashboard-title{font-size:25px;font-weight:bold;color:#174d35;margin:5px 0 14px}
 
-      /* ONLY ADMIN CAN LIST ORDERS */
+.dashboard-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px}
 
-      allow list: if
+.stat-card{background:#fff;border-radius:18px;padding:18px;border:1px solid #e5eae6;box-shadow:0 4px 18px #0000000c}
 
-        request.auth != null
+.stat-icon{font-size:27px}
 
-        &&
+.stat-label{color:#666;font-size:13px;margin-top:8px;font-weight:bold}
 
-        request.auth.token.email ==
+.stat-value{font-size:27px;font-weight:bold;color:#174d35;margin-top:5px}
 
-        'truethink6@gmail.com';
+.report{background:#fff;border:1px solid #e5eae6;border-radius:18px;padding:18px;margin-bottom:22px;box-shadow:0 4px 18px #0000000c}
 
-      /* ONLY ADMIN CAN UPDATE */
+.report-title{font-size:21px;font-weight:bold;color:#174d35;margin-bottom:14px}
 
-      allow update: if
+.controls{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 
-        request.auth != null
+.controls input{padding:11px;border:1px solid #ddd;border-radius:10px;background:#fff;font-size:15px}
 
-        &&
+.results{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:15px}
 
-        request.auth.token.email ==
+.result{background:#f6f7f5;border-radius:13px;padding:13px}
 
-        'truethink6@gmail.com';
+.result-label{color:#666;font-size:12px;font-weight:bold}
 
-      /* ONLY ADMIN CAN DELETE */
+.result-value{color:#174d35;font-size:22px;font-weight:bold;margin-top:5px}
 
-      allow delete: if
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
 
-        request.auth != null
+.toolbar input,.toolbar select{padding:11px;border:1px solid #ddd;border-radius:10px;background:#fff}
 
-        &&
+.orders{display:grid;gap:14px}
 
-        request.auth.token.email ==
+.order-card{background:#fff;border-radius:16px;padding:16px;box-shadow:0 4px 18px #00000010;border:1px solid #e8ece8}
 
-        'truethink6@gmail.com';
+.order-head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
 
-    }
+.order-id{font-size:12px;color:#777;word-break:break-all}
 
-    /* =========================
+.customer{font-size:18px;font-weight:bold;color:#174d35}
 
-       EXPENSES
+.meta{font-size:13px;color:#555;line-height:1.5;margin:8px 0}
 
-       ========================= */
+.items{border-top:1px solid #eee;border-bottom:1px solid #eee;padding:8px 0;margin:10px 0}
 
-    match /expenses/{expenseId} {
+.item-row{display:flex;justify-content:space-between;gap:10px;padding:6px 0;font-size:14px}
 
-      /* ONLY ADMIN CAN READ */
+.free{color:#174d35;font-weight:bold}
 
-      allow read: if
+.bottom{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
 
-        request.auth != null
+.total{font-size:19px;font-weight:bold;color:#174d35}
 
-        &&
+.status{padding:9px;border-radius:9px;border:1px solid #ddd;background:#fff;font-weight:bold}
 
-        request.auth.token.email ==
+.empty,.loading{padding:35px;text-align:center;color:#777;background:#fff;border-radius:16px}
 
-        'truethink6@gmail.com';
+@media(max-width:850px){
 
-      /* ONLY ADMIN CAN ADD */
+.dashboard-grid{grid-template-columns:repeat(2,1fr)}
 
-      allow create: if
-
-        request.auth != null
-
-        &&
-
-        request.auth.token.email ==
-
-        'truethink6@gmail.com';
-
-      /* ONLY ADMIN CAN EDIT */
-
-      allow update: if
-
-        request.auth != null
-
-        &&
-
-        request.auth.token.email ==
-
-        'truethink6@gmail.com';
-
-      /* ONLY ADMIN CAN DELETE */
-
-      allow delete: if
-
-        request.auth != null
-
-        &&
-
-        request.auth.token.email ==
-
-        'truethink6@gmail.com';
-
-    }
-
-  }
+.results{grid-template-columns:repeat(2,1fr)}
 
 }
+
+@media(max-width:600px){
+
+.wrap{padding:12px}
+
+.top-inner{align-items:flex-start}
+
+.top h1{font-size:18px}
+
+.order-head{display:block}
+
+.bottom{align-items:flex-start}
+
+.dashboard-title{font-size:23px}
+
+.dashboard-grid{grid-template-columns:repeat(2,1fr);gap:9px}
+
+.stat-card{padding:13px}
+
+.stat-icon{font-size:23px}
+
+.stat-value{font-size:22px}
+
+.results{grid-template-columns:repeat(2,1fr)}
+
+.result{padding:11px}
+
+.result-value{font-size:19px}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- LOGIN -->
+
+<div id="loginView" class="login">
+
+<h2>🥥 COCO CAFEINA</h2>
+
+<p>Admin Orders</p>
+
+<input id="email" type="email" placeholder="Admin email" autocomplete="username">
+
+<input id="password" type="password" placeholder="Password" autocomplete="current-password">
+
+<div id="loginError" class="error"></div>
+
+<button class="btn primary" onclick="login()">🔐 LOGIN</button>
+
+</div>
+
+<!-- APP -->
+
+<div id="appView" class="hidden">
+
+<header class="top">
+
+<div class="top-inner">
+
+<h1>🥥 COCO CAFEINA • Orders</h1>
+
+<button class="btn logout" onclick="logout()">Logout</button>
+
+</div>
+
+</header>
+
+<main class="wrap">
+
+<!-- TODAY DASHBOARD -->
+
+<div class="dashboard-title">📊 Admin Dashboard</div>
+
+<div class="dashboard-grid">
+
+<div class="stat-card">
+
+<div class="stat-icon">📊</div>
+
+<div class="stat-label">TODAY'S ORDERS</div>
+
+<div class="stat-value" id="todayOrders">0</div>
+
+</div>
+
+<div class="stat-card">
+
+<div class="stat-icon">💰</div>
+
+<div class="stat-label">TODAY'S SALES</div>
+
+<div class="stat-value" id="todaySales">₹0</div>
+
+</div>
+
+<div class="stat-card">
+
+<div class="stat-icon">📦</div>
+
+<div class="stat-label">PENDING TODAY</div>
+
+<div class="stat-value" id="todayPending">0</div>
+
+</div>
+
+<div class="stat-card">
+
+<div class="stat-icon">✅</div>
+
+<div class="stat-label">CONFIRMED TODAY</div>
+
+<div class="stat-value" id="todayConfirmed">0</div>
+
+</div>
+
+<div class="stat-card">
+
+<div class="stat-icon">👨‍🍳</div>
+
+<div class="stat-label">PREPARING TODAY</div>
+
+<div class="stat-value" id="todayPreparing">0</div>
+
+</div>
+
+<div class="stat-card">
+
+<div class="stat-icon">🚚</div>
+
+<div class="stat-label">OUT FOR DELIVERY TODAY</div>
+
+<div class="stat-value" id="todayDelivery">0</div>
+
+</div>
+
+<div class="stat-card">
+
+<div class="stat-icon">🎉</div>
+
+<div class="stat-label">DELIVERED TODAY</div>
+
+<div class="stat-value" id="todayDelivered">0</div>
+
+</div>
+
+<div class="stat-card">
+
+<div class="stat-icon">❌</div>
+
+<div class="stat-label">CANCELLED TODAY</div>
+
+<div class="stat-value" id="todayCancelled">0</div>
+
+</div>
+
+</div>
+
+<!-- DATE WISE -->
+
+<section class="report">
+
+<div class="report-title">📅 Date-wise Sales & Orders</div>
+
+<div class="controls">
+
+<input type="date" id="reportDate" onchange="updateDateReport()">
+
+<button class="btn" onclick="setTodayReport()">📅 Today</button>
+
+<button class="btn" onclick="updateDateReport()">🔄 Refresh Report</button>
+
+</div>
+
+<div class="results">
+
+<div class="result">
+
+<div class="result-label">📦 TOTAL ORDERS</div>
+
+<div class="result-value" id="selectedDateOrders">0</div>
+
+</div>
+
+<div class="result">
+
+<div class="result-label">💰 TOTAL SALES</div>
+
+<div class="result-value" id="selectedDateSales">₹0</div>
+
+</div>
+
+<div class="result">
+
+<div class="result-label">📦 PENDING</div>
+
+<div class="result-value" id="selectedPending">0</div>
+
+</div>
+
+<div class="result">
+
+<div class="result-label">✅ CONFIRMED</div>
+
+<div class="result-value" id="selectedConfirmed">0</div>
+
+</div>
+
+<div class="result">
+
+<div class="result-label">👨‍🍳 PREPARING</div>
+
+<div class="result-value" id="selectedPreparing">0</div>
+
+</div>
+
+<div class="result">
+
+<div class="result-label">🚚 OUT FOR DELIVERY</div>
+
+<div class="result-value" id="selectedDelivery">0</div>
+
+</div>
+
+<div class="result">
+
+<div class="result-label">🎉 DELIVERED</div>
+
+<div class="result-value" id="selectedDelivered">0</div>
+
+</div>
+
+<div class="result">
+
+<div class="result-label">❌ CANCELLED</div>
+
+<div class="result-value" id="selectedCancelled">0</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- MONTHLY -->
+
+<section class="report">
+
+<div class="report-title">🗓️ Monthly Sales & Orders</div>
+
+<div class="controls">
+
+<input type="month" id="reportMonth" onchange="updateMonthlyReport()">
+
+<button class="btn" onclick="setCurrentMonth()">🗓️ This Month</button>
+
+<button class="btn" onclick="updateMonthlyReport()">🔄 Refresh Month</button>
+
+</div>
+
+<div class="results">
+
+<div class="result">
+
+<div class="result-label">📦 TOTAL ORDERS</div>
+
+<div class="result-value" id="monthOrders">0</div>
+
+</div>
+
+<div class="result">
+
+<div class="result-label">💰 TOTAL SALES</div>
+
+<div class="result-value" id="monthSales">₹0</div>
+
+</div>
+
+<div class="result">
+
+<div class="result-label">📦 PENDING</div>
+
+<div class="result-value" id="monthPending">0</div>
+
+</div>
+
+<div class="result">
+
+<div class="result-label">✅ CONFIRMED</div>
+
+<div class="result-value" id="monthConfirmed">0</div>
+
+</div>
+
+<div class="result">
+
+<div class="result-label">👨‍🍳 PREPARING</div>
+
+<div class="result-value" id="monthPreparing">0</div>
+
+</div>
+
+<div class="result">
+
+<div class="result-label">🚚 OUT FOR DELIVERY</div>
+
+<div class="result-value" id="monthDelivery">0</div>
+
+</div>
+
+<div class="result">
+
+<div class="result-label">🎉 DELIVERED</div>
+
+<div class="result-value" id="monthDelivered">0</div>
+
+</div>
+
+<div class="result">
+
+<div class="result-label">❌ CANCELLED</div>
+
+<div class="result-value" id="monthCancelled">0</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ORDERS -->
+
+<div class="toolbar">
+
+<input
+
+id="search"
+
+placeholder="🔍 Search customer / phone / order ID"
+
+oninput="renderOrders()">
+
+<select id="statusFilter" onchange="renderOrders()">
+
+<option value="all">All Status</option>
+
+<option value="pending">Pending</option>
+
+<option value="confirmed">Confirmed</option>
+
+<option value="preparing">Preparing</option>
+
+<option value="out_for_delivery">Out for delivery</option>
+
+<option value="delivered">Delivered</option>
+
+<option value="cancelled">Cancelled</option>
+
+</select>
+
+<button class="btn" onclick="loadOrders()">🔄 Refresh</button>
+
+</div>
+
+<div id="orders" class="orders">
+
+<div class="loading">Loading orders...</div>
+
+</div>
+
+</main>
+
+</div>
+
+<script>
+
+/* FIREBASE */
+
+const firebaseConfig={
+
+apiKey:"AIzaSyABdyflDhA_syt9igT9bkjwAjzDQbdl760",
+
+authDomain:"coco-cafeina.firebaseapp.com",
+
+projectId:"coco-cafeina",
+
+storageBucket:"coco-cafeina.firebasestorage.app",
+
+messagingSenderId:"1001937326141",
+
+appId:"1:1001937326141:web:206c27faba6590c2199a54"
+
+};
+
+firebase.initializeApp(firebaseConfig);
+
+const auth=firebase.auth();
+
+const db=firebase.firestore();
+
+let orders=[];
+
+/* AUTH */
+
+auth.onAuthStateChanged(u=>{
+
+if(u){
+
+document.getElementById("loginView").classList.add("hidden");
+
+document.getElementById("appView").classList.remove("hidden");
+
+setTodayReport();
+
+setCurrentMonth();
+
+loadOrders();
+
+loadTodayDashboard();
+
+}else{
+
+document.getElementById("loginView").classList.remove("hidden");
+
+document.getElementById("appView").classList.add("hidden");
+
+}
+
+});
+
+/* LOGIN */
+
+async function login(){
+
+const e=document.getElementById("email").value.trim();
+
+const p=document.getElementById("password").value;
+
+const er=document.getElementById("loginError");
+
+er.textContent="";
+
+if(!e||!p){
+
+er.textContent="Enter email and password.";
+
+return;
+
+}
+
+try{
+
+await auth.signInWithEmailAndPassword(e,p);
+
+}catch(x){
+
+console.error(x);
+
+er.textContent="Login failed. Check the admin account and password.";
+
+}
+
+}
+
+/* LOGOUT */
+
+function logout(){
+
+auth.signOut();
+
+}
+
+/* TODAY KEY */
+
+function todayKey(){
+
+const d=new Date();
+
+return d.getFullYear()+"-"+
+
+String(d.getMonth()+1).padStart(2,"0")+"-"+
+
+String(d.getDate()).padStart(2,"0");
+
+}
+
+/* MONTH KEY */
+
+function monthKey(){
+
+const d=new Date();
+
+return d.getFullYear()+"-"+
+
+String(d.getMonth()+1).padStart(2,"0");
+
+}
+
+/* DATE RANGE */
+
+function getDateRange(dateKey){
+
+const [y,m,d]=dateKey.split("-").map(Number);
+
+const start=new Date(y,m-1,d,0,0,0,0);
+
+const end=new Date(y,m-1,d+1,0,0,0,0);
+
+return{
+
+start:firebase.firestore.Timestamp.fromDate(start),
+
+end:firebase.firestore.Timestamp.fromDate(end)
+
+};
+
+}
+
+/* MONTH RANGE */
+
+function getMonthRange(monthKeyValue){
+
+const [y,m]=monthKeyValue.split("-").map(Number);
+
+const start=new Date(y,m-1,1,0,0,0,0);
+
+const end=new Date(y,m,1,0,0,0,0);
+
+return{
+
+start:firebase.firestore.Timestamp.fromDate(start),
+
+end:firebase.firestore.Timestamp.fromDate(end)
+
+};
+
+}
+
+/* ORDERS FOR DATE */
+
+async function getOrdersForDate(dateKey){
+
+const range=getDateRange(dateKey);
+
+const snapshot=await db
+
+.collection("orders")
+
+.where("createdAt",">=",range.start)
+
+.where("createdAt","<",range.end)
+
+.orderBy("createdAt","desc")
+
+.get();
+
+return snapshot.docs.map(d=>({
+
+id:d.id,
+
+...d.data()
+
+}));
+
+}
+
+/* ORDERS FOR MONTH */
+
+async function getOrdersForMonth(monthKeyValue){
+
+const range=getMonthRange(monthKeyValue);
+
+const snapshot=await db
+
+.collection("orders")
+
+.where("createdAt",">=",range.start)
+
+.where("createdAt","<",range.end)
+
+.orderBy("createdAt","desc")
+
+.get();
+
+return snapshot.docs.map(d=>({
+
+id:d.id,
+
+...d.data()
+
+}));
+
+}
+
+/* STATS */
+
+function stats(arr){
+
+let sales=0;
+
+let pending=0;
+
+let confirmed=0;
+
+let preparing=0;
+
+let delivery=0;
+
+let delivered=0;
+
+let cancelled=0;
+
+arr.forEach(o=>{
+
+const s=o.status||"pending";
+
+/* Cancelled orders excluded from sales */
+
+if(s!=="cancelled"){
+
+sales+=Number(o.total||0);
+
+}
+
+if(s==="pending")pending++;
+
+if(s==="confirmed")confirmed++;
+
+if(s==="preparing")preparing++;
+
+if(s==="out_for_delivery")delivery++;
+
+if(s==="delivered")delivered++;
+
+if(s==="cancelled")cancelled++;
+
+});
+
+return{
+
+orders:arr.length,
+
+sales,
+
+pending,
+
+confirmed,
+
+preparing,
+
+delivery,
+
+delivered,
+
+cancelled
+
+};
+
+}
+
+/* TODAY DASHBOARD */
+
+async function loadTodayDashboard(){
+
+try{
+
+const arr=await getOrdersForDate(todayKey());
+
+const s=stats(arr);
+
+document.getElementById("todayOrders").textContent=s.orders;
+
+document.getElementById("todaySales").textContent="₹"+s.sales.toLocaleString("en-IN");
+
+document.getElementById("todayPending").textContent=s.pending;
+
+document.getElementById("todayConfirmed").textContent=s.confirmed;
+
+document.getElementById("todayPreparing").textContent=s.preparing;
+
+document.getElementById("todayDelivery").textContent=s.delivery;
+
+document.getElementById("todayDelivered").textContent=s.delivered;
+
+document.getElementById("todayCancelled").textContent=s.cancelled;
+
+}catch(e){
+
+console.error("Today's dashboard:",e);
+
+}
+
+}
+
+/* DATE REPORT */
+
+async function updateDateReport(){
+
+const selected=document.getElementById("reportDate").value;
+
+if(!selected)return;
+
+try{
+
+const arr=await getOrdersForDate(selected);
+
+const s=stats(arr);
+
+document.getElementById("selectedDateOrders").textContent=s.orders;
+
+document.getElementById("selectedDateSales").textContent="₹"+s.sales.toLocaleString("en-IN");
+
+document.getElementById("selectedPending").textContent=s.pending;
+
+document.getElementById("selectedConfirmed").textContent=s.confirmed;
+
+document.getElementById("selectedPreparing").textContent=s.preparing;
+
+document.getElementById("selectedDelivery").textContent=s.delivery;
+
+document.getElementById("selectedDelivered").textContent=s.delivered;
+
+document.getElementById("selectedCancelled").textContent=s.cancelled;
+
+}catch(e){
+
+console.error("Date report:",e);
+
+}
+
+}
+
+/* TODAY DATE */
+
+function setTodayReport(){
+
+document.getElementById("reportDate").value=todayKey();
+
+updateDateReport();
+
+}
+
+/* MONTHLY REPORT */
+
+async function updateMonthlyReport(){
+
+const selected=document.getElementById("reportMonth").value;
+
+if(!selected)return;
+
+try{
+
+const arr=await getOrdersForMonth(selected);
+
+const s=stats(arr);
+
+document.getElementById("monthOrders").textContent=s.orders;
+
+document.getElementById("monthSales").textContent=
+
+"₹"+s.sales.toLocaleString("en-IN");
+
+document.getElementById("monthPending").textContent=s.pending;
+
+document.getElementById("monthConfirmed").textContent=s.confirmed;
+
+document.getElementById("monthPreparing").textContent=s.preparing;
+
+document.getElementById("monthDelivery").textContent=s.delivery;
+
+document.getElementById("monthDelivered").textContent=s.delivered;
+
+document.getElementById("monthCancelled").textContent=s.cancelled;
+
+}catch(e){
+
+console.error("Monthly report:",e);
+
+if(e.message && e.message.toLowerCase().includes("index")){
+
+alert(
+
+"Firestore needs an index for this report. Open the Firebase index link shown in the browser console."
+
+);
+
+}
+
+}
+
+}
+
+/* CURRENT MONTH */
+
+function setCurrentMonth(){
+
+document.getElementById("reportMonth").value=monthKey();
+
+updateMonthlyReport();
+
+}
+
+/* LOAD ORDERS LIST */
+
+async function loadOrders(){
+
+const box=document.getElementById("orders");
+
+box.innerHTML=
+
+'<div class="loading">Loading latest orders...</div>';
+
+try{
+
+const snapshot=await db
+
+.collection("orders")
+
+.orderBy("createdAt","desc")
+
+.limit(100)
+
+.get();
+
+orders=snapshot.docs.map(d=>({
+
+id:d.id,
+
+...d.data()
+
+}));
+
+renderOrders();
+
+loadTodayDashboard();
+
+updateDateReport();
+
+updateMonthlyReport();
+
+}catch(e){
+
+console.error(e);
+
+box.innerHTML=
+
+'<div class="empty">Could not load orders. Check Firestore Rules and Authentication.</div>';
+
+}
+
+}
+
+/* DATE TEXT */
+
+function dateText(ts){
+
+if(!ts)return"Date pending";
+
+try{
+
+return ts.toDate().toLocaleString(
+
+"en-IN",
+
+{
+
+dateStyle:"medium",
+
+timeStyle:"short"
+
+}
+
+);
+
+}catch(e){
+
+return"Date pending";
+
+}
+
+}
+
+/* LABEL */
+
+function label(s){
+
+return(s||"pending")
+
+.replaceAll("_"," ")
+
+.replace(/\b\w/g,c=>c.toUpperCase());
+
+}
+
+/* ESCAPE */
+
+function esc(v){
+
+return String(v??"").replace(
+
+/[&<>"']/g,
+
+c=>({
+
+"&":"&amp;",
+
+"<":"&lt;",
+
+">":"&gt;",
+
+'"':"&quot;",
+
+"'":"&#39;"
+
+}[c])
+
+);
+
+}
+
+/* RENDER ORDERS */
+
+function renderOrders(){
+
+const q=document.getElementById("search").value.toLowerCase().trim();
+
+const f=document.getElementById("statusFilter").value;
+
+const arr=orders.filter(o=>
+
+(
+
+!q ||
+
+[
+
+o.id,
+
+o.customerName,
+
+o.phone,
+
+o.address
+
+]
+
+.join(" ")
+
+.toLowerCase()
+
+.includes(q)
+
+)
+
+&&
+
+(
+
+f==="all" ||
+
+(o.status||"pending")===f
+
+)
+
+);
+
+const box=document.getElementById("orders");
+
+if(!arr.length){
+
+box.innerHTML='<div class="empty">No orders found.</div>';
+
+return;
+
+}
+
+box.innerHTML=arr.map(o=>{
+
+const items=(o.items||[]).map(i=>`
+
+<div class="item-row">
+
+<span>
+
+${esc(i.icon||"")}
+
+${esc(i.name)}
+
+× ${esc(i.quantity)}
+
+</span>
+
+<b>₹${Number(i.itemTotal||0)}</b>
+
+</div>
+
+`).join("");
+
+const free=(o.freeItems||[]).map(i=>`
+
+<div class="item-row free">
+
+<span>
+
+🎁
+
+${esc(i.icon||"")}
+
+${esc(i.name)}
+
+× ${esc(i.quantity)}
+
+</span>
+
+<span>FREE</span>
+
+</div>
+
+`).join("");
+
+return`
+
+<article class="order-card">
+
+<div class="order-head">
+
+<div>
+
+<div class="customer">
+
+👤 ${esc(o.customerName||"Customer")}
+
+</div>
+
+<div class="order-id">
+
+Order ID: ${esc(o.id)}
+
+</div>
+
+</div>
+
+<select
+
+class="status"
+
+onchange="updateStatus('${esc(o.id)}',this.value)">
+
+${
+
+[
+
+"pending",
+
+"confirmed",
+
+"preparing",
+
+"out_for_delivery",
+
+"delivered",
+
+"cancelled"
+
+].map(s=>`
+
+<option
+
+value="${s}"
+
+${(o.status||"pending")===s?"selected":""}>
+
+${label(s)}
+
+</option>
+
+`).join("")
+
+}
+
+</select>
+
+</div>
+
+<div class="meta">
+
+📞
+
+<a href="tel:${esc(o.phone||"")}">
+
+${esc(o.phone||"")}
+
+</a>
+
+<br>
+
+📍 ${esc(o.address||"")}
+
+<br>
+
+🚚 ${esc(o.deliveryArea||"Deralakatte → Thokkottu")}
+
+<br>
+
+🕒 ${dateText(o.createdAt)}
+
+</div>
+
+<div class="items">
+
+${items}
+
+${free}
+
+</div>
+
+<div class="bottom">
+
+<div class="total">
+
+Total: ₹${Number(o.total||0)}
+
+</div>
+
+<a
+
+class="btn"
+
+href="https://wa.me/${encodeURIComponent((o.phone||"").replace(/\D/g,""))}"
+
+target="_blank">
+
+💬 WhatsApp Customer
+
+</a>
+
+</div>
+
+</article>
+
+`;
+
+}).join("");
+
+}
+
+/* STATUS UPDATE */
+
+async function updateStatus(id,status){
+
+try{
+
+await db
+
+.collection("orders")
+
+.doc(id)
+
+.update({
+
+status:status,
+
+statusUpdatedAt:
+
+firebase.firestore.FieldValue.serverTimestamp()
+
+});
+
+const o=orders.find(x=>x.id===id);
+
+if(o)o.status=status;
+
+renderOrders();
+
+await loadTodayDashboard();
+
+await updateDateReport();
+
+await updateMonthlyReport();
+
+}catch(e){
+
+alert("Status update failed. Check Firestore Rules.");
+
+console.error(e);
+
+}
+
+}
+
+</script>
+
+</body>
+
+</html>
